@@ -1,0 +1,15 @@
+User
+Address (User)
+Permission (User)
+Location
+LocationType (Location)
+Rating (Location)
+Setting (User)
+
+User: username, password, firstname, lastname, birthdate, (Address, Permission, Setting)
+Address: country, county, city, street, housenumber
+Permission: accounttype
+Location: name (LocationType, Rating), 
+LocationType: typeName
+Rating: grade, feedback
+Setting:
