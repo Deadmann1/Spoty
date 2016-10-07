@@ -1,78 +1,116 @@
-Drop table Permission Cascade Constraints;
+Drop table AccountType Cascade Constraints;
 Drop table UserAccount Cascade Constraints;
-Drop table Setting Cascade Constraints;
-Drop table Location Cascade Constraints;
-Drop table Rating Cascade Constraints;
+Drop table Country Cascade Constraints;
+Drop table County Cascade Constraints;
+Drop table City Cascade Constraints;
 Drop table Address Cascade Constraints;
 Drop table LocationType Cascade Constraints;
+Drop table Location Cascade Constraints;
+Drop table Rating Cascade Constraints;
 
-create table Permission
+
+create table AccountType
 (
-   accounttype Varchar2(100) NOT NULL,
+   idAccountType Integer,
+   accounttype Varchar2(100),
    
-   CONSTRAINT pkPermission PRIMARY KEY (accounttype)
+   CONSTRAINT pkPermission PRIMARY KEY (idAccountType)
 );
 
 create table UserAccount
 (
-  username  Varchar2(50) NOT NULL,
-  password  Varchar2(50) NOT NULL,
-  firstname Varchar2(30),
-  lastname  Varchar2(30),
-  birthdate Date,
-  accounttype Varchar2(100) NOT NULL,
+  idUserAccount Integer NOT NULL,
+  username      Varchar2(50) NOT NULL,
+  password      Varchar2(50) NOT NULL,
+  firstname     Varchar2(30),
+  lastname      Varchar2(30),
+  birthdate     Date,
+  idAccountType   Integer,
   
-  CONSTRAINT pkUserAccount PRIMARY KEY(username),
-  CONSTRAINT fkPermission FOREIGN KEY(accounttype) REFERENCES Permission (accounttype)
+  CONSTRAINT pkUserAccount PRIMARY KEY(idUserAccount),
+  CONSTRAINT fkPermission FOREIGN KEY(idAccountType) REFERENCES AccountType (idAccountType)
 );
 
-create table Setting
+create table Country
 (
-  type Varchar2(100),
-  value Varchar2(100),
-  username Varchar2(50),
+  idCountry Integer,
+  countryname Varchar2(30),
+  
+  CONSTRAINT pkCountry PRIMARY KEY(idCountry)
+);
 
-  CONSTRAINT fkUserAccountSetting FOREIGN KEY(username) REFERENCES UserAccount(username),
-  CONSTRAINT pkSetting PRIMARY KEY(username)
+create table County
+(
+  idCounty Integer,
+  countyname Varchar2(30),
+  idCountry Integer,
+  
+  CONSTRAINT pkCounty PRIMARY KEY(idCounty),
+  CONSTRAINT fkCounty FOREIGN KEY(idCountry) REFERENCES Country(idCountry)
+);
+
+create table City
+(
+  idCity Integer,
+  postalcode Integer,
+  cityname Varchar2(30),
+  idCounty Integer,
+  
+  CONSTRAINT pkCity PRIMARY KEY(idCity),
+  CONSTRAINT fkCityCounty FOREIGN KEY(idCounty) REFERENCES County(idCounty)
+);
+
+create table Address
+(
+  idAddress Integer,
+  idCity Integer,
+  streetname Varchar2(50),
+  housenumber Integer,
+  
+  CONSTRAINT pkAddress PRIMARY KEY(idAddress),
+  CONSTRAINT fkCity FOREIGN KEY(idCity) REFERENCES City(idCity)
+);
+
+create table LocationType
+(
+  idType Integer,
+  locationtypename Varchar2(50),
+  
+  CONSTRAINT pkLocationType PRIMARY KEY(idType)
 );
 
 create table Location
 (
-  name Varchar2(50),
+  idLocation Integer,
+  locationname Varchar2(50),
+  idType Integer,
+  idAdress Integer,
   
-  CONSTRAINT pkLocation PRIMARY KEY(name)
+  CONSTRAINT pkLocation PRIMARY KEY(idLocation),
+  CONSTRAINT fkLocationType FOREIGN KEY(idType) REFERENCES LocationType(idType),
+  CONSTRAINT fkIPAddress FOREIGN KEY(idAdress) REFERENCES Address(idAddress)
 );
 
 create table Rating
 (
   grade Integer NOT NULL,
   feedback Varchar2(100),
-  username Varchar2(50) NOT NULL,
-  locationname Varchar2(50),
+  idUserAccount Integer,
+  idLocation Integer,
   
-  CONSTRAINT fkUserAccountRating FOREIGN KEY(username) REFERENCES UserAccount(username),
-  CONSTRAINT fkLocation FOREIGN KEY(locationname) REFERENCES Location(name),
-  CONSTRAINT pkRating PRIMARY KEY(username, locationname)
+  CONSTRAINT fkUserAccountRating FOREIGN KEY(idUserAccount) REFERENCES UserAccount(idUserAccount),
+  CONSTRAINT fkLocation FOREIGN KEY(idLocation) REFERENCES Location(idLocation),
+  CONSTRAINT pkRating PRIMARY KEY(idUserAccount, idLocation)
 );
 
 
-create table Address
-(
-  country Varchar2(30),
-  county Varchar2(30),
-  city Varchar2(30),
-  street Varchar2(30),
-  housenumber Integer,
-  locationname Varchar2(50),
-  
-  CONSTRAINT pkAddress PRIMARY KEY(country,county,city,street,housenumber,locationname)
-);
 
-create table LocationType
-(
-  typename Varchar2(50),
-  
-  CONSTRAINT pkLocationType PRIMARY KEY(typename)
-);
+
+
+
+
+
+
+
 
 
