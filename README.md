@@ -2,8 +2,8 @@
 
 Credits:
 
-Sammer Manuel : Project Lead, Programer
+Sammer Manuel : Project Lead, Programmer
 
-Alexander Ruhdorfer: Programer, Sunshine
+Alexander Ruhdorfer: Programmer, Sunshine
 
-Daniel Lamprecht : Vice Project Lead, Techinal Assisant, Programer
+Daniel Lamprecht : Vice Project Lead, Technical Assistant, Programmer
