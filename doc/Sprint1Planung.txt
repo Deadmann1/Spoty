@@ -1,1 +1,12 @@
+Ziele:
+  Operative Applikation:
+    ⦁	Auswählen von Geschäftstypen
+    ⦁	Filtern nach typischen Kriterien dieser Typen (Sterne, Bewertungen, Preise)
+    ⦁	Auflistung der Ergebnisse in der Nähe oder für einen eingegebenen Ort
+ 
+  Administrive Applikation:
+    ⦁ Verwalten von Geschäften
 
+ Mobile Applikation:  
+    ⦁ Xamarin.droid
+     
