@@ -10,5 +10,5 @@ package spoty.desktop.app.data;
  * @author lampr
  */
 public class test {
-    
+    private String testName;
 }
