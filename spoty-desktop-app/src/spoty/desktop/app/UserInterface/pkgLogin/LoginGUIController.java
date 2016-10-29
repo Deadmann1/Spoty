@@ -1,5 +1,4 @@
-package spoty.desktop.app.UserInterface.pkgLogin;
-
+package spoty.dekstop.app.UserInterface.pkgLogin;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,26 +41,22 @@ public class LoginGUIController {
 
     @FXML
     void onAction_btnLogin(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("./pkgMain/MainGUI.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        Stage stage = new Stage();
-        stage.setTitle("Hauptmenü");
-        stage.setScene(scene);
-        stage.show();
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("../pkgMain/MainGUI.fxml"), resources);
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root, 450, 450));
+            stage.show();
     }
 
     @FXML
     void initialize() {
-        assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert lblPassword != null : "fx:id=\"lblPassword\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert lblUsername != null : "fx:id=\"lblUsername\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'MainGUI.fxml'.";
+        assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginGUI.fxml'.";
+        assert lblPassword != null : "fx:id=\"lblPassword\" was not injected: check your FXML file 'LoginGUI.fxml'.";
+        assert lblUsername != null : "fx:id=\"lblUsername\" was not injected: check your FXML file 'LoginGUI.fxml'.";
+        assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginGUI.fxml'.";
+        assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'LoginGUI.fxml'.";
 
 
     }
 
 }
-
