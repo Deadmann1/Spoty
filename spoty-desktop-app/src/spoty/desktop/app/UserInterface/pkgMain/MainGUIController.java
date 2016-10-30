@@ -1,11 +1,16 @@
 package pkgMain;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 
 public class MainGUIController {
@@ -27,11 +32,19 @@ public class MainGUIController {
 
 
     @FXML
-    void onAction_btnAddLocation(ActionEvent event) {
+    void onAction_btnAddLocation(ActionEvent event) throws Exception {
+        Parent rootframeTable = FXMLLoader.load(getClass().getResource("spoty.desktop.app/UserInterface/pkgAddLocation/AddLocationGUI.fxml"));
+        Scene sceneTable = new Scene(rootframeTable);
+        Stage stage = new Stage();
+        stage.setScene(sceneTable);
+        stage.setTitle("Location hinzufügen");
+        stage.showAndWait();
+
     }
 
     @FXML
     void onAction_btnUpdateLocation(ActionEvent event) {
+        
     }
 
     @FXML

@@ -19,7 +19,7 @@ public class SpotyDesktopApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("UserInterface/pkgLogin/LoginGUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("UserInterface/pkgMain/MainGUI.fxml"));
         
         Scene scene = new Scene(root);
         
