@@ -1,4 +1,4 @@
-package pkgUpdateLocation;
+package spoty.desktop.app.UserInterface;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,4 +1,4 @@
-package pkgLogin;
+package spoty.desktop.app.UserInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,7 +49,7 @@ public class LoginGUIController {
             stage.show();
            */
             
-            Parent rootframeTable = FXMLLoader.load(getClass().getResource("../pkgMain/MainGUI.fxml"));
+            Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/MainGUI.fxml"));
             Scene sceneTable = new Scene(rootframeTable);
             Stage stage = new Stage();
 	    stage.setScene(sceneTable);

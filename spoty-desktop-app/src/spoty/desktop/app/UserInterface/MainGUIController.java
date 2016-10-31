@@ -1,4 +1,4 @@
-package pkgMain;
+package spoty.desktop.app.UserInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +33,7 @@ public class MainGUIController {
 
     @FXML
     void onAction_btnAddLocation(ActionEvent event) throws Exception {
-        Parent rootframeTable = FXMLLoader.load(getClass().getResource("spoty.desktop.app/UserInterface/pkgAddLocation/AddLocationGUI.fxml"));
+        Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/AddLocationGUI.fxml"));
         Scene sceneTable = new Scene(rootframeTable);
         Stage stage = new Stage();
         stage.setScene(sceneTable);
@@ -43,8 +43,13 @@ public class MainGUIController {
     }
 
     @FXML
-    void onAction_btnUpdateLocation(ActionEvent event) {
-        
+    void onAction_btnUpdateLocation(ActionEvent event) throws Exception {
+        Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/UpdateLocationGUI.fxml"));
+        Scene sceneTable = new Scene(rootframeTable);
+        Stage stage = new Stage();
+        stage.setScene(sceneTable);
+        stage.setTitle("Hauptmenü");
+        stage.showAndWait();
     }
 
     @FXML
