@@ -38,7 +38,7 @@ public class LocationType {
 
     @Override
     public String toString() {
-        return "LocationType{" + "idType=" + idType + ", locationtypename=" + locationtypename + '}';
+        return locationtypename;
     }
     
     

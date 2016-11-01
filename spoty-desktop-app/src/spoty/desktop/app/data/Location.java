@@ -58,7 +58,7 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" + "idLocation=" + idLocation + ", locationname=" + locationname + ", idType=" + idType + ", idAddress=" + idAddress + '}';
+        return locationname;
     }
     
     

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import spoty.desktop.app.Database.UserAccountDatabase;
 
 
 public class LoginGUIController {
@@ -41,20 +42,14 @@ public class LoginGUIController {
 
     @FXML
     void onAction_btnLogin(ActionEvent event) throws Exception {
-        /*
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("..pkgMain/MainGUI.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("My New Stage Title");
-            stage.setScene(new Scene(root, 450, 450));
-            stage.show();
-           */
+        
             
-            Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/MainGUI.fxml"));
-            Scene sceneTable = new Scene(rootframeTable);
-            Stage stage = new Stage();
-	    stage.setScene(sceneTable);
-            stage.setTitle("Hauptmenü");
-            stage.showAndWait();
+        Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/MainGUI.fxml"));
+        Scene sceneTable = new Scene(rootframeTable);
+        Stage stage = new Stage();
+        stage.setScene(sceneTable);
+        stage.setTitle("Hauptmenü");
+        stage.showAndWait();
 
     }
 

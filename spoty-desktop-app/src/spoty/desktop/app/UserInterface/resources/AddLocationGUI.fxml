@@ -10,16 +10,12 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="337.0" prefWidth="479.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.AddLocationGUIController">
   <children>
     <Label layoutX="27.0" layoutY="14.0" text="Adresse:" />
-    <GridPane layoutX="27.0" layoutY="43.0" prefWidth="441.0">
+    <GridPane layoutX="27.0" layoutY="63.0" prefWidth="441.0">
       <children>
         <Label text="Stadt:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <ComboBox fx:id="cmbCity" onAction="#cmbCity" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
+            <FXCollections fx:factory="observableArrayList" />
           </items>
         </ComboBox>
         <Button id="onAction_btnAddCity" fx:id="btnAddCity" mnemonicParsing="false" onAction="#onAction_btnAddCity" text="Stadt hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -29,20 +25,12 @@
         <Label text="Hausnummer:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <ComboBox fx:id="cmbCountry" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
+            <FXCollections fx:factory="observableArrayList" />
           </items>
         </ComboBox>
-        <ComboBox onAction="#cmbCounty" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <ComboBox fx:id="cmbCounty" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
           <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
+            <FXCollections fx:factory="observableArrayList" />
           </items>
         </ComboBox>
         <Button fx:id="btnAddCountry" mnemonicParsing="false" onAction="#onAction_btnAddCountry" text="Staat hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="0" />
@@ -67,14 +55,12 @@
     <Label layoutX="27.0" layoutY="217.0" text="Typ:" />
     <ComboBox fx:id="cmbLocationtype" layoutX="160.0" layoutY="218.0" prefWidth="166.0">
       <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
-        </FXCollections>
+        <FXCollections fx:factory="observableArrayList" />
       </items>
     </ComboBox>
     <Button fx:id="btnAddLocationtype" layoutX="329.0" layoutY="218.0" mnemonicParsing="false" onAction="#onAction_btnAddLocationtype" prefWidth="137.99990000000253" text="Typ hinzufügen" />
     <Button fx:id="btnAddLocation" layoutX="301.0" layoutY="297.0" mnemonicParsing="false" onAction="#onAction_btnAddLocation" prefWidth="166.0" text="Location hinzufügen" />
+    <Label layoutX="27.0" layoutY="43.0" text="Name:" />
+    <TextField id="lblLocationname" fx:id="txtLocationname" layoutX="160.0" layoutY="40.0" prefWidth="200.0" />
   </children>
 </AnchorPane>

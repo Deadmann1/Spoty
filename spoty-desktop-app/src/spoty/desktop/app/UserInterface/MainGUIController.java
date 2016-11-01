@@ -3,6 +3,8 @@ package spoty.desktop.app.UserInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import spoty.desktop.app.Database.AddressDatabase;
+import spoty.desktop.app.Database.LocationDatabase;
+import spoty.desktop.app.data.Location;
 
 
 public class MainGUIController {
@@ -28,7 +33,7 @@ public class MainGUIController {
     private Button btnUpdateLocation;
 
     @FXML
-    private ListView<?> listViewLocations;
+    private ListView<Location> listViewLocations;
 
 
     @FXML
@@ -39,17 +44,21 @@ public class MainGUIController {
         stage.setScene(sceneTable);
         stage.setTitle("Location hinzufügen");
         stage.showAndWait();
-
+        fillListViewLocations();
     }
 
     @FXML
     void onAction_btnUpdateLocation(ActionEvent event) throws Exception {
-        Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/UpdateLocationGUI.fxml"));
-        Scene sceneTable = new Scene(rootframeTable);
-        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/UpdateLocationGUI.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        UpdateLocationGUIController controller = fxmlLoader.<UpdateLocationGUIController>getController();
+        controller.setUpdateLocation(listViewLocations.getSelectionModel().getSelectedItem());
+        Scene sceneTable = new Scene(root);
+        Stage stage = new Stage();     
         stage.setScene(sceneTable);
-        stage.setTitle("Hauptmenü");
+        stage.setTitle("Location abändern");
         stage.showAndWait();
+        fillListViewLocations();
     }
 
     @FXML
@@ -57,8 +66,15 @@ public class MainGUIController {
         assert btnAddLocation != null : "fx:id=\"btnAddLocation\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert btnUpdateLocation != null : "fx:id=\"btnUpdateLocation\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert listViewLocations != null : "fx:id=\"listViewLocations\" was not injected: check your FXML file 'MainGUI.fxml'.";
-
-
+        AddressDatabase.generateTestAddresses();
+        LocationDatabase.generateTestLocations();
+        fillListViewLocations();
+    }
+    
+    
+    private void fillListViewLocations()
+    {
+        listViewLocations.setItems(FXCollections.observableArrayList(LocationDatabase.getInstance().getLocations()));
     }
 
 }

@@ -1,12 +1,21 @@
 package spoty.desktop.app.UserInterface;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import spoty.desktop.app.Database.AddressDatabase;
+import spoty.desktop.app.Database.LocationDatabase;
+import spoty.desktop.app.data.Address;
+import spoty.desktop.app.data.City;
+import spoty.desktop.app.data.Country;
+import spoty.desktop.app.data.County;
+import spoty.desktop.app.data.Location;
+import spoty.desktop.app.data.LocationType;
 
 
 public class AddLocationGUIController {
@@ -33,19 +42,25 @@ public class AddLocationGUIController {
     private Button btnAddLocation;
 
     @FXML
-    private ComboBox<?> cmbCity;
+    private ComboBox<City> cmbCity;
 
     @FXML
-    private ComboBox<?> cmbCountry;
+    private ComboBox<Country> cmbCountry;
+    
+    @FXML
+    private ComboBox<County> cmbCounty;
 
     @FXML
-    private ComboBox<?> cmbLocationtype;
+    private ComboBox<LocationType> cmbLocationtype;
 
     @FXML
     private TextField txtHousenumber;
 
     @FXML
     private TextField txtStreetname;
+    
+    @FXML
+    private TextField txtLocationname;
 
 
     @FXML
@@ -75,7 +90,16 @@ public class AddLocationGUIController {
     @FXML
     void onAction_btnAddLocation(ActionEvent event)
     {
+        int id_selectedType = cmbLocationtype.getSelectionModel().getSelectedItem().getIdType();
+        /*int id_selectedCountry = cmbCountry.getSelectionModel().getSelectedItem().getIdCountry();
+        int id_selectedCounty = cmbCounty.getSelectionModel().getSelectedItem().getIdCounty();*/
+        int id_selectedCity = cmbCity.getSelectionModel().getSelectedItem().getIdCity();
         
+        Address newAddress = new Address(AddressDatabase.getInstance().getNewAddressID(), id_selectedCity, txtStreetname.getText(), Integer.parseInt(txtHousenumber.getText()));
+        Location newLocation = new Location(LocationDatabase.getInstance().getNewLocationID(), txtLocationname.getText(), id_selectedType, newAddress.getIdAddress());
+        
+        AddressDatabase.vecAddresses.add(newAddress);
+        LocationDatabase.vecLocations.add(newLocation);
     }
 
     @FXML
@@ -90,7 +114,30 @@ public class AddLocationGUIController {
         assert txtHousenumber != null : "fx:id=\"txtHousenumber\" was not injected: check your FXML file 'AddLocationGUI.fxml'.";
         assert txtStreetname != null : "fx:id=\"txtStreetname\" was not injected: check your FXML file 'AddLocationGUI.fxml'.";
 
-
+        fillCmbCounty();
+        fillCmbCity();
+        fillCmbCountry();
+        fillCmbLocationType();
+    }
+    
+    private void fillCmbCity()
+    {
+        cmbCity.getItems().addAll((Collection<City>)AddressDatabase.getInstance().getCities());
+    }
+    
+    private void fillCmbLocationType()
+    {
+        cmbLocationtype.getItems().addAll((Collection<LocationType>)LocationDatabase.getInstance().getLocationTypes());
+    }
+    
+    private void fillCmbCounty()
+    {
+        cmbCounty.getItems().addAll((Collection<County>)AddressDatabase.getInstance().getCounties());
+    }
+    
+    private void fillCmbCountry()
+    {
+        cmbCountry.getItems().addAll((Collection<Country>)AddressDatabase.getInstance().getCountries());
     }
 
 }

@@ -46,7 +46,7 @@ public class County {
 
     @Override
     public String toString() {
-        return "County{" + "idCounty=" + idCounty + ", countyname=" + countyname + ", idCountry=" + idCountry + '}';
+        return countyname;
     }
     
     
