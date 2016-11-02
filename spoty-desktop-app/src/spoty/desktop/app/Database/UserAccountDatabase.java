@@ -52,7 +52,7 @@ public class UserAccountDatabase {
         UserAccount userAccount1 = new UserAccount(1, "admin", "admin", "Daniel", "Lamprecht", d1, 1);
         
         Date d2 = sdf.parse("04/05/1998");
-        UserAccount userAccount2 = new UserAccount(1, "sama", "sama", "Manuel", "Sammer", d2, 2);
+        UserAccount userAccount2 = new UserAccount(2, "sama", "sama", "Manuel", "Sammer", d2, 2);
         
         vecUserAccounts.add(userAccount1);
         vecUserAccounts.add(userAccount2);
@@ -72,6 +72,34 @@ public class UserAccountDatabase {
                 returnPassword = u.getPassword();
         }
         
+        //System.out.println("Password: " + returnPassword);
+        
         return returnPassword;
+    }
+    
+    public boolean existsUsername(String username)
+    {
+        boolean exists = false;
+        
+        for (UserAccount u : this.getUserAccounts())
+        {
+            if (u.getUsername().compareTo(username)==0)
+                exists = true;
+        }
+        
+        //System.out.println("Username exists: " + exists);
+        return exists;
+    }
+
+    public int getIDOfAccount(String username) {
+        int id=-1;
+        
+        for (UserAccount u : this.getUserAccounts())
+        {
+            if (u.getUsername().compareTo(username)==0)
+                id = u.getIdUserAccount();
+        }
+        
+        return id;
     }
 }

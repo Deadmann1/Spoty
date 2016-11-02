@@ -42,25 +42,32 @@ public class LoginGUIController {
 
     @FXML
     void onAction_btnLogin(ActionEvent event) throws Exception {
-        
+        if (UserAccountDatabase.getInstance().existsUsername(txtUsername.getText())==true)
+        {
+            int idUserAccount = UserAccountDatabase.getInstance().getIDOfAccount(txtUsername.getText());
+            System.out.println("ID: "+ idUserAccount);
             
-        Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/MainGUI.fxml"));
-        Scene sceneTable = new Scene(rootframeTable);
-        Stage stage = new Stage();
-        stage.setScene(sceneTable);
-        stage.setTitle("Hauptmenü");
-        stage.showAndWait();
-
+            if (txtPassword.getText().compareTo(UserAccountDatabase.getInstance().getPasswordOfAccount(idUserAccount))==0)
+            {
+                Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/MainGUI.fxml"));
+                Scene sceneTable = new Scene(rootframeTable);
+                Stage stage = new Stage();
+                stage.setScene(sceneTable);
+                stage.setTitle("Hauptmenü");
+                stage.showAndWait();
+            }
+        }
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws Exception {
         assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginGUI.fxml'.";
         assert lblPassword != null : "fx:id=\"lblPassword\" was not injected: check your FXML file 'LoginGUI.fxml'.";
         assert lblUsername != null : "fx:id=\"lblUsername\" was not injected: check your FXML file 'LoginGUI.fxml'.";
         assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginGUI.fxml'.";
         assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'LoginGUI.fxml'.";
 
+        UserAccountDatabase.getInstance().generateTestUserAccounts();
 
     }
 
