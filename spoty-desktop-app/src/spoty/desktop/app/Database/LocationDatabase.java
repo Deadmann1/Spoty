@@ -99,4 +99,17 @@ public class LocationDatabase {
             
             return highestID+1;
         }
+        
+        public void deleteLocation(int idLocation)
+        {
+            //bug
+            for (Location location : this.vecLocations)
+            {
+                if (location.getIdLocation()==idLocation)
+                {
+                    System.out.println(location.toString());
+                    this.vecLocations.remove(location);
+                }
+            }
+        }
 }

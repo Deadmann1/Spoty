@@ -12,6 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
@@ -20,6 +23,30 @@ import spoty.desktop.app.data.Location;
 
 public class MainGUIController {
 
+    @FXML
+    private GridPane gridPaneInformation;
+
+    @FXML
+    private Label lblCity;
+
+    @FXML
+    private Label lblCountry;
+
+    @FXML
+    private Label lblCounty;
+
+    @FXML
+    private Label lblHousenumber;
+
+    @FXML
+    private Label lblLocationType;
+
+    @FXML
+    private Label lblName;
+
+    @FXML
+    private Label lblStreet;
+    
     @FXML
     private ResourceBundle resources;
 
@@ -31,6 +58,9 @@ public class MainGUIController {
 
     @FXML
     private Button btnUpdateLocation;
+    
+    @FXML
+    private Button btnDeleteLocation;
 
     @FXML
     private ListView<Location> listViewLocations;
@@ -60,6 +90,17 @@ public class MainGUIController {
         stage.showAndWait();
         fillListViewLocations();
     }
+    
+    
+    @FXML
+    void onAction_btnDeleteLocation(ActionEvent event) throws Exception {
+        if (listViewLocations.getSelectionModel().getSelectedItem()!=null)
+        {
+            System.out.println(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
+            LocationDatabase.getInstance().deleteLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
+            fillListViewLocations();
+        }
+    }
 
     @FXML
     void initialize() {
@@ -75,6 +116,17 @@ public class MainGUIController {
     private void fillListViewLocations()
     {
         listViewLocations.setItems(FXCollections.observableArrayList(LocationDatabase.getInstance().getLocations()));
+    }
+    
+    
+    @FXML
+    void onMouseClicked_ListViewLocations(MouseEvent event) {
+        fillInformationData();
+    }
+    
+    private void fillInformationData()
+    {
+        System.out.println("Test");
     }
 
 }
