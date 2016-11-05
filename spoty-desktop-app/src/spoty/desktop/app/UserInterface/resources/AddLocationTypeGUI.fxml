@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="234.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.AddLocationTypeGUIController">
+  <children>
+    <Label layoutX="14.0" layoutY="14.0" text="Typ hinzufügen:" />
+    <TextField fx:id="txtTypename" layoutX="67.0" layoutY="40.0" prefWidth="133.0" />
+    <Label layoutX="14.0" layoutY="43.0" text="Name:" />
+    <Button fx:id="btnAddLocationType" layoutX="14.0" layoutY="84.0" mnemonicParsing="false" onAction="#onAction_btnAddLocationType" prefWidth="186.0" text="Typ hinzufügen" />
+    <Label fx:id="lblInfoMessageAddLocationType" layoutX="14.0" layoutY="132.0" prefWidth="186.0" text="..." />
+  </children>
+</AnchorPane>

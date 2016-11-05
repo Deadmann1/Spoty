@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="293.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.AddCountryGUIController">
+  <children>
+    <Label layoutX="25.0" layoutY="14.0" prefWidth="142.0" text="Staat hinzufügen:" />
+    <TextField fx:id="txtCountryname" layoutX="76.0" layoutY="43.0" prefWidth="184.0" />
+    <Button fx:id="btnAddCountry" layoutX="25.0" layoutY="83.0" mnemonicParsing="false" onAction="#onAction_btnAddCountry" prefWidth="235.0" text="Staat hinzufügen" />
+    <Label layoutX="26.0" layoutY="43.0" text="Name:" />
+    <Label fx:id="lblInfoMessageAddCountry" layoutX="25.0" layoutY="127.0" text="..." />
+  </children>
+</AnchorPane>

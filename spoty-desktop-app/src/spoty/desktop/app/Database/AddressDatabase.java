@@ -97,11 +97,31 @@ public class AddressDatabase {
         {
             return vecCountries;
         }
+        
+        public Vector<Address> getAddresses()
+        {
+            return vecAddresses;
+        }
+        
+        public Address getAddress(int idAddress)
+        {
+            Address returnAddress = null;
+            
+            for (Address address : this.getAddresses())
+            {
+                if (address.getIdAddress() == idAddress)
+                {
+                    returnAddress = address;
+                }
+            }
+            
+            return returnAddress;
+        }
 
         public int getNewAddressID() {
             int highestID = -1;
             
-            for (Address a : vecAddresses)
+            for (Address a : this.getAddresses())
             {
                 if (a.getIdAddress()>highestID)
                     highestID = a.getIdAddress();
@@ -109,5 +129,123 @@ public class AddressDatabase {
             
             return highestID+1;
         }
+        
+        public int getNewCountryID() {
+            int highestID = -1;
+            
+            for (Country c : this.getCountries())
+            {
+                if (c.getIdCountry()>highestID)
+                    highestID = c.getIdCountry();
+            }
+            
+            return highestID+1;
+        }
+        
+        public int getNewCountyID() {
+        int highestID = -1;
+            
+            for (County c : this.getCounties())
+            {
+                if (c.getIdCounty()>highestID)
+                    highestID = c.getIdCounty();
+            }
+            
+            return highestID+1;
+        }
+        
+        public int getNewCityID() {
+        int highestID = -1;
+            
+            for (City c : this.getCities())
+            {
+                if (c.getIdCity()>highestID)
+                    highestID = c.getIdCity();
+            }
+            
+            return highestID+1;
+        }
+        
+        
+
+    public City getCity(int idCity) {
+        City returnCity = null;
+        
+        for (City c: this.getCities())
+        {
+            if (c.getIdCity() == idCity)
+                returnCity = c;
+        }
+        
+        return returnCity;
+    }
+
+    public County getCounty(int idCounty) {
+        County returnCounty = null;
+        for (County c: this.getCounties())
+        {
+            if(c.getIdCounty() == idCounty)
+                returnCounty = c;
+        }
+        
+        return returnCounty;
+    }
+
+    public Country getCountry(int idCountry) {
+        Country returnCountry = null;
+        for (Country c: this.getCountries())
+        {
+            if(c.getIdCountry() == idCountry)
+                returnCountry = c;
+        }
+        
+        return returnCountry;
+    }
+    
+    public Vector<County> getCountiesByCountry(int idCountry)
+    {
+        Vector<County> returnCounties = new Vector<County>();
+        
+        for (County c : this.getCounties())
+        {
+            if (c.getIdCountry() == idCountry)
+                returnCounties.add(c);
+        }
+        
+        return returnCounties;
+    }
+    
+    public Vector<City> getCitiesByCounty(int idCounty)
+    {
+        Vector<City> returnCities= new Vector<City>();
+        
+        for (City c : this.getCities())
+        {
+            if (c.getIdCounty() == idCounty)
+                returnCities.add(c);
+        }
+        
+        return returnCities;
+    }
+
+    public void addCountry(Country newCountry) {
+        this.getCountries().add(newCountry);
+    }
+
+    public void addCounty(County newCounty) {
+        this.getCounties().add(newCounty);
+    }
+
+    public void addCity(City newCity) {
+        this.getCities().add(newCity);
+    }
+
+    public void addAddress(Address newAddress) {
+        this.getAddresses().add(newAddress);
+    }
+
+    
+
+    
 }
 

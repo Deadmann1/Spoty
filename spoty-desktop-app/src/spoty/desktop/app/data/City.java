@@ -13,13 +13,13 @@ public class City {
     private int idCity;
     private int postalcode;
     private String cityname;
-    private int idCountry;
+    private int idCounty;
 
-    public City(int idCity, int postalcode, String cityname, int idCountry) {
+    public City(int idCity, int postalcode, String cityname, int idCounty) {
         this.idCity = idCity;
         this.postalcode = postalcode;
         this.cityname = cityname;
-        this.idCountry = idCountry;
+        this.idCounty = idCounty;
     }
     
     
@@ -48,12 +48,12 @@ public class City {
         this.cityname = cityname;
     }
 
-    public int getIdCountry() {
-        return idCountry;
+    public int getIdCounty() {
+        return idCounty;
     }
 
     public void setIdCountry(int idCountry) {
-        this.idCountry = idCountry;
+        this.idCounty = idCounty;
     }
 
     @Override

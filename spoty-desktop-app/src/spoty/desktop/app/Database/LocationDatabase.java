@@ -100,16 +100,56 @@ public class LocationDatabase {
             return highestID+1;
         }
         
+        public int getNewLocationTypeID() {
+            int highestID = -1;
+            
+            for (Location l : this.getLocations())
+            {
+                if (l.getIdLocation()>highestID)
+                    highestID = l.getIdLocation();
+            }
+            
+            return highestID+1;
+        }
+        
         public void deleteLocation(int idLocation)
         {
+            int index = 0;
+            int indexToDelete = -1;
             //bug
             for (Location location : this.vecLocations)
             {
                 if (location.getIdLocation()==idLocation)
                 {
-                    System.out.println(location.toString());
-                    this.vecLocations.remove(location);
+                    indexToDelete = index;
                 }
+                
+                index++;
             }
+            
+            if (indexToDelete != -1)
+                this.getLocations().remove(indexToDelete);
         }
+        
+        public LocationType getLocationType(int idLocationType)
+        {
+            LocationType returnType = null;
+            
+            for (LocationType type : this.getLocationTypes())
+            { 
+                if (type.getIdType() == idLocationType)
+                    returnType = type;
+            }
+            
+            return returnType;
+        }
+
+         public void addLocationType(LocationType newType) {
+             this.getLocationTypes().add(newType);
+        }
+
+    public void addLocation(Location newLocation) {
+        this.getLocations().add(newLocation);
+    }
+   
 }

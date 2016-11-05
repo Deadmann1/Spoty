@@ -20,6 +20,10 @@ public class County {
         this.idCountry = idCountry;
     }
 
+    public County(int idLocationType, String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdCounty() {
         return idCounty;
     }

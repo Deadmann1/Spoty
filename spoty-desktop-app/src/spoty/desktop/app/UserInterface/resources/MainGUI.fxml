@@ -19,22 +19,25 @@
         <Label text="Staat:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Label text="Land:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label text="Stadt:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label text="Straße:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <Label text="Hausnummer:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <Label text="Typ:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="Straße:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="Hausnummer:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="Typ:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
         <Label fx:id="lblName" text="..." GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label fx:id="lblCountry" text="..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label fx:id="lblCounty" text="..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label fx:id="lblCity" text="..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label fx:id="lblStreet" text="..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Label fx:id="lblHousenumber" text="..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <Label fx:id="lblLocationType" text="..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <Label fx:id="lblStreet" text="..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label fx:id="lblHousenumber" text="..." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <Label fx:id="lblLocationType" text="..." GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <Label text="PLZ:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label fx:id="lblPostalcode" text="..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

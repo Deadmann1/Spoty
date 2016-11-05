@@ -18,7 +18,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
+import spoty.desktop.app.data.Address;
+import spoty.desktop.app.data.City;
+import spoty.desktop.app.data.Country;
+import spoty.desktop.app.data.County;
 import spoty.desktop.app.data.Location;
+import spoty.desktop.app.data.LocationType;
 
 
 public class MainGUIController {
@@ -46,6 +51,9 @@ public class MainGUIController {
 
     @FXML
     private Label lblStreet;
+    
+    @FXML
+    private Label lblPostalcode;
     
     @FXML
     private ResourceBundle resources;
@@ -126,7 +134,21 @@ public class MainGUIController {
     
     private void fillInformationData()
     {
-        System.out.println("Test");
+        Location currentlySelectedLocation = listViewLocations.getSelectionModel().getSelectedItem();
+        
+        lblName.setText(currentlySelectedLocation.getLocationname());
+        Address currentlySelectedLocationAddress = AddressDatabase.getInstance().getAddress(currentlySelectedLocation.getIdAddress());
+        City city = AddressDatabase.getInstance().getCity(currentlySelectedLocationAddress.getIdCity());
+        lblCity.setText(city.getCityname());
+        lblPostalcode.setText(Integer.toString(city.getPostalcode()));
+        County county = AddressDatabase.getInstance().getCounty(city.getIdCounty());
+        lblCounty.setText(county.getCountyname());
+        Country country = AddressDatabase.getInstance().getCountry(county.getIdCountry());
+        lblCountry.setText(country.getCountryname());
+        lblStreet.setText(currentlySelectedLocationAddress.getStreetname());
+        lblHousenumber.setText(Integer.toString(currentlySelectedLocationAddress.getHousenumber()));
+        LocationType type = LocationDatabase.getInstance().getLocationType(currentlySelectedLocation.getIdType());
+        lblLocationType.setText(type.getLocationtypename());
     }
 
 }
