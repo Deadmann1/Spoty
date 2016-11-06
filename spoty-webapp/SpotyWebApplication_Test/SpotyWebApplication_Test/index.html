@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="App/app.module.js"></script>
+    <script src="App/main.js"></script>
+</head>
+<body ng-controller="Main as user">
+    <label for="username">Username</label>
+    <input type="text" id="usernameID" ng-model="user.username" placeholder="Enter Username"><br>
+    <label for="password">Password</label>
+    <input type="text" id="passwordID" ng-model="user.password" placeholder="Enter Password"><br>
+    <button id="btnLogin" type="submit" style="height:20px; width:100px">Login</button>
+</body>
+</html>
