@@ -32,6 +32,9 @@ public class LoginGUIController {
 
     @FXML
     private Label lblUsername;
+    
+    @FXML
+    private Label lblInfoMessageLogin;
 
     @FXML
     private PasswordField txtPassword;
@@ -54,9 +57,17 @@ public class LoginGUIController {
                 Stage stage = new Stage();
                 stage.setScene(sceneTable);
                 stage.setTitle("Hauptmenü");
-                stage.showAndWait();
+                Stage stageLogin = (Stage) btnLogin.getScene().getWindow();
+                stageLogin.close();
+                stage.showAndWait();  
             }
+            
+            else
+                lblInfoMessageLogin.setText("Passwort falsch");
         }
+        
+        else
+            lblInfoMessageLogin.setText("Username nicht vorhanden");
     }
 
     @FXML

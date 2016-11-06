@@ -139,6 +139,9 @@ public class UpdateLocationGUIController {
             
             Address updateAddress = new Address(idAddress, id_selectedCity, txtStreet.getText(), Integer.parseInt(txtHousenumber.getText()));
             AddressDatabase.getInstance().updateAddress(updateAddress);
+            
+            Stage stage = (Stage) btnUpdateLocation.getScene().getWindow();
+            stage.close();
         }
         
         else

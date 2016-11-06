@@ -156,6 +156,9 @@ public class AddLocationGUIController {
 
             AddressDatabase.getInstance().addAddress(newAddress);
             LocationDatabase.getInstance().addLocation(newLocation);
+            
+            Stage stage = (Stage) btnAddLocation.getScene().getWindow();
+            stage.close();
         }
         
         else 

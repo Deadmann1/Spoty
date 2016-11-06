@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.data.Country;
 import spoty.desktop.app.data.County;
@@ -49,6 +50,9 @@ public class AddCountyGUIController {
             int idCounty = AddressDatabase.getInstance().getNewCountyID();
             County newCounty = new County(idCounty, txtCountyname.getText(), idCountry);
             AddressDatabase.getInstance().addCounty(newCounty);
+            
+            Stage stage = (Stage) btnAddCounty.getScene().getWindow();
+            stage.close();
         }
         
         else

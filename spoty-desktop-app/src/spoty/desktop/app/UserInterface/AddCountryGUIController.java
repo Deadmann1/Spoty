@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.data.Country;
 
@@ -36,6 +37,9 @@ public class AddCountryGUIController {
             int idCountry = AddressDatabase.getInstance().getNewCountryID();
             Country newCountry = new Country(idCountry, txtCountryname.getText());
             AddressDatabase.getInstance().addCountry(newCountry);
+            
+            Stage stage = (Stage) btnAddCountry.getScene().getWindow();
+            stage.close();
         }
         
         else
