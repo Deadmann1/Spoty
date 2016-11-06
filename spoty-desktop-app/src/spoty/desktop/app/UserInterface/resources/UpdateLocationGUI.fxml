@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="334.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.UpdateLocationGUIController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.UpdateLocationGUIController">
   <children>
     <Label layoutX="66.0" layoutY="14.0" text="Adresse:" />
     <GridPane layoutX="67.0" layoutY="63.0" prefWidth="441.0">
@@ -34,9 +34,9 @@
           </items>
         </ComboBox>
         <Button id="btnAddCountry" mnemonicParsing="false" onAction="#onAction_btnAddCountry" text="Staat hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <Button id="btnAddCounty" mnemonicParsing="false" onAction="#onAction_btnAddCounty" text="Stadt hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <TextField id="txtStreet" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <TextField id="txtHouseNumber" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Button id="btnAddCounty" mnemonicParsing="false" onAction="#onAction_btnAddCounty" text="Land hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField fx:id="txtStreet" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField id="txtHouseNumber" fx:id="txtHousenumber" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="119.0" />
@@ -62,5 +62,6 @@
     <Button fx:id="btnUpdateLocation" layoutX="370.0" layoutY="289.0" mnemonicParsing="false" onAction="#onAction_btnUpdateLocation" text="Location ändern" />
     <Label layoutX="67.0" layoutY="43.0" text="Name:" />
     <TextField fx:id="txtLocationname" layoutX="200.0" layoutY="37.0" prefWidth="200.0" />
+    <Label fx:id="lblInfoMessageUpdateLocation" layoutX="67.0" layoutY="327.0" prefWidth="441.0" text="..." />
   </children>
 </AnchorPane>

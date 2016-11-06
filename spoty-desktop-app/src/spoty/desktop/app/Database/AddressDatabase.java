@@ -227,6 +227,20 @@ public class AddressDatabase {
         
         return returnCities;
     }
+    
+     public Vector<County> getCountriesByCounty(int idCountry)
+    {
+        Vector<County> returnCounties= new Vector<County>();
+        
+        for (County c : this.getCounties())
+        {
+            if (c.getIdCountry()== idCountry)
+                returnCounties.add(c);
+        }
+        
+        return returnCounties;
+    }
+    
 
     public void addCountry(Country newCountry) {
         this.getCountries().add(newCountry);
@@ -244,7 +258,20 @@ public class AddressDatabase {
         this.getAddresses().add(newAddress);
     }
 
-    
+    public void updateAddress(Address updateAddress)
+    {
+        int index = -1;
+        int i=0;
+        for (Address a : this.getAddresses())
+        {
+            if (a.getIdAddress() == updateAddress.getIdAddress())
+                index=i;
+                
+            i++;
+        }
+        
+        this.getAddresses().setElementAt(updateAddress, index);
+    }
 
     
 }

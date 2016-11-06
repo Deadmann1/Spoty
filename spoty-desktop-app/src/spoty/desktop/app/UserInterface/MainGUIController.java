@@ -3,9 +3,12 @@ package spoty.desktop.app.UserInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
 import spoty.desktop.app.data.Address;
@@ -72,6 +76,9 @@ public class MainGUIController {
 
     @FXML
     private ListView<Location> listViewLocations;
+    
+    @FXML
+    private Label lblInfoMessageMainMenu;
 
 
     @FXML
@@ -87,16 +94,36 @@ public class MainGUIController {
 
     @FXML
     void onAction_btnUpdateLocation(ActionEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/UpdateLocationGUI.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        UpdateLocationGUIController controller = fxmlLoader.<UpdateLocationGUIController>getController();
-        controller.setUpdateLocation(listViewLocations.getSelectionModel().getSelectedItem());
-        Scene sceneTable = new Scene(root);
-        Stage stage = new Stage();     
-        stage.setScene(sceneTable);
-        stage.setTitle("Location abändern");
-        stage.showAndWait();
-        fillListViewLocations();
+        if (listViewLocations.getSelectionModel().getSelectedItem()!=null)
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/UpdateLocationGUI.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            UpdateLocationGUIController controller = fxmlLoader.<UpdateLocationGUIController>getController();
+            //controller.setIdLocation(currentlySelecte);
+            System.out.println("Loc: " + LocationDatabase.getInstance().getLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation()));
+            controller.setIdLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
+            controller.setIdAddress(listViewLocations.getSelectionModel().getSelectedItem().getIdAddress());
+            Scene sceneTable = new Scene(root);
+            Stage stage = new Stage();     
+            stage.setScene(sceneTable);
+            stage.setTitle("Location ändern");
+            stage.setOnShown(new EventHandler<WindowEvent>() {
+              public void handle(WindowEvent we) {
+                 controller.fillCmbCity();
+                 controller.fillCmbCounty();
+                 controller.fillCmbCountry();
+                 controller.fillCmbLocationType();
+                 controller.fillUpdateLocationValues();
+              }
+            });  
+            
+            stage.showAndWait();
+            fillListViewLocations();
+        }
+        
+        else
+            lblInfoMessageMainMenu.setText("Es muss ein Ort ausgewählt werden!");
+        
     }
     
     

@@ -131,6 +131,19 @@ public class LocationDatabase {
                 this.getLocations().remove(indexToDelete);
         }
         
+         public Location getLocation(int idLocation)
+        {
+            Location returnLocation = null;
+            
+            for (Location l : this.getLocations())
+            { 
+                if (l.getIdLocation() == idLocation)
+                    returnLocation = l;
+            }
+            
+            return returnLocation;
+        }
+         
         public LocationType getLocationType(int idLocationType)
         {
             LocationType returnType = null;
@@ -150,6 +163,21 @@ public class LocationDatabase {
 
     public void addLocation(Location newLocation) {
         this.getLocations().add(newLocation);
+    }
+    
+    public void updateLocation(Location updateLocation)
+    {
+        int index = -1;
+        int i=0;
+        for (Location l : this.getLocations())
+        {
+            if (l.getIdLocation() == updateLocation.getIdLocation())
+                index=i;
+                
+            i++;
+        }
+        
+        this.getLocations().setElementAt(updateLocation, index);
     }
    
 }
