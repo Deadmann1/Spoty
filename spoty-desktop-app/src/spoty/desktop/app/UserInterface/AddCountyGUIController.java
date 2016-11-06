@@ -45,6 +45,7 @@ public class AddCountyGUIController {
     void onAction_btnAddCounty(ActionEvent event) {
         if (txtCountyname.getText().compareTo("")!=0)
         {
+            System.out.println("Id country: " + idCountry);
             int idCounty = AddressDatabase.getInstance().getNewCountyID();
             County newCounty = new County(idCounty, txtCountyname.getText(), idCountry);
             AddressDatabase.getInstance().addCounty(newCounty);

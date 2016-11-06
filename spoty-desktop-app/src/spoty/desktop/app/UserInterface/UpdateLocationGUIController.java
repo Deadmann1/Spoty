@@ -84,7 +84,7 @@ public class UpdateLocationGUIController {
         stage.setScene(sceneTable);
         stage.setTitle("Stadt hinzufügen");
         stage.showAndWait();
-        fillCmbCounty(cmbCounty.getSelectionModel().getSelectedItem().getIdCounty());
+        fillCmbCity(cmbCounty.getSelectionModel().getSelectedItem().getIdCounty());
     }
 
     @FXML

@@ -135,6 +135,8 @@ public class MainGUIController {
             LocationDatabase.getInstance().deleteLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
             fillListViewLocations();
         }
+        
+        lblInfoMessageMainMenu.setText("Es muss ein Ort ausgewählt werden!");
     }
 
     @FXML
