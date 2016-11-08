@@ -1,23 +1,16 @@
 {
-  "name": "WebMatrixExpressSite",
-  "version": "0.2.0",
-  "author": "The WebMatrix Team <webmatrix@microsoft.com>",
-  "description": "A simple boilerplate for building node applications on Windows Azure (or wherever)",
-  "contributors": [
-    {
-      "name": "Microsoft",
-      "email": "appgal@microsoft.com"
-    }
-  ],
-  "main": "./server.js",
-  "keywords": [
-    "azure",
-    "boilerplate",
-    "express"
-  ],
+  "name": "spoty",
+  "version": "1.0.0",
+  "author": "Manuel Sammer",
+  "description": "Server_Backend SPOTY",
+  "main": "./app.js",
   "dependencies": {
     "jade": "*",
-    "express": "~3.1.0"
+    "express": "4.14.0"
+  },
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/Deadmann1/Spoty.git"
   },
   "noAnalyze": true,
   "license": "Apache",
