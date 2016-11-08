@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-/* ROUTES */
-var location = require('./routes/location');
+/* ROUTES DEFINITION*/
 var index = require('./routes/index');
+var location = require('./routes/location');
+var userAccount = require('./routes/userAccount.js');
+var adress = require('./routes/adress.js');
 
 var app = express();
 
@@ -22,27 +24,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// SQL SERVER
-var Connection = require('tedious').Connection;
-var config = {
-  userName: 'deadmann',
-  password: 'Drfreemann33',
-  server: 'spoty.database.windows.net',
-  // If you are on Microsoft Azure, you need this:  
-  options: { encrypt: true, database: 'SpotyDB' }
-};
-config.options.rowCollectionOnRequestCompletion = true;
-var connection = new Connection(config);
-connection.on('connect', function (err) {
-  // If no error, then good to proceed.  
-  console.log("Connected");
-});
-app.set('connection', connection);
-
 
 /* ROUTES */
 app.use('/', index);
 app.use('/api', location);
+app.use('/api', userAccount);
+app.use('/api', adress);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

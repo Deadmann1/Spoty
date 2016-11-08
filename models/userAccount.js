@@ -10,4 +10,4 @@ function UserAccount(IdUserAccount, Username, Password, Firstname,  Lastname, Bi
     this.IdAccountType = IdAccountType;
 }
 
-module.exports = User;
+module.exports = UserAccount;
