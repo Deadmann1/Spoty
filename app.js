@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var errorHandler = require('error-handler');
 
 /* ROUTES */
 var location = require('./routes/location');
@@ -44,20 +43,6 @@ app.set('connection', connection);
 /* ROUTES */
 app.use('/', index);
 app.use('/api', location);
-
-
-
-
-var env = process.argv[2] || 'dev';
-switch (env) {
-  case 'dev':
-    // Setup development config
-    //app.use(errorHandler);
-    break;
-  case 'prod':
-    // Setup production config
-    break;
-}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

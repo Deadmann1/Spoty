@@ -1,7 +1,6 @@
 {
   "name": "Spoty",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -14,7 +13,6 @@
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "tedious" : "*",
-    "express-error-handler" : "*",
-    "error-handler" : "*"
+    "express-error-handler" : "*"
   }
 }
