@@ -1,0 +1,152 @@
+CREATE TABLE [Spoty].[AccountType] (
+    [IdAccountType] INT           NOT NULL,
+    [AccountType]   VARCHAR (100) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdAccountType] ASC)
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_AccountType_IdAccountType]
+    ON [Spoty].[AccountType]([IdAccountType] ASC);
+
+
+
+
+
+
+CREATE TABLE [Spoty].[UserAccount] (
+    [IdUserAccount] INT          NOT NULL,
+    [Username]      VARCHAR (50) NOT NULL,
+    [Password]      VARCHAR (50) NOT NULL,
+    [Firstname]     VARCHAR (50) NULL,
+    [Lastname]      VARCHAR (50) NULL,
+    [Birthdate]     DATE         NULL,
+    [IdAccountType] INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdUserAccount] ASC),
+    CONSTRAINT [FK_UserAccountToAccountType] FOREIGN KEY ([IdAccountType]) REFERENCES [Spoty].[AccountType] ([IdAccountType])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserAccount_IdUserAccount]
+    ON [Spoty].[UserAccount]([IdUserAccount] ASC);
+
+
+
+
+
+
+
+CREATE TABLE [Spoty].[Rating] (
+    [Grade]         INT           NOT NULL,
+    [Feedback]      VARCHAR (100) NULL,
+    [IdUserAccount] INT           NOT NULL,
+    [IdLocation]    INT           NOT NULL,
+    CONSTRAINT [FK_Rating_Location] FOREIGN KEY ([IdLocation]) REFERENCES [Spoty].[Location] ([IdLocation]),
+    CONSTRAINT [FK_Rating_UserAccount] FOREIGN KEY ([IdUserAccount]) REFERENCES [Spoty].[UserAccount] ([IdUserAccount])
+);
+
+
+
+
+CREATE TABLE [Spoty].[LocationType] (
+    [IdLocationType]   INT          NOT NULL,
+    [LocationTypeName] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdLocationType] ASC)
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_LocationType_IdLocationType]
+    ON [Spoty].[LocationType]([IdLocationType] ASC);
+
+
+
+
+
+
+
+CREATE TABLE [Spoty].[Location] (
+    [IdLocation]     INT          NOT NULL,
+    [LocationName]   VARCHAR (50) NOT NULL,
+    [IdLocationType] INT          NOT NULL,
+    [IdAdress]       INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdLocation] ASC),
+    CONSTRAINT [FK_Location_Adress] FOREIGN KEY ([IdAdress]) REFERENCES [Spoty].[Adress] ([IdAdress]),
+    CONSTRAINT [FK_Location_LocationType] FOREIGN KEY ([IdLocationType]) REFERENCES [Spoty].[LocationType] ([IdLocationType])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Location_IdLocation]
+    ON [Spoty].[Location]([IdLocation] ASC);
+
+
+
+
+
+
+
+CREATE TABLE [Spoty].[Adress] (
+    [IdAdress]    INT          NOT NULL,
+    [StreetName]  VARCHAR (50) NOT NULL,
+    [HouseNumber] INT          NOT NULL,
+    [IdCity]      INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdAdress] ASC),
+    CONSTRAINT [FK_Adress_City] FOREIGN KEY ([IdCity]) REFERENCES [Spoty].[City] ([IdCity])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Adress_IdAdress]
+    ON [Spoty].[Adress]([IdAdress] ASC);
+
+
+
+
+
+CREATE TABLE [Spoty].[City] (
+    [IdCity]     INT          NOT NULL,
+    [CityName]   VARCHAR (50) NOT NULL,
+    [PostalCode] INT          NOT NULL,
+    [IdCounty]   INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdCity] ASC),
+    CONSTRAINT [FK_City_County] FOREIGN KEY ([IdCounty]) REFERENCES [Spoty].[County] ([IdCounty])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_City_IdCity]
+    ON [Spoty].[City]([IdCity] ASC);
+
+
+
+
+
+CREATE TABLE [Spoty].[County] (
+    [IdCounty]   INT           NOT NULL,
+    [CountyName] VARCHAR (100) NOT NULL,
+    [IdCountry]  INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdCounty] ASC),
+    CONSTRAINT [FK_County_Country] FOREIGN KEY ([IdCountry]) REFERENCES [Spoty].[Country] ([IdCountry])
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_County_IdCounty]
+    ON [Spoty].[County]([IdCounty] ASC);
+
+
+
+
+
+CREATE TABLE [Spoty].[Country] (
+    [IdCountry]   INT           NOT NULL,
+    [CountryName] VARCHAR (100) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdCountry] ASC)
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Country_IdCountry]
+    ON [Spoty].[Country]([IdCountry] ASC);

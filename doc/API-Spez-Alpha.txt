@@ -1,0 +1,26 @@
+API URL : http://spotyweb-backend.azurewebsites.net/api
+
+Resources: for example:
+
+		   http://spotyweb-backend.azurewebsites.net/api/locations  	 GET METHOD.... gets all locations
+		   http://spotyweb-backend.azurewebsites.net/api/locations/{id}  GET METHOD... id url param, gets specific locations
+		   http://spotyweb-backend.azurewebsites.net/api/locations/{id}  POST METHOD .. creates new location
+		   http://spotyweb-backend.azurewebsites.net/api/locations/{id}  PUT METHOD .. updates  location
+		   http://spotyweb-backend.azurewebsites.net/api/users/{id}  	 DELETE METHOD .. deletes  location
+		   
+		   http://spotyweb-backend.azurewebsites.net/api/users  	 GET METHOD.... gets all users
+		   http://spotyweb-backend.azurewebsites.net/api/users/{id}  GET METHOD... id url param, gets specific user
+		   http://spotyweb-backend.azurewebsites.net/api/users/{id}  POST METHOD .. creates new user
+		   http://spotyweb-backend.azurewebsites.net/api/users/{id}  PUT METHOD .. updates  user
+		   http://spotyweb-backend.azurewebsites.net/api/users/{id}  DELETE METHOD .. deletes  user
+		   
+		   You can repeat this for every resource we have .. cities, counties ect.
+		   
+Impl. in the future:
+
+Login per challenge ........  means:
+Before you can access any api functions(you get unautohrized)you have to get an valid token via a challenge from the api.
+
+
+		   
+		   
