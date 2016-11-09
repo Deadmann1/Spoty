@@ -1,8 +1,10 @@
 var method = Rating.prototype;
 
-function Rating(IdRating, AccountyType) {
-    this.IdRating = IdRating;
-    this.AccountyType = AccountyType;
+function Rating(Grade, Feedback, IdUserAccount, IdLocation) {
+    this.Grade = Grade;
+    this.Feedback = Feedback;
+    this.IdUserAccount = IdUserAccount;
+    this.IdLocation = IdLocation;
 }
 
 module.exports = Rating;

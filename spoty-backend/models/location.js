@@ -1,8 +1,8 @@
 var method = Location.prototype;
 
-function Location(IdLocation, Locationname, IdLocationType, IdAddress ) {
+function Location(IdLocation, LocationName, IdLocationType, IdAddress ) {
     this.IdLocation = IdLocation;
-    this.Locationname = Locationname;
+    this.LocationName = LocationName;
     this.IdLocationType = IdLocationType;
     this.IdAddress = IdAddress;
 }
