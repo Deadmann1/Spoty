@@ -2,18 +2,18 @@ var express = require('express');
 var router = express.Router();
 var Request = require('tedious').Request;
 var types = require('tedious').TYPES;
-var Adress = require("../models/adress.js");
+var Address = require("../models/address.js");
 var pool = require("../database/database.js");
 
 
-router.get('/adresses', function (req, res, next) {
+router.get('/addresses', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
             console.error(err);
             return;
         }
         var result = [];
-        var adresses = [];
+        var addresses = [];
         request = new Request("SELECT * FROM Spoty.Adress;", function (err) {
             if (err) {
                 throw (err);
@@ -28,27 +28,27 @@ router.get('/adresses', function (req, res, next) {
                 }
             });
             console.log(result);
-            adresses.push(new Adress(result[0], result[1], result[2], result[3]));
+            addresses.push(new Address(result[0], result[1], result[2], result[3]));
             result = [];
         });
         request.on('doneInProc', function (rowCount, more, rows) {
             console.log(rowCount + ' rows returned');
             connection.release();
             res.type('application/json');
-            res.send(adresses);
+            res.send(addresses);
         });
         connection.execSql(request);
     });
 });
 
-router.get('/adresses/:_id', function (req, res, next) {
+router.get('/addresses/:_id', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
             console.error(err);
             return;
         }
         var result = [];
-        var adress;
+        var address;
         request = new Request("SELECT * FROM Spoty.Adress WHERE IdAdress =" + req.params._id + ";", function (err) {
             if (err) {
                 next(err)
@@ -66,10 +66,10 @@ router.get('/adresses/:_id', function (req, res, next) {
             if (!result) {
                 next(err)
             }
-            adress = new Adress(result[0], result[1], result[2], result[3]);
+            address = new Address(result[0], result[1], result[2], result[3]);
             connection.release();
             res.type('application/json');
-            res.send(adress);
+            res.send(address);
         });
         connection.execSql(request);
     });
