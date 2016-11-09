@@ -1,0 +1,32 @@
+Ziele:
+  Operative Applikationen:
+    ⦁	Auswählen von Geschäftstypen
+    ⦁	Filtern nach typischen Kriterien dieser Typen (Sterne, Bewertungen, Preise)
+    ⦁	Auflistung der Ergebnisse in der Nähe oder für einen eingegebenen Ort
+ 
+  Administrive Applikation:
+    ⦁ Verwalten von Geschäften
+      ⦁	CRUD
+      ⦁ Hinzufügen neuer Geschäfte mit GeoDaten oder Adresse (Spatial, DWH)
+
+Implementation: 
+
+Operative Applikationen:
+
+ Mobile Applikation:  Manuel Sammer  C#
+    ⦁ Xamarin.Droid
+    
+ Web Applikation: Alexander Ruhdörfer C#
+    ⦁ ASP.NET
+    
+Adminstravive Applikation: 
+
+  Desktop Applikation: Daniel Lamprecht Java
+    ⦁ JavaFX
+
+Backend:  
+Oracle DB Alexander Ruhdorfer
+Webservice Restful Daniel Lamprecht, Manuel Sammer
+Hosting for Service and Site Manuel Sammer
+
+    
