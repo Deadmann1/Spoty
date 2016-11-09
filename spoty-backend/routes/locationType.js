@@ -3,7 +3,7 @@ var router = express.Router();
 var Request = require('tedious').Request;
 var types = require('tedious').TYPES;
 var LocationType= require("../models/locationType.js");
-var connection = require("../database/database.js");
+var pool = require("../database/database.js");
 
 
 router.get('/locationTypes', function (req, res, next) {
@@ -28,7 +28,7 @@ router.get('/locationTypes', function (req, res, next) {
             }
         });
         console.log(result);
-        locationTypes.push(new LocationTyp(result[0],result[1]));
+        locationTypes.push(new LocationType(result[0],result[1]));
         result = [];
     });
     request.on('doneInProc', function (rowCount, more, rows) {

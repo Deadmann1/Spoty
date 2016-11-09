@@ -130,10 +130,10 @@ router.put('/addresses/:_id', function (req, res, next) {
                 next(err)
             }
         });
-        request.addParameter('IdAddress', types.Int,  location.IdLocation);
-        request.addParameter('StreetName', types.NVarChar,  location.StreetName);
-        request.addParameter('HouseNumber', types.Int,  location.HouseNumber);
-        request.addParameter('IdCity', types.Int,  location.IdCity);
+        request.addParameter('IdAddress', types.Int,  address.IdAddress);
+        request.addParameter('StreetName', types.NVarChar,address.StreetName);
+        request.addParameter('HouseNumber', types.Int,  address.HouseNumber);
+        request.addParameter('IdCity', types.Int,  address.IdCity);
         request.on('doneInProc', function (columns) {
             connection.release();
             res.send({message: 'Address successfully updated'});
