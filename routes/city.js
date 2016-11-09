@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Request = require('tedious').Request;
 var types = require('tedious').TYPES;
-var Location = require("../models/city.js");
+var City = require("../models/city.js");
 var pool = require("../database/database.js");
 
 
@@ -13,7 +13,7 @@ router.get('/cities', function (req, res, next) {
             return;
         }
         var result = [];
-        var locations = [];
+        var cities = [];
         request = new Request("SELECT * FROM Spoty.City;", function (err) {
             if (err) {
                 throw (err);
@@ -28,14 +28,14 @@ router.get('/cities', function (req, res, next) {
                 }
             });
             console.log(result);
-            locations.push(new Location(result[0], result[1], result[2], result[3]));
+            cities.push(new City(result[0], result[1], result[2], result[3]));
             result = [];
         });
         request.on('doneInProc', function (rowCount, more, rows) {
             console.log(rowCount + ' rows returned');
             connection.release();
             res.type('application/json');
-            res.send(locations);
+            res.send(cities);
         });
         connection.execSql(request);
     });
@@ -49,8 +49,8 @@ router.get('/cities/:_id', function (req, res, next) {
             return;
         }
         var result = [];
-        var location;
-        request = new Request("SELECT * FROM City.Location WHERE IdLocation =" + req.params._id + ";", function (err) {
+        var city;
+        request = new Request("SELECT * FROM Spoty.City WHERE IdCity =" + req.params._id + ";", function (err) {
             if (err) {
                 next(err)
             }
@@ -67,10 +67,10 @@ router.get('/cities/:_id', function (req, res, next) {
             if (!result) {
                 next(err)
             }
-            location = new Location(result[0], result[1], result[2], result[3]);
+            city = new City(result[0], result[1], result[2], result[3]);
             connection.release();
             res.type('application/json');
-            res.send(location);
+            res.send(city);
         });
         connection.execSql(request);
     });
