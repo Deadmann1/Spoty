@@ -1,10 +1,10 @@
 var method = Location.prototype;
 
-function Location(IdLocation, Locationame, IdLocationType, IdAdress ) {
+function Location(IdLocation, LocationName, IdLocationType, IdAddress ) {
     this.IdLocation = IdLocation;
-    this.Locationame = Locationame;
+    this.LocationName = LocationName;
     this.IdLocationType = IdLocationType;
-    this.IdAdress = IdAdress;
+    this.IdAddress = IdAddress;
 }
 
 module.exports = Location;

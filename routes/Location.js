@@ -11,7 +11,7 @@ router.get('/locations', function (req, res, next) {
         if (err) {
             console.error(err);
             return;
-        }c
+        }
         var result = [];
         var locations = [];
         request = new Request("SELECT * FROM Spoty.Location;", function (err) {
@@ -70,6 +70,73 @@ router.get('/locations/:_id', function (req, res, next) {
             connection.release();
             res.type('application/json');
             res.send(location);
+        });
+        connection.execSql(request);
+    });
+});
+
+router.post('/locations', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var location = req.body;
+        request = new Request("INSERT Spoty.Location (IdLocation, LocationName, IdLocationType, IdAdress) VALUES (@IdLocation, @LocationName, @IdLocationType, @IdAddress);", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdLocation', types.Int,  location.IdLocation);
+        request.addParameter('LocationName', types.NVarChar,  location.LocationName);
+        request.addParameter('IdLocationType', types.Int,  location.IdLocationType);
+        request.addParameter('IdAddress', types.Int,  location.IdAddress);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Station successfully added'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.delete('/locations/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        request = new Request("DELETE FROM Spoty.Location WHERE IdLocation =" + req.params._id + ";", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Station successfully deleted'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.put('/locations', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var location = req.body;
+        request = new Request("UPDATE Spoty.Location SET LocationName=@LocationName, IdLocationType=@IdLocationType, IdAdress=@IdAddress WHERE IdLocation=@IdLocation;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdLocation', types.Int,  reg);
+        request.addParameter('LocationName', types.NVarChar,  location.LocationName);
+        request.addParameter('IdLocationType', types.Int,  location.IdLocationType);
+        request.addParameter('IdAddress', types.Int,  location.IdAddress);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Station successfully added'});
         });
         connection.execSql(request);
     });
