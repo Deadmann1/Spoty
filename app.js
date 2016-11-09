@@ -8,9 +8,15 @@ var bodyParser = require('body-parser');
 /* ROUTES DEFINITION*/
 var index = require('./routes/index');
 var location = require('./routes/location');
-var userAccount = require('./routes/userAccount.js');
-var adress = require('./routes/adress.js');
-var city = require('./routes/city.js');
+var userAccount = require('./routes/userAccount');
+var adress = require('./routes/adress');
+var city = require('./routes/city');
+var country = require('./routes/country');
+var locationType = require('./routes/locationType');
+var rating = require('./routes/rating');
+var accountType = require('./routes/accountType');
+var county = require('./routes/county');
+
 
 var app = express();
 
@@ -32,7 +38,11 @@ app.use('/api', location);
 app.use('/api', userAccount);
 app.use('/api', adress);
 app.use('/api', city);
-
+app.use('/api', country);
+app.use('/api', county);
+app.use('/api', accountType);
+app.use('/api', locationType);
+app.use('/api', rating);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');

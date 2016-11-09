@@ -11,7 +11,7 @@ router.get('/locations', function (req, res, next) {
         if (err) {
             console.error(err);
             return;
-        }
+        }c
         var result = [];
         var locations = [];
         request = new Request("SELECT * FROM Spoty.Location;", function (err) {

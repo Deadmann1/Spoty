@@ -2,7 +2,7 @@ var ConnectionPool = require('tedious-connection-pool');
 var Request = require('tedious').Request;
 
 var poolConfig = {
-  min: 5,
+  min: 0,
   max: 100,
   log: true
 };

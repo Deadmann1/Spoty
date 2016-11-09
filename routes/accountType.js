@@ -13,7 +13,7 @@ router.get('/accountTypes', function (req, res, next) {
             return;
         }
         var result = [];
-        var locations = [];
+        var accountTypes = [];
         request = new Request("SELECT * FROM Spoty.AccountType;", function (err) {
             if (err) {
                 throw (err);
@@ -28,14 +28,14 @@ router.get('/accountTypes', function (req, res, next) {
                 }
             });
             console.log(result);
-            locations.push(new Location(result[0], result[1], result[2], result[3]));
+            accountTypes.push(new AccountType(result[0], result[1]));
             result = [];
         });
         request.on('doneInProc', function (rowCount, more, rows) {
             console.log(rowCount + ' rows returned');
             connection.release();
             res.type('application/json');
-            res.send(locations);
+            res.send(accountTypes);
         });
         connection.execSql(request);
     });

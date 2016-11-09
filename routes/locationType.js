@@ -1,16 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var app = require('../app');
 var Request = require('tedious').Request;
 var types = require('tedious').TYPES;
-var Location = require("../models/location.js");
+var LocationType= require("../models/locationType.js");
 var connection = require("../database/database.js");
 
 
-router.get('/locations', function (req, res, next) {
+router.get('/locationTypes', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
     var result = [];
-    var locations = [];
-    request = new Request("SELECT * FROM Spoty.Location;", function (err) {
+    var locationTypes = [];
+    request = new Request("SELECT * FROM Spoty.LocationType;", function (err) {
         if (err) {
             throw(err);
         }
@@ -24,22 +28,28 @@ router.get('/locations', function (req, res, next) {
             }
         });
         console.log(result);
-        locations.push(new Location(result[0],result[1],result[2],result[3]));
+        locationTypes.push(new LocationTyp(result[0],result[1]));
         result = [];
     });
     request.on('doneInProc', function (rowCount, more, rows) {
         console.log(rowCount + ' rows returned');
+        connection.release();
         res.type('application/json');  
-        res.send(locations);
+        res.send(locationTypes);
     });
     connection.execSql(request);
-    
+    });
 });
 
-router.get('/locations/:_id', function (req, res, next) {
+router.get('/locationTypes/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
     var result = [];
-    var location;
-    request = new Request("SELECT * FROM Spoty.Location WHERE IdLocation =" + req.params._id + ";", function (err) {
+    var locationType;
+    request = new Request("SELECT * FROM Spoty.LocationType WHERE IdLocationType =" + req.params._id + ";", function (err) {
         if (err) {
             next(err)
         }
@@ -56,11 +66,13 @@ router.get('/locations/:_id', function (req, res, next) {
         if(!result) {
             next(err)
         }
-        location = new Location(result[0],result[1],result[2],result[3]);
+        locationType = new LocationType(result[0],result[1]);
+        connection.release();
         res.type('application/json');  
-        res.send(location);
+        res.send(locationType);
     });
     connection.execSql(request);
+    });
 });
 
 module.exports = router;
