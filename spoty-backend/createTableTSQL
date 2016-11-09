@@ -1,3 +1,13 @@
+DROP TABLE Spoty.Rating;
+DROP TABLE Spoty.UserAccount;
+DROP TABLE Spoty.AccountType;
+DROP TABLE Spoty.Location;
+DROP TABLE Spoty.LocationType;
+DROP TABLE Spoty.Address;
+DROP TABLE Spoty.City;
+DROP TABLE Spoty.County;
+DROP TABLE Spoty.Country;
+
 CREATE TABLE [Spoty].[AccountType] (
     [IdAccountType] INT           NOT NULL,
     [AccountType]   VARCHAR (100) NOT NULL,
@@ -70,9 +80,9 @@ CREATE TABLE [Spoty].[Location] (
     [IdLocation]     INT          NOT NULL,
     [LocationName]   VARCHAR (50) NOT NULL,
     [IdLocationType] INT          NOT NULL,
-    [IdAdress]       INT          NOT NULL,
+    [IdAddress]       INT          NOT NULL,
     PRIMARY KEY CLUSTERED ([IdLocation] ASC),
-    CONSTRAINT [FK_Location_Adress] FOREIGN KEY ([IdAdress]) REFERENCES [Spoty].[Adress] ([IdAdress]),
+    CONSTRAINT [FK_Location_Address] FOREIGN KEY ([IdAddress]) REFERENCES [Spoty].[Address] ([IdAddress]),
     CONSTRAINT [FK_Location_LocationType] FOREIGN KEY ([IdLocationType]) REFERENCES [Spoty].[LocationType] ([IdLocationType])
 );
 
@@ -87,19 +97,19 @@ CREATE NONCLUSTERED INDEX [IX_Location_IdLocation]
 
 
 
-CREATE TABLE [Spoty].[Adress] (
-    [IdAdress]    INT          NOT NULL,
+CREATE TABLE [Spoty].[Address] (
+    [IdAddress]    INT          NOT NULL,
+    [IdCity]      INT          NOT NULL,
     [StreetName]  VARCHAR (50) NOT NULL,
     [HouseNumber] INT          NOT NULL,
-    [IdCity]      INT          NOT NULL,
-    PRIMARY KEY CLUSTERED ([IdAdress] ASC),
-    CONSTRAINT [FK_Adress_City] FOREIGN KEY ([IdCity]) REFERENCES [Spoty].[City] ([IdCity])
+    PRIMARY KEY CLUSTERED ([IdAddress] ASC),
+    CONSTRAINT [FK_Address_City] FOREIGN KEY ([IdCity]) REFERENCES [Spoty].[City] ([IdCity])
 );
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_Adress_IdAdress]
-    ON [Spoty].[Adress]([IdAdress] ASC);
+CREATE NONCLUSTERED INDEX [IX_Address_IdAddress]
+    ON [Spoty].[Address]([IdAddress] ASC);
 
 
 
@@ -107,8 +117,8 @@ CREATE NONCLUSTERED INDEX [IX_Adress_IdAdress]
 
 CREATE TABLE [Spoty].[City] (
     [IdCity]     INT          NOT NULL,
-    [CityName]   VARCHAR (50) NOT NULL,
     [PostalCode] INT          NOT NULL,
+    [CityName]   VARCHAR (50) NOT NULL,
     [IdCounty]   INT          NOT NULL,
     PRIMARY KEY CLUSTERED ([IdCity] ASC),
     CONSTRAINT [FK_City_County] FOREIGN KEY ([IdCounty]) REFERENCES [Spoty].[County] ([IdCounty])
