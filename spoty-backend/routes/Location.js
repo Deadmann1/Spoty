@@ -125,18 +125,18 @@ router.put('/locations', function (req, res, next) {
             return;
         }
         var location = req.body;
-        request = new Request("UPDATE Spoty.Location SET LocationName=@LocationName, IdLocationType=@IdLocationType, IdAdress=@IdAddress WHERE IdLocation=@IdLocation;", function (err) {
+        request = new Request("UPDATE Spoty.Location SET LocationName = @LocationName, IdLocationType = @IdLocationType, IdAdress = @IdAddress WHERE IdLocation = @IdLocation;", function (err) {
             if (err) {
                 next(err)
             }
         });
-        request.addParameter('IdLocation', types.Int,  reg);
+        request.addParameter('IdLocation', types.Int,  location.IdLocation);
         request.addParameter('LocationName', types.NVarChar,  location.LocationName);
         request.addParameter('IdLocationType', types.Int,  location.IdLocationType);
         request.addParameter('IdAddress', types.Int,  location.IdAddress);
         request.on('doneInProc', function (columns) {
             connection.release();
-            res.send({message: 'Station successfully added'});
+            res.send({message: 'Station successfully updated'});
         });
         connection.execSql(request);
     });

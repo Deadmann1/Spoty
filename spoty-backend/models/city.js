@@ -1,9 +1,9 @@
 var method = City.prototype;
 
-function City(IdCity, CityName, PostalCode, IdCounty ) {
+function City(IdCity,PostalCode, CityName, IdCounty ) {
     this.IdCity = IdCity;
-    this.CityName = CityName;
     this.PostalCode = PostalCode;
+    this.CityName = CityName;
     this.IdCounty = IdCounty;
 }
 
