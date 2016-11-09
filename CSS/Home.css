@@ -1,0 +1,8 @@
+﻿input[type="text"] 
+{
+   padding: 2px 16px; 
+   height: 10px; 
+   font-size: 1.8em;
+   border-radius: 18px;
+   outline: none // keine blaue Umrandung beim Fokus
+}

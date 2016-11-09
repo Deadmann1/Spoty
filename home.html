@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="CSS/Button.css">
+    <link rel="stylesheet" href="CSS/Home.css">
+    <script src="Scripts/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="App/main.js"></script>
+</head>
+<body ng-controller="HomeController">
+    <div id="HomeContainer">
+        <select style="width:auto">
+            <option value="Kino">Kino</option>
+            <option value="Buschenschenke">Buschenschenke</option>
+            <option value="Autowerkstatt">Autowerkstatt</option>
+            <option value="Gasthaus">Gasthaus</option>
+        </select><br />
+        
+        <label>Suchen: <input type="text" ng-model="search.$"></label> <br>
+        <label for="Ergebnisse:"></label>
+        <table id="searchObjResults" border="1">
+            <tr><th>Land</th><th>Bundesland</th><th>Stadt</th><th>Location</th></tr>
+            <tr ng-repeat="ort in orte | filter:search:strict">
+                <td>{{ort.Land}}</td>
+                <td>{{ort.Bundesland}}</td>
+                <td>{{ort.Stadt}}</td>
+                <td>{{ort.Location}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
