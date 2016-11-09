@@ -1,6 +1,7 @@
 {
   "name": "Spoty",
   "version": "1.0.0",
+  "description": "Backend for out school project spoty",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -13,6 +14,6 @@
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "tedious" : "*",
-    "express-error-handler" : "*"
+    "tedious-connection-pool" : "*"
   }
 }
