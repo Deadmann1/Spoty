@@ -41,15 +41,15 @@ router.get('/accountTypes', function (req, res, next) {
     });
 });
 
-router.get('/locations/:_id', function (req, res, next) {
+router.get('/accountTypes/:_id', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
             console.error(err);
             return;
         }
     var result = [];
-    var location;
-    request = new Request("SELECT * FROM Spoty.Location WHERE IdLocation =" + req.params._id + ";", function (err) {
+    var accountTpye;
+    request = new Request("SELECT * FROM Spoty.AccountType WHERE IdAccountType =" + req.params._id + ";", function (err) {
         if (err) {
             next(err)
         }
@@ -66,10 +66,10 @@ router.get('/locations/:_id', function (req, res, next) {
         if (!result) {
             next(err)
         }
-        location = new Location(result[0], result[1], result[2], result[3]);
+        accountTpye = new AccountType(result[0], result[1]);
         connection.release();
         res.type('application/json');
-        res.send(location);
+        res.send(accountTpye);
     });
     connection.execSql(request);
     });

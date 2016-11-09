@@ -15,5 +15,8 @@
     "serve-favicon": "~2.3.0",
     "tedious" : "*",
     "tedious-connection-pool" : "*"
-  }
+  },
+  "engines":{
+    "node": "6.9.1 || 0.6.x"
+    }
 }

@@ -1,10 +1,10 @@
 var method = Address.prototype;
 
-function Address(IdAddress, StreetName, HouseNumber,IdCity) {
+function Address(IdAddress,IdCity, StreetName, HouseNumber) {
     this.IdAddress = IdAddress;
+    this.IdCity = IdCity;
     this.StreetName = StreetName;
     this.HouseNumber = HouseNumber;
-    this.IdCity = IdCity;
 }
 
 module.exports = Address;
