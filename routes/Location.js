@@ -82,7 +82,7 @@ router.post('/locations', function (req, res, next) {
             return;
         }
         var location = req.body;
-        request = new Request("INSERT Spoty.Location (IdLocation, LocationName, IdLocationType, IdAdress) VALUES (@IdLocation, @LocationName, @IdLocationType, @IdAddress);", function (err) {
+        request = new Request("INSERT Spoty.Location (IdLocation, LocationName, IdLocationType, IdAddress) VALUES (@IdLocation, @LocationName, @IdLocationType, @IdAddress);", function (err) {
             if (err) {
                 next(err)
             }
@@ -93,7 +93,7 @@ router.post('/locations', function (req, res, next) {
         request.addParameter('IdAddress', types.Int,  location.IdAddress);
         request.on('doneInProc', function (columns) {
             connection.release();
-            res.send({message: 'Station successfully added'});
+            res.send({message: 'Location successfully added'});
         });
         connection.execSql(request);
     });
@@ -112,20 +112,20 @@ router.delete('/locations/:_id', function (req, res, next) {
         });
         request.on('doneInProc', function (columns) {
             connection.release();
-            res.send({message: 'Station successfully deleted'});
+            res.send({message: 'Location successfully deleted'});
         });
         connection.execSql(request);
     });
 });
 
-router.put('/locations', function (req, res, next) {
+router.put('/locations/:_id', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
             console.error(err);
             return;
         }
         var location = req.body;
-        request = new Request("UPDATE Spoty.Location SET LocationName = @LocationName, IdLocationType = @IdLocationType, IdAdress = @IdAddress WHERE IdLocation = @IdLocation;", function (err) {
+        request = new Request("UPDATE Spoty.Location SET LocationName = @LocationName, IdLocationType = @IdLocationType, IdAddress = @IdAddress WHERE IdLocation = @IdLocation;", function (err) {
             if (err) {
                 next(err)
             }
@@ -136,7 +136,7 @@ router.put('/locations', function (req, res, next) {
         request.addParameter('IdAddress', types.Int,  location.IdAddress);
         request.on('doneInProc', function (columns) {
             connection.release();
-            res.send({message: 'Station successfully updated'});
+            res.send({message: 'Location successfully updated'});
         });
         connection.execSql(request);
     });

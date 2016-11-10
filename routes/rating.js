@@ -75,4 +75,77 @@ router.get('/ratings/:_id', function (req, res, next) {
         connection.execSql(request);
     });
 });
+
+/*
+*
+*   Rating künstliche ID geben ? Sonst blöd wegen delete bzw mehrfach gleiche Datensätze möglich ? Z.B. User 1,loc 1 grade 1 feedback null o.Ä. könnte mehrmals auftauchen
+*
+/*
+router.post('/ratings', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var city = req.body;
+        request = new Request("INSERT Spoty.Rating (IdRating, PostalCode, CityName, IdCounty) VALUES (@IdRating, @PostalCode, @CityName, @IdCounty);", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdRating', types.Int,  city.IdRating);
+        request.addParameter('PostalCode', types.Int,  city.PostalCode);
+        request.addParameter('CityName', types.NVarChar,  city.CityName);
+        request.addParameter('IdCounty', types.Int,  city.IdCounty);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Rating successfully added'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.delete('/ratings/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        request = new Request("DELETE FROM Spoty.Rating WHERE IdCity =" + req.params._id + ";", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Rating successfully deleted'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.put('/ratings/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var city = req.body;
+        request = new Request("UPDATE Spoty.Rating SET PostalCode = @PostalCode, CityName = @CityName, IdCounty = @IdCounty WHERE IdCity= @IdCity;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdCity', types.Int,  city.IdCity);
+        request.addParameter('PostalCode', types.Int,city.PostalCode);
+        request.addParameter('CityName', types.NVarChar,  city.CityName);
+        request.addParameter('IdCounty', types.Int,  city.IdCounty);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Rating successfully updated'});
+        });
+        connection.execSql(request);
+    });
+});
+*/
 module.exports = router;

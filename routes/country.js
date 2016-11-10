@@ -74,5 +74,66 @@ router.get('/countries/:_id', function (req, res, next) {
     connection.execSql(request);
     });
 });
+router.post('/countries', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var country = req.body;
+        request = new Request("INSERT Spoty.Country (IdCountry, CountryName) VALUES (@IdCountry, @CountryName);", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdCountry', types.Int,  country.IdCountry);
+        request.addParameter('CountryName', types.NVarChar,  country.CountryName);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Country successfully added'});
+        });
+        connection.execSql(request);
+    });
+});
 
+router.delete('/countries/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        request = new Request("DELETE FROM Spoty.Country WHERE IdCountry =" + req.params._id + ";", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Country successfully deleted'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.put('/countries/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var country = req.body;
+        request = new Request("UPDATE Spoty.Country SET CountryName = @CountryName WHERE IdCountry= @IdCountry;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdCountry', types.Int, country.IdCountry);
+        request.addParameter('CountryName', types.NVarChar, country.CountryName);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Country successfully updated'});
+        });
+        connection.execSql(request);
+    });
+});
 module.exports = router;
