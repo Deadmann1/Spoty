@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="LoginLayoutTitle">Spoty - Login</string>
+  <string name="ShowStationLayoutTitle">Spoty - Location</string>
+  <string name="ApplicationName">Spoty</string>
+</resources>
