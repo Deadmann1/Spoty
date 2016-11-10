@@ -76,11 +76,6 @@ router.get('/ratings/:_id', function (req, res, next) {
     });
 });
 
-/*
-*
-*   Rating künstliche ID geben ? Sonst blöd wegen delete bzw mehrfach gleiche Datensätze möglich ? Z.B. User 1,loc 1 grade 1 feedback null o.Ä. könnte mehrmals auftauchen
-*
-/*
 router.post('/ratings', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
@@ -88,12 +83,12 @@ router.post('/ratings', function (req, res, next) {
             return;
         }
         var city = req.body;
-        request = new Request("INSERT Spoty.Rating (IdRating, PostalCode, CityName, IdCounty) VALUES (@IdRating, @PostalCode, @CityName, @IdCounty);", function (err) {
+        request = new Request("INSERT Spoty.Rating ( Grade, CityName, IdCounty) VALUES (@IdRating, @PostalCode, @CityName, @IdCounty);", function (err) {
             if (err) {
                 next(err)
             }
         });
-        request.addParameter('IdRating', types.Int,  city.IdRating);
+        request.addParameter('Grade', types.Int,  city.IdRating);
         request.addParameter('PostalCode', types.Int,  city.PostalCode);
         request.addParameter('CityName', types.NVarChar,  city.CityName);
         request.addParameter('IdCounty', types.Int,  city.IdCounty);
@@ -104,7 +99,7 @@ router.post('/ratings', function (req, res, next) {
         connection.execSql(request);
     });
 });
-
+/*
 router.delete('/ratings/:_id', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
