@@ -75,14 +75,39 @@
 
     var app = angular.module("SpotyWebApplication", ['ngRoute']);
 
-
     app.config(['$routeProvider', function ($routeProvider)
     {
         $routeProvider.
             when('/', { templateUrl: 'login.html', controller: 'LoginController' }).
-            when('/home', { templateUrl: 'home.html', controller: 'HomeController' }).
-            when('/bewerten', { templateUrl: 'bewerten.html', controller: 'BewertenController' });
+            when('/home', { templateUrl: 'home.html', controller: 'HomeController' });
     }]);
+
+    app.filter('unique', function () {
+        // we will return a function which will take in a collection
+        // and a keyname
+        return function (collection, keyname) {
+            // we define our output and keys array;
+            var output = [],
+                keys = [];
+
+            // we utilize angular's foreach function
+            // this takes in our original collection and an iterator function
+            angular.forEach(collection, function (item) {
+                // we check to see whether our object exists
+                var key = item[keyname];
+                // if it's not already part of our keys array
+                if (keys.indexOf(key) === -1) {
+                    // add it to our keys array
+                    keys.push(key);
+                    // push this item to our final output array
+                    output.push(item);
+                }
+            });
+            // return our array which should be devoid of
+            // any duplicates
+            return output;
+        };
+    });
 
     app.controller("LoginController", function ($scope, $location)
     {
@@ -115,47 +140,40 @@
         }
     });
 
-    app.controller("HomeController", function ($scope, $location) {
+    app.controller("HomeController", function ($scope, $location)
+    {
+        $scope.selectedRow = null;
         $scope.orte = orte;
 
-        $scope.goToBewerten = function (path)
+        $scope.removeSelection = function ()
         {
-            $location.path(path);
+            $scope.search.Land = "";
+            $scope.search.Bundesland = "";
+            $scope.search.Stadt = "";
+            $scope.search.Locationtyp = "";
+        }
+        $scope.setSelectedRow = function (index)
+        {
+            $scope.selectedRow = index;
+            alert(index);
         }
 
+        $scope.saveBewertung = function(bew)
+        {
+            bewertung = bew;
+            if (bewertung != null)
+            {
+                alert($scope.orte[$scope.selectedRow].Locationname);
+                if ($scope.orte[$scope.selectedRow] != null)
+                {
+                    orte[$scope.selectedRow].Bewertung = bewertung;
+                    $scope.orte = orte;
+                }
+            }
+        }
         setTimeout(function ()
         {
             $scope.$apply();
         }, 2000);
-    });
-
-    app.controller("BewertenController", function ($scope, $location)
-    {
-        $scope.orte = orte;
-
-        
-        $scope.saveBewertung = function (bew)
-        {
-            bewertung = bew;
-            alert(bew);
-        }
-
-        $scope.goToHomeBack = function (path)
-        {
-            if (bewertung != null) 
-            {
-                if ($scope.orte.Locationname != null)
-                {
-                    for (var i = 0; i < orte.length; i++)
-                    {
-                        if (orte[i].Locationname == $scope.orte.Locationname)
-                        {
-                            orte[i].Bewertung = bewertung;
-                        }
-                    }
-                    $location.path(path);
-                }
-            }
-        }
     });
 })();

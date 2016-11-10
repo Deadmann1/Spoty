@@ -1,39 +1,55 @@
 ﻿table 
-        {
+{
             
-            color: #333;
-            font-family: Helvetica, Arial, sans-serif;
-            width: 640px;
-            margin:auto;
-            border-collapse:
-            collapse; border-spacing: 0;
-        }
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 700px;
+    margin:auto;
+    margin-top:50px;
+    border-collapse:
+    collapse; border-spacing: 0;
+}
 
-        td, th 
-        {
-            border: 1px solid transparent; /* No more visible border */
-            height: 30px;
-            transition: all 0.3s; /* Simple transition for hover effect */
-        }
+td, th 
+{
+    border: 1px solid transparent; /* No more visible border */
+    height: 30px;
+    width:30px;
+    transition: all 0.3s; /* Simple transition for hover effect */
+}
 
-        th 
-        {
-            background: #DFDFDF; /* Darken header a bit */
-            font-weight: bold;
-        }
+th 
+{
+    background: #DFDFDF; /* Darken header a bit */
+    font-weight: bold;
+}
 
-        td {
-            background: #FAFAFA;
-            text-align: center;
-        }
+td {
+    background: #FAFAFA;
+    text-align: center;
+}
 
-            /* Cells in even rows (2,4,6...) are one color */
-        tr:nth-child(even) td { background: #F1F1F1; }
+tr:hover 
+{
+    background: #0e93ea!important;
+}
+            
+tr:nth-child(even) td
+{
+     background: #F1F1F1; 
+}
+    
+tr:nth-child(odd) td 
+{ 
+    background: #FEFEFE; 
+}
 
-            /* Cells in odd rows (1,3,5...) are another (excludes header cells) */
-        tr:nth-child(odd) td { background: #FEFEFE; }
+tr td:hover 
+{ 
+    background: #666; color: #FFF; 
+}
 
-        tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+
 
 
 
@@ -102,4 +118,77 @@ input[type="text"]:focus,
 input[type="text"].focus 
 {
   border-bottom: solid 2px #969696;
+}
+
+
+.review-holder {
+  position: relative;
+  clear: both;
+  display: inline-block;
+}
+
+.review:hover span {
+  color: red;
+}
+.review:hover span:before {
+  content: "\e600";
+}
+.review span {
+  /* reflection css effect */
+  -webkit-box-reflect: below -8px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 250, 0.3)));
+  float: left;
+  padding: 0 2px;
+  color: red;
+  cursor: pointer;
+}
+.review span:after {
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+}
+.review span:hover:after {
+  content: attr(data-description);
+  position: absolute;
+  white-space: nowrap;
+  left: calc(100% + 10px);
+  color: black;
+}
+.review span:before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e601";
+  font-family: 'apple';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+.review span:hover ~ span {
+  color: red;
+}
+.review span:hover ~ span:before {
+  content: "\e601";
+}
+
+@font-face {
+  font-family: 'apple';
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg6SAysAAAC8AAAAYGNtYXAaVcxYAAABHAAAAExnYXNwAAAAEAAAAWgAAAAIZ2x5ZqrfI3MAAAFwAAAA1GhlYWQD07CSAAACRAAAADZoaGVhB4UDxwAAAnwAAAAkaG10eAoAAHoAAAKgAAAAGGxvY2EAkgBOAAACuAAAAA5tYXhwAAkAGAAAAsgAAAAgbmFtZa5zCdEAAALoAAABM3Bvc3QAAwAAAAAEHAAAACAAAwQAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADmAQPA/8D/wAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAACAAAAAwAAABQAAwABAAAAFAAEADgAAAAKAAgAAgACAAEAIOYB//3//wAAAAAAIOYA//3//wAB/+MaBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQA9AAoDwwOPAAkAAAETIQUTJQUTJSECAHoBSf70X/7q/upf/vQBSQOP/qjK/p3V1QFjygAAAAACAD0ACgPDA48ACgAVAAABIQsBIQUDJQUDJQUHNycXNxc3BxcnA8P+t3p6/rcBDF8BFgEWXwEM/j2aP5K1ODi0kT+aAjcBWP6oyv6d1dUBY8r0gLd1Bc/PBXW3gAAAAAABAAAAAQAADdS5fF8PPPUACwQAAAAAANB5NgMAAAAA0Hk2AwAAAAADwwOPAAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAAAPDAAEAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAgAAAAQAAD0EAAA9AAAAAAAKABQAHgA6AGoAAAABAAAABgAWAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEACgAAAAEAAAAAAAIADgA5AAEAAAAAAAMACgAgAAEAAAAAAAQACgBHAAEAAAAAAAUAFgAKAAEAAAAAAAYABQAqAAEAAAAAAAoANABRAAMAAQQJAAEACgAAAAMAAQQJAAIADgA5AAMAAQQJAAMACgAgAAMAAQQJAAQACgBHAAMAAQQJAAUAFgAKAAMAAQQJAAYACgAvAAMAAQQJAAoANABRAGEAcABwAGwAZQBWAGUAcgBzAGkAbwBuACAAMQAuADAAYQBwAHAAbABlYXBwbGUAYQBwAHAAbABlAFIAZQBnAHUAbABhAHIAYQBwAHAAbABlAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==) format("truetype"), url(data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAAASIAAsAAAAABDwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABCAAAAGAAAABgDpIDK2NtYXAAAAFoAAAATAAAAEwaVcxYZ2FzcAAAAbQAAAAIAAAACAAAABBnbHlmAAABvAAAANQAAADUqt8jc2hlYWQAAAKQAAAANgAAADYD07CSaGhlYQAAAsgAAAAkAAAAJAeFA8dobXR4AAAC7AAAABgAAAAYCgAAemxvY2EAAAMEAAAADgAAAA4AkgBObWF4cAAAAxQAAAAgAAAAIAAJABhuYW1lAAADNAAAATMAAAEzrnMJ0XBvc3QAAARoAAAAIAAAACAAAwAAAAMEAAGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gEDwP/A/8ADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAf/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAPQAKA8MDjwAJAAABEyEFEyUFEyUhAgB6AUn+9F/+6v7qX/70AUkDj/6oyv6d1dUBY8oAAAAAAgA9AAoDwwOPAAoAFQAAASELASEFAyUFAyUFBzcnFzcXNwcXJwPD/rd6ev63AQxfARYBFl8BDP49mj+StTg4tJE/mgI3AVj+qMr+ndXVAWPK9IC3dQXPzwV1t4AAAAAAAQAAAAEAAA3UuXxfDzz1AAsEAAAAAADQeTYDAAAAANB5NgMAAAAAA8MDjwAAAAgAAgAAAAAAAAABAAADwP/AAAAEAAAAAAADwwABAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAAAIAAAAEAAA9BAAAPQAAAAAACgAUAB4AOgBqAAAAAQAAAAYAFgACAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAoAAAABAAAAAAACAA4AOQABAAAAAAADAAoAIAABAAAAAAAEAAoARwABAAAAAAAFABYACgABAAAAAAAGAAUAKgABAAAAAAAKADQAUQADAAEECQABAAoAAAADAAEECQACAA4AOQADAAEECQADAAoAIAADAAEECQAEAAoARwADAAEECQAFABYACgADAAEECQAGAAoALwADAAEECQAKADQAUQBhAHAAcABsAGUAVgBlAHIAcwBpAG8AbgAgADEALgAwAGEAcABwAGwAZWFwcGxlAGEAcABwAGwAZQBSAGUAZwB1AGwAYQByAGEAcABwAGwAZQBGAG8AbgB0ACAAZwBlAG4AZQByAGEAdABlAGQAIABiAHkAIABJAGMAbwBNAG8AbwBuAC4AAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+select 
+{
+    height:20px;
+    width:100px;
+}
+
+.selected 
+{
+    background: #0e93ea !important;
+    color:white;
+    font-weight:bold;
 }

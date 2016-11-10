@@ -37,4 +37,3 @@ D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test
 D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\obj\Debug\SpotyWebApplication_Test.dll
 D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\obj\Debug\SpotyWebApplication_Test.pdb
-D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\obj\Debug\SpotyWebApplication_Test.csprojResolveAssemblyReference.cache
