@@ -41,29 +41,7 @@ router.get('/addresses', function (req, res, next) {
     });
 });
 
-router.post('/addresses', function (req, res, next) {
-    pool.acquire(function (err, connection) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        var address = req.body;
-        request = new Request("INSERT Spoty.Address (IdAddress, StreetName, HouseNumber, IdCity) VALUES (@IdAddress, @StreetName, @HouseNumber, @IdCity);", function (err) {
-            if (err) {
-                next(err)
-            }
-        });
-        request.addParameter('IdAddress', types.Int,  address.IdAddress);
-        request.addParameter('StreetName', types.NVarChar,  address.StreetName);
-        request.addParameter('HouseNumber', types.NVarChar,  address.HouseNumber);
-        request.addParameter('IdCity', types.Int,  address.IdCity);
-        request.on('doneInProc', function (columns) {
-            connection.release();
-            res.send({message: 'Address successfully added'});
-        });
-        connection.execSql(request);
-    });
-});
+
 
 router.get('/addresses/:_id', function (req, res, next) {
     pool.acquire(function (err, connection) {
@@ -99,6 +77,29 @@ router.get('/addresses/:_id', function (req, res, next) {
     });
 });
 
+router.post('/addresses', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var address = req.body;
+        request = new Request("INSERT Spoty.Address (IdAddress, StreetName, HouseNumber, IdCity) VALUES (@IdAddress, @StreetName, @HouseNumber, @IdCity);", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdAddress', types.Int,  address.IdAddress);
+        request.addParameter('StreetName', types.NVarChar,  address.StreetName);
+        request.addParameter('HouseNumber', types.NVarChar,  address.HouseNumber);
+        request.addParameter('IdCity', types.Int,  address.IdCity);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Address successfully added'});
+        });
+        connection.execSql(request);
+    });
+});
 router.delete('/addresses/:_id', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {

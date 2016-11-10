@@ -74,5 +74,69 @@ router.get('/counties/:_id', function (req, res, next) {
         connection.execSql(request);
     });
 });
+router.post('/counties', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var county = req.body;
+        request = new Request("INSERT Spoty.County (IdCounty, CountyName, IdCountry ) VALUES (@IdCounty, @CountyName, @CityName, @IdCountry);", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdCounty', types.Int,  county.IdCounty);
+        request.addParameter('CountyName', types.NVarChar,  county.CountyName);
+        request.addParameter('IdCountry', types.Int,  county.IdCountry);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'County successfully added'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.delete('/counties/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        request = new Request("DELETE FROM Spoty.County WHERE IdCounty =" + req.params._id + ";", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'County successfully deleted'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.put('/counties/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var county = req.body;
+        request = new Request("UPDATE Spoty.City SET CountyName = @CountyName, IdCountry = @IdCountry WHERE IdCounty = @IdCounty;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdCounty', types.Int,  county.IdCounty);
+        request.addParameter('CountyName', types.NVarChar,  county.CountyName);
+        request.addParameter('IdCountry', types.Int,  county.IdCountry);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'County successfully updated'});
+        });
+        connection.execSql(request);
+    });
+});
 
 module.exports = router;
