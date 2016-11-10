@@ -74,5 +74,66 @@ router.get('/locationTypes/:_id', function (req, res, next) {
     connection.execSql(request);
     });
 });
+router.post('/locationTypes', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var locationType = req.body;
+        request = new Request("INSERT Spoty.LocationType (IdLocationType, LocationTypeName) VALUES (@IdLocationType, @LocationTypeName);", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdLocationType', types.Int,  locationType.IdLocationType);
+        request.addParameter('LocationTypeName', types.NVarChar,  locationType.LocationTypeName);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'LocationType successfully added'});
+        });
+        connection.execSql(request);
+    });
+});
 
+router.delete('/locationTypes/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        request = new Request("DELETE FROM Spoty.LocationType WHERE IdLocationType =" + req.params._id + ";", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'LocationType successfully deleted'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.put('/locationTypes/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var locationType = req.body;
+        request = new Request("UPDATE Spoty.Location SET LocationTypeName = @LocationTypeName WHERE IdLocationType = @IdLocationType;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdLocationType', types.Int,  locationType.IdLocationType);
+        request.addParameter('LocationTypeName', types.NVarChar,  locationType.LocationTypeName);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'LocationType successfully updated'});
+        });
+        connection.execSql(request);
+    });
+});
 module.exports = router;
