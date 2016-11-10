@@ -3,32 +3,30 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
-    <link rel="stylesheet" href="CSS/Button.css">
+
     <link rel="stylesheet" href="CSS/Home.css">
     <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="App/geoLocation.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="App/main.js"></script>
 </head>
 <body ng-controller="HomeController">
     <div id="HomeContainer">
-        <select style="width:auto">
-            <option value="Kino">Kino</option>
-            <option value="Buschenschenke">Buschenschenke</option>
-            <option value="Autowerkstatt">Autowerkstatt</option>
-            <option value="Gasthaus">Gasthaus</option>
-        </select><br />
-        
-        <label>Suchen: <input type="text" ng-model="search.$"></label> <br>
+        <label style="font-size:20px">Suchen: <input class="txtInput" type="text" ng-model="search.$" style="font-size:20px"></label>
         <label for="Ergebnisse:"></label>
-        <table id="searchObjResults" border="1">
-            <tr><th>Land</th><th>Bundesland</th><th>Stadt</th><th>Location</th></tr>
+        <table class="table" id="searchObjResults" border="1">
+            <tr><th>Land</th><th>Bundesland</th><th>Stadt</th><th>Location</th><th>Locationtyp</th><th>Bewertung</th></tr>
             <tr ng-repeat="ort in orte | filter:search:strict">
                 <td>{{ort.Land}}</td>
                 <td>{{ort.Bundesland}}</td>
                 <td>{{ort.Stadt}}</td>
-                <td>{{ort.Location}}</td>
+                <td>{{ort.Locationname}}</td>
+                <td>{{ort.Locationtyp}}</td>
+                <td>{{ort.Bewertung}}</td>
             </tr>
         </table>
+        <button class="btn btn-default btn-lg btn3d" value="Lokalität bewerten" ng-click="goToBewerten('/bewerten')">Bewerten</button>
     </div>
 </body>
 </html>

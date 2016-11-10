@@ -1,8 +1,105 @@
-﻿input[type="text"] 
+﻿table 
+        {
+            
+            color: #333;
+            font-family: Helvetica, Arial, sans-serif;
+            width: 640px;
+            margin:auto;
+            border-collapse:
+            collapse; border-spacing: 0;
+        }
+
+        td, th 
+        {
+            border: 1px solid transparent; /* No more visible border */
+            height: 30px;
+            transition: all 0.3s; /* Simple transition for hover effect */
+        }
+
+        th 
+        {
+            background: #DFDFDF; /* Darken header a bit */
+            font-weight: bold;
+        }
+
+        td {
+            background: #FAFAFA;
+            text-align: center;
+        }
+
+            /* Cells in even rows (2,4,6...) are one color */
+        tr:nth-child(even) td { background: #F1F1F1; }
+
+            /* Cells in odd rows (1,3,5...) are another (excludes header cells) */
+        tr:nth-child(odd) td { background: #FEFEFE; }
+
+        tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+
+
+
+
+.btn3d {
+    width:100px;
+    height:20px;
+    transition:all .08s linear;
+    position:relative;
+    outline:medium none;
+    -moz-outline-style:none;
+    border:0px;
+    margin-right:10px;
+    margin-top:15px;
+}
+.btn3d:focus {
+    outline:medium none;
+    -moz-outline-style:none;
+}
+.btn3d:active {
+    top:9px;
+}
+.btn-default {
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #adadad, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#fff;
+}
+.btn-primary {
+    box-shadow:0 0 0 1px #428bca inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#428bca;
+}
+ .btn-success {
+    box-shadow:0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#5cb85c;
+}
+ .btn-info {
+    box-shadow:0 0 0 1px #5bc0de inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #46b8da, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#5bc0de;
+}
+.btn-warning {
+    box-shadow:0 0 0 1px #f0ad4e inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #eea236, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#f0ad4e;
+}
+.btn-danger {
+    box-shadow:0 0 0 1px #c63702 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #C24032, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#c63702;
+}
+.btn-label {position: relative;left: -15px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
+.btn-labeled {padding-top: 0;padding-bottom: 0;}
+.btn 
+{ 
+    margin:auto;
+    margin-bottom:10px; 
+    height:40px;
+    width:120px;
+}
+
+
+input[type="text"] 
 {
-   padding: 2px 16px; 
-   height: 10px; 
-   font-size: 1.8em;
-   border-radius: 18px;
-   outline: none // keine blaue Umrandung beim Fokus
+  padding: 10px;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+}
+input[type="text"]:focus,
+input[type="text"].focus 
+{
+  border-bottom: solid 2px #969696;
 }
