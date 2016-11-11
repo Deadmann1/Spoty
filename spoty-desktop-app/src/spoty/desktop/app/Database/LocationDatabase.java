@@ -32,7 +32,6 @@ import javax.ws.rs.core.UriBuilder;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.codehaus.jettison.json.JSONObject;
 import jdk.nashorn.internal.parser.JSONParser;
-import spoty.desktop.app.data.LocationList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
