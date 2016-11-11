@@ -15,20 +15,21 @@ public final class R {
         public static final int logo=0x7f020001;
     }
     public static final class id {
-        public static final int buttonExit=0x7f05001a;
-        public static final int buttonLogin=0x7f050017;
-        public static final int buttonLoginGuest=0x7f050018;
-        public static final int buttonLogout=0x7f050019;
-        public static final int buttonRate=0x7f050011;
-        public static final int editTextFeedback=0x7f050010;
-        public static final int editTextPassword=0x7f050016;
-        public static final int editTextUsername=0x7f050015;
-        public static final int imageViewLogin=0x7f050013;
+        public static final int buttonExit=0x7f05001b;
+        public static final int buttonLogin=0x7f050018;
+        public static final int buttonLoginGuest=0x7f050019;
+        public static final int buttonLogout=0x7f05001a;
+        public static final int buttonRate=0x7f050012;
+        public static final int editTextFeedback=0x7f050011;
+        public static final int editTextPassword=0x7f050017;
+        public static final int editTextUsername=0x7f050016;
+        public static final int imageViewLogin=0x7f050014;
         public static final int linearLayout1=0x7f050000;
-        public static final int linearLayoutLogin=0x7f050014;
-        public static final int listViewLocations=0x7f050012;
+        public static final int linearLayout2=0x7f05000f;
+        public static final int linearLayoutLogin=0x7f050015;
+        public static final int listViewLocations=0x7f050013;
         public static final int listViewRatings=0x7f05000e;
-        public static final int ratingBarLocation=0x7f05000f;
+        public static final int ratingBarLocation=0x7f050010;
         public static final int tableLayoutLocation=0x7f050001;
         public static final int tableRowCity=0x7f050006;
         public static final int tableRowCountry=0x7f05000c;

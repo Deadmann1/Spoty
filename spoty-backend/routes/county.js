@@ -81,7 +81,7 @@ router.post('/counties', function (req, res, next) {
             return;
         }
         var county = req.body;
-        request = new Request("INSERT Spoty.County (IdCounty, CountyName, IdCountry ) VALUES (@IdCounty, @CountyName, @CityName, @IdCountry);", function (err) {
+        request = new Request("INSERT Spoty.County (IdCounty, CountyName, IdCountry ) VALUES (@IdCounty, @CountyName, @IdCountry);", function (err) {
             if (err) {
                 next(err)
             }

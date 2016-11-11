@@ -54,6 +54,8 @@ namespace spoty
                 List<Rating> filteredRatings = Database.Instance.Ratings.Where(x => x.IdLocation == l.Id).ToList();
                 ArrayAdapter<Rating> adapter = new ArrayAdapter<Rating>(this, Android.Resource.Layout.SimpleListItem1, filteredRatings);
                 listRatings.Adapter = adapter;
+                rbGrade.NumStars = 5;
+                rbGrade.StepSize = 1;
             }
             catch (Exception e)
             {

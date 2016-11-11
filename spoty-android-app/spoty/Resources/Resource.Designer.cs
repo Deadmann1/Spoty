@@ -63,47 +63,50 @@ namespace spoty
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f05001a
-			public const int buttonExit = 2131034138;
-			
-			// aapt resource value: 0x7f050017
-			public const int buttonLogin = 2131034135;
+			// aapt resource value: 0x7f05001b
+			public const int buttonExit = 2131034139;
 			
 			// aapt resource value: 0x7f050018
-			public const int buttonLoginGuest = 2131034136;
+			public const int buttonLogin = 2131034136;
 			
 			// aapt resource value: 0x7f050019
-			public const int buttonLogout = 2131034137;
+			public const int buttonLoginGuest = 2131034137;
+			
+			// aapt resource value: 0x7f05001a
+			public const int buttonLogout = 2131034138;
+			
+			// aapt resource value: 0x7f050012
+			public const int buttonRate = 2131034130;
 			
 			// aapt resource value: 0x7f050011
-			public const int buttonRate = 2131034129;
+			public const int editTextFeedback = 2131034129;
 			
-			// aapt resource value: 0x7f050010
-			public const int editTextFeedback = 2131034128;
+			// aapt resource value: 0x7f050017
+			public const int editTextPassword = 2131034135;
 			
 			// aapt resource value: 0x7f050016
-			public const int editTextPassword = 2131034134;
+			public const int editTextUsername = 2131034134;
 			
-			// aapt resource value: 0x7f050015
-			public const int editTextUsername = 2131034133;
-			
-			// aapt resource value: 0x7f050013
-			public const int imageViewLogin = 2131034131;
+			// aapt resource value: 0x7f050014
+			public const int imageViewLogin = 2131034132;
 			
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;
 			
-			// aapt resource value: 0x7f050014
-			public const int linearLayoutLogin = 2131034132;
+			// aapt resource value: 0x7f05000f
+			public const int linearLayout2 = 2131034127;
 			
-			// aapt resource value: 0x7f050012
-			public const int listViewLocations = 2131034130;
+			// aapt resource value: 0x7f050015
+			public const int linearLayoutLogin = 2131034133;
+			
+			// aapt resource value: 0x7f050013
+			public const int listViewLocations = 2131034131;
 			
 			// aapt resource value: 0x7f05000e
 			public const int listViewRatings = 2131034126;
 			
-			// aapt resource value: 0x7f05000f
-			public const int ratingBarLocation = 2131034127;
+			// aapt resource value: 0x7f050010
+			public const int ratingBarLocation = 2131034128;
 			
 			// aapt resource value: 0x7f050001
 			public const int tableLayoutLocation = 2131034113;

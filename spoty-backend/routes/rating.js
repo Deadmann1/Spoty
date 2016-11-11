@@ -117,8 +117,30 @@ router.delete('/ratings/:_id', function (req, res, next) {
         });
         connection.execSql(request);
     });
-    
+});
+
+router.put('/ratings/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var city = req.body;
+        request = new Request("UPDATE Spoty.Rating SET PostalCode = @PostalCode, CityName = @CityName, IdCounty = @IdCounty WHERE IdCity= @IdCity;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdCity', types.Int,  city.IdCity);
+        request.addParameter('PostalCode', types.Int,city.PostalCode);
+        request.addParameter('CityName', types.NVarChar,  city.CityName);
+        request.addParameter('IdCounty', types.Int,  city.IdCounty);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'Rating successfully updated'});
+        });
+        connection.execSql(request);
+    });
 });
 */
-
 module.exports = router;

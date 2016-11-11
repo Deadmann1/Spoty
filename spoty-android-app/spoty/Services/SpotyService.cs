@@ -217,8 +217,34 @@ namespace spoty.Services
             }
         }
 
-        public static void SendFeedback(int rbGradeNumStars, string txtFeedbackText)
+        public static async void SendFeedback(int rbGradeNumStars, string txtFeedbackText)
         {
+            try
+            {
+                RestClient myRestClient = new RestClient(SpotyServiceUrl);
+                RestRequest request = new RestRequest("/ratings", Method.POST);
+                //Execute async for perfomance
+                request.AddHeader("Content-Type", "application/json");
+                request.RequestFormat = DataFormat.Json;
+                var jsonString =
+                    JsonConvert.SerializeObject(new Rating(rbGradeNumStars, txtFeedbackText,
+                        Database.Instance.CurrentLocation.Id, Database.Instance.CurrentLocation.Id)).ToString();
+                request.AddBody(jsonString);
+                var restResponse = await myRestClient.ExecuteTaskAsync(request);
+                if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    Console.WriteLine("Post rating worked");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }

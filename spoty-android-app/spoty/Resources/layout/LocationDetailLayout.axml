@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tableLayoutLocation"
-            android:layout_weight="50"
+            android:layout_weight="45"
             android:weightSum="100">
             <TableRow
                 android:id="@+id/tableRowName"
@@ -22,7 +22,7 @@
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/textViewName"
-                    android:textSize="100px" />
+                    android:textSize="75px" />
             </TableRow>
             <TableRow
                 android:id="@+id/tableRowType"
@@ -78,26 +78,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/listViewRatings"
-            android:layout_weight="50" />
-        <RatingBar
+            android:layout_weight="55"
+            android:scrollbars="vertical" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ratingBarLocation"
-            android:layout_weight="10"
-            android:numStars="5"
-            android:rating="0"
-            android:stepSize="1"
-            android:isIndicator="false" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextFeedback"
-            android:layout_weight="20" />
-        <Button
-            android:text="Rate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonRate"
-            android:layout_weight="10" />
+            android:id="@+id/linearLayout2">
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBarLocation"
+                android:layout_weight="98"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="1"
+                android:isIndicator="false" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextFeedback"
+                android:layout_weight="98" />
+            <Button
+                android:text="Rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonRate"
+                android:layout_weight="98" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

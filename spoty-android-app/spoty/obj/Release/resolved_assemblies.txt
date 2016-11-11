@@ -1,0 +1,14 @@
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\spoty.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Java.Interop.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Mono.Android.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\mscorlib.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.Core.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.Xml.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.Xml.Linq.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Newtonsoft.Json.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\RestSharp.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.Runtime.Serialization.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.ServiceModel.Internals.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Microsoft.CSharp.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Mono.CSharp.dll
