@@ -39,9 +39,6 @@ public class UserAccountDatabase {
     public static UserAccountDatabase getInstance() {
             if (db == null) {
                     db = new UserAccountDatabase();
-                    db.connectionString = ConnectionProperties.getInstance().getConnectionString();
-                    db.username = ConnectionProperties.getInstance().getUsername();
-                    db.password = ConnectionProperties.getInstance().getPassword();
             }
             return db;
     }

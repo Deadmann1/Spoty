@@ -42,9 +42,6 @@ public class AddressDatabase {
 	public static AddressDatabase getInstance() {
 		if (db == null) {
 			db = new AddressDatabase();
-			db.connectionString = ConnectionProperties.getInstance().getConnectionString();
-			db.username = ConnectionProperties.getInstance().getUsername();
-			db.password = ConnectionProperties.getInstance().getPassword();
 		}
 		return db;
 	}

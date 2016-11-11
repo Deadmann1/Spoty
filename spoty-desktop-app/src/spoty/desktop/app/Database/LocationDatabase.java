@@ -57,9 +57,6 @@ public class LocationDatabase {
 	public static LocationDatabase getInstance() {
 		if (db == null) {
 			db = new LocationDatabase();
-			db.connectionString = ConnectionProperties.getInstance().getConnectionString();
-			db.username = ConnectionProperties.getInstance().getUsername();
-			db.password = ConnectionProperties.getInstance().getPassword();
 		}
 		return db;
 	}
