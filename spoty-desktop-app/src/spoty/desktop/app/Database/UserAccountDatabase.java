@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+import spoty.desktop.app.Service.UserAccountService;
 import spoty.desktop.app.data.AccountType;
 import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.LocationType;
@@ -47,7 +48,7 @@ public class UserAccountDatabase {
     
     public void generateTestUserAccounts() throws Exception
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date d1 = sdf.parse("30/12/1997");
         UserAccount userAccount1 = new UserAccount(1, "admin", "admin", "Daniel", "Lamprecht", d1, 1);
         
@@ -55,15 +56,18 @@ public class UserAccountDatabase {
         UserAccount userAccount2 = new UserAccount(2, "sama", "sama", "Manuel", "Sammer", d2, 2);
         
         vecUserAccounts.add(userAccount1);
-        vecUserAccounts.add(userAccount2);
+        vecUserAccounts.add(userAccount2);*/
     }
     public Vector<UserAccount> getUserAccounts()
     {
-        return vecUserAccounts;
+        return UserAccountService.getInstance().getUserAccounts();
+        //return vecUserAccounts;
     }
     
     public String getPasswordOfAccount(int idUserAccount)
     {
+        return UserAccountService.getInstance().getUserAccount(idUserAccount).getPassword();
+        /*
         String returnPassword = "";
         
         for (UserAccount u : vecUserAccounts)
@@ -74,7 +78,7 @@ public class UserAccountDatabase {
         
         //System.out.println("Password: " + returnPassword);
         
-        return returnPassword;
+        return returnPassword;*/
     }
     
     public boolean existsUsername(String username)

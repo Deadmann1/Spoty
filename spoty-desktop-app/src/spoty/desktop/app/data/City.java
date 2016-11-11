@@ -5,14 +5,20 @@
  */
 package spoty.desktop.app.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author lampr
  */
 public class City {
+    @SerializedName("IdCity")
     private int idCity;
+    @SerializedName("PostalCode")
     private int postalcode;
+    @SerializedName("CityName")
     private String cityname;
+    @SerializedName("IdCounty")
     private int idCounty;
 
     public City(int idCity, int postalcode, String cityname, int idCounty) {

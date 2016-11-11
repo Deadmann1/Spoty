@@ -5,6 +5,8 @@
  */
 package spoty.desktop.app.data;
 
+import com.google.gson.annotations.SerializedName;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,15 +14,23 @@ import java.util.Date;
  * @author lampr
  */
 public class UserAccount {
+    @SerializedName("IdUserAccount")
     private int idUserAccount;
+    @SerializedName("Username")
     private String username;
+    @SerializedName("Password")
     private String password;
+    @SerializedName("Firstname")
     private String firstname;
+    @SerializedName("Lastname")
     private String lastname;
-    private Date birthdate;
+    @SerializedName("Birthdate")
+    private String birthdate;
+    @SerializedName("IdAccountType")
     private int idAccountType;
 
-    public UserAccount(int idUserAccount, String username, String password, String firstname, String lastname, Date birthdate, int idAccountType) {
+    public UserAccount(int idUserAccount, String username, String password, String firstname, String lastname, String birthdate, int idAccountType) {
+        System.out.println("asdf");
         this.idUserAccount = idUserAccount;
         this.username = username;
         this.password = password;
@@ -73,11 +83,11 @@ public class UserAccount {
         this.lastname = lastname;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 

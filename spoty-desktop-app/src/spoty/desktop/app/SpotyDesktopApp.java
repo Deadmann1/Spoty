@@ -5,11 +5,20 @@
  */
 package spoty.desktop.app;
 
+import com.sun.deploy.util.SessionState.Client;
+import com.sun.jersey.api.client.WebResource;
+import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+import spoty.desktop.app.data.Location;
+/*import com.sun.jersey.api.client.Client;*/
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 /**
  *
@@ -33,5 +42,4 @@ public class SpotyDesktopApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
 }

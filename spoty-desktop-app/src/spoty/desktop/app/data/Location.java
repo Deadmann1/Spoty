@@ -3,62 +3,77 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package spoty.desktop.app.data;
+
+import com.google.gson.annotations.SerializedName;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author lampr
  */
-public class Location {
-    private int idLocation;
-    private String locationname;
-    private int idType;
-    private int idAddress;
 
-    public Location(int idLocation, String locationname, int idType, int idAddress) {
-        this.idLocation = idLocation;
-        this.locationname = locationname;
-        this.idType = idType;
-        this.idAddress = idAddress;
+@XmlRootElement (name = "Location")
+public class Location {
+    @SerializedName("IdLocation")
+    private int IdLocation;
+    @SerializedName("LocationName")
+    private String Locationname;
+    @SerializedName("IdLocationType")
+    private int IdLocationType;
+    @SerializedName("IdAddress")
+    private int IdAddress;
+
+    public Location(int IdLocation, String Locationname, int IdLocationType, int IdAddress) {
+        this.IdLocation = IdLocation;
+        this.Locationname = Locationname;
+        this.IdLocationType = IdLocationType;
+        this.IdAddress = IdAddress;
     }
+
+    public Location() {
+    }
+    
     
     
 
     public int getIdLocation() {
-        return idLocation;
+        return IdLocation;
     }
 
     public void setIdLocation(int idLocation) {
-        this.idLocation = idLocation;
+        this.IdLocation = idLocation;
     }
 
     public String getLocationname() {
-        return locationname;
+        return Locationname;
     }
 
     public void setLocationname(String locationname) {
-        this.locationname = locationname;
+        this.Locationname = locationname;
     }
 
     public int getIdType() {
-        return idType;
+        return IdLocationType;
     }
 
     public void setIdType(int idType) {
-        this.idType = idType;
+        this.IdLocationType = idType;
     }
 
     public int getIdAddress() {
-        return idAddress;
+        return IdAddress;
     }
 
     public void setIdAddress(int idAddress) {
-        this.idAddress = idAddress;
+        this.IdAddress = idAddress;
     }
 
     @Override
     public String toString() {
-        return locationname;
+        return Locationname;
     }
     
     

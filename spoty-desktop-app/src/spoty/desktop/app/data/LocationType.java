@@ -5,12 +5,16 @@
  */
 package spoty.desktop.app.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author lampr
  */
 public class LocationType {
+    @SerializedName("IdLocationType")
     private int idType;
+    @SerializedName("LocationTypeName")
     private String locationtypename;
 
     public LocationType(int idType, String locationtypename) {

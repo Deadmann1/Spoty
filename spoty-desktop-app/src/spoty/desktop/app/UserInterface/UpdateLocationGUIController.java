@@ -134,10 +134,11 @@ public class UpdateLocationGUIController {
             //int id_selectedCounty = cmbCounty.getSelectionModel().getSelectedItem().getIdCounty();
             int id_selectedCity = cmbCity.getSelectionModel().getSelectedItem().getIdCity();
 
+            
             Location updateLocation = new Location(idLocation, txtLocationname.getText(), id_selectedType, idAddress);
             LocationDatabase.getInstance().updateLocation(updateLocation);
             
-            Address updateAddress = new Address(idAddress, id_selectedCity, txtStreet.getText(), Integer.parseInt(txtHousenumber.getText()));
+            Address updateAddress = new Address(idAddress,  id_selectedCity, txtStreet.getText(), Integer.parseInt(txtHousenumber.getText()));
             AddressDatabase.getInstance().updateAddress(updateAddress);
             
             Stage stage = (Stage) btnUpdateLocation.getScene().getWindow();

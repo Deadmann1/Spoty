@@ -1,8 +1,11 @@
 package spoty.desktop.app.UserInterface;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,6 +25,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
+import spoty.desktop.app.Service.AddressService;
+import spoty.desktop.app.Service.LocationService;
 import spoty.desktop.app.data.Address;
 import spoty.desktop.app.data.City;
 import spoty.desktop.app.data.Country;
@@ -99,8 +104,6 @@ public class MainGUIController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/UpdateLocationGUI.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             UpdateLocationGUIController controller = fxmlLoader.<UpdateLocationGUIController>getController();
-            //controller.setIdLocation(currentlySelecte);
-            System.out.println("Loc: " + LocationDatabase.getInstance().getLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation()));
             controller.setIdLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
             controller.setIdAddress(listViewLocations.getSelectionModel().getSelectedItem().getIdAddress());
             Scene sceneTable = new Scene(root);
@@ -131,8 +134,7 @@ public class MainGUIController {
     void onAction_btnDeleteLocation(ActionEvent event) throws Exception {
         if (listViewLocations.getSelectionModel().getSelectedItem()!=null)
         {
-            System.out.println(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
-            LocationDatabase.getInstance().deleteLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
+            LocationDatabase.getInstance().deleteLocation(listViewLocations.getSelectionModel().getSelectedItem());
             fillListViewLocations();
         }
         
@@ -144,13 +146,14 @@ public class MainGUIController {
         assert btnAddLocation != null : "fx:id=\"btnAddLocation\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert btnUpdateLocation != null : "fx:id=\"btnUpdateLocation\" was not injected: check your FXML file 'MainGUI.fxml'.";
         assert listViewLocations != null : "fx:id=\"listViewLocations\" was not injected: check your FXML file 'MainGUI.fxml'.";
-        AddressDatabase.generateTestAddresses();
-        LocationDatabase.generateTestLocations();
+        
+        //AddressDatabase.generateTestAddresses();
+        //LocationDatabase.generateTestLocations();
         fillListViewLocations();
     }
     
     
-    private void fillListViewLocations()
+    public void fillListViewLocations()
     {
         listViewLocations.setItems(FXCollections.observableArrayList(LocationDatabase.getInstance().getLocations()));
     }
@@ -164,9 +167,12 @@ public class MainGUIController {
     private void fillInformationData()
     {
         Location currentlySelectedLocation = listViewLocations.getSelectionModel().getSelectedItem();
+         
         
         lblName.setText(currentlySelectedLocation.getLocationname());
         Address currentlySelectedLocationAddress = AddressDatabase.getInstance().getAddress(currentlySelectedLocation.getIdAddress());
+       
+        
         City city = AddressDatabase.getInstance().getCity(currentlySelectedLocationAddress.getIdCity());
         lblCity.setText(city.getCityname());
         lblPostalcode.setText(Integer.toString(city.getPostalcode()));

@@ -5,12 +5,16 @@
  */
 package spoty.desktop.app.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author lampr
  */
 public class Country {
+    @SerializedName("IdCountry")
     private int idCountry;
+    @SerializedName("CountryName")
     private String countryname;
 
     public Country(int idCountry, String countryname) {

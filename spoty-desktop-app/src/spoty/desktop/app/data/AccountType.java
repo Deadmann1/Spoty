@@ -5,12 +5,16 @@
  */
 package spoty.desktop.app.data;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author lampr
  */
 public class AccountType {
+    @SerializedName("IdAccountType")
     private int idAccountType;
+    @SerializedName("AccountyType")
     private String accountType;
 
     public AccountType(int idAccountType, String accountType) {

@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 import static spoty.desktop.app.Database.LocationDatabase.vecLocations;
+import spoty.desktop.app.Service.AddressService;
+import spoty.desktop.app.Service.LocationService;
 import spoty.desktop.app.data.Address;
 import spoty.desktop.app.data.City;
 import spoty.desktop.app.data.Country;
@@ -55,6 +57,7 @@ public class AddressDatabase {
         
         public static void generateTestAddresses()
         {
+            
             Address address1 = new Address(1, 1, "Big street", 11);
             Address address2 = new Address(2, 1, "Half street",43);
             Address address3 = new Address(3, 2, "Small street", 54);
@@ -68,6 +71,7 @@ public class AddressDatabase {
             County county1 = new County(1, "Kärnten", 1);
             
             Country country1 = new Country(1, "Österreich");
+            
             
             vecAddresses.add(address1);
             vecAddresses.add(address2);
@@ -85,27 +89,28 @@ public class AddressDatabase {
         
         public Vector<County> getCounties()
         {
-            return vecCounties;
+            return AddressService.getInstance().getCounties();
         }
         
         public Vector<City> getCities()
         {
-            return vecCities;
+            return AddressService.getInstance().getCities();
         }
         
         public Vector<Country> getCountries()
         {
-            return vecCountries;
+            return AddressService.getInstance().getCountries();
         }
         
         public Vector<Address> getAddresses()
         {
-            return vecAddresses;
+            return AddressService.getInstance().getAddresses();
         }
         
         public Address getAddress(int idAddress)
         {
-            Address returnAddress = null;
+            
+            /*Address returnAddress = null;
             
             for (Address address : this.getAddresses())
             {
@@ -113,9 +118,9 @@ public class AddressDatabase {
                 {
                     returnAddress = address;
                 }
-            }
+            }*/
             
-            return returnAddress;
+            return AddressService.getInstance().getAddress(idAddress);
         }
 
         public int getNewAddressID() {
@@ -169,6 +174,9 @@ public class AddressDatabase {
         
 
     public City getCity(int idCity) {
+        
+        return AddressService.getInstance().getCity(idCity);
+        /*
         City returnCity = null;
         
         for (City c: this.getCities())
@@ -177,10 +185,14 @@ public class AddressDatabase {
                 returnCity = c;
         }
         
-        return returnCity;
+        return returnCity;*/
     }
 
     public County getCounty(int idCounty) {
+        return AddressService.getInstance().getCounty(idCounty);
+        
+        
+        /*
         County returnCounty = null;
         for (County c: this.getCounties())
         {
@@ -188,10 +200,13 @@ public class AddressDatabase {
                 returnCounty = c;
         }
         
-        return returnCounty;
+        return returnCounty;*/
     }
 
     public Country getCountry(int idCountry) {
+        return AddressService.getInstance().getCountry(idCountry);
+        
+        /*
         Country returnCountry = null;
         for (Country c: this.getCountries())
         {
@@ -200,6 +215,7 @@ public class AddressDatabase {
         }
         
         return returnCountry;
+*/
     }
     
     public Vector<County> getCountiesByCountry(int idCountry)
@@ -243,23 +259,29 @@ public class AddressDatabase {
     
 
     public void addCountry(Country newCountry) {
-        this.getCountries().add(newCountry);
+        AddressService.getInstance().postCountry(newCountry);
+        //this.getCountries().add(newCountry);
     }
 
     public void addCounty(County newCounty) {
-        this.getCounties().add(newCounty);
+        AddressService.getInstance().postCounty(newCounty);
+        //this.getCounties().add(newCounty);
     }
 
     public void addCity(City newCity) {
-        this.getCities().add(newCity);
+        AddressService.getInstance().postCity(newCity);
+        //this.getCities().add(newCity);
     }
 
     public void addAddress(Address newAddress) {
-        this.getAddresses().add(newAddress);
+        AddressService.getInstance().postAddress(newAddress);
+        //this.getAddresses().add(newAddress);
     }
 
     public void updateAddress(Address updateAddress)
     {
+        AddressService.getInstance().putAddress(updateAddress);
+        /*
         int index = -1;
         int i=0;
         for (Address a : this.getAddresses())
@@ -270,7 +292,7 @@ public class AddressDatabase {
             i++;
         }
         
-        this.getAddresses().setElementAt(updateAddress, index);
+        this.getAddresses().setElementAt(updateAddress, index);*/
     }
 
     

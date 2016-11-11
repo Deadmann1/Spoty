@@ -9,6 +9,9 @@ package spoty.desktop.app.Database;
  *
  * @author lampr
  */
+import com.sun.deploy.util.SessionState;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +21,22 @@ import java.sql.Statement;
 import java.util.Vector;
 import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.LocationType;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.WebResource;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.codehaus.jettison.json.JSONObject;
+import jdk.nashorn.internal.parser.JSONParser;
+import spoty.desktop.app.data.LocationList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import spoty.desktop.app.Service.LocationService;
 
 
 public class LocationDatabase {
@@ -58,7 +77,7 @@ public class LocationDatabase {
             LocationType locType2 = new LocationType(2, "Einkaufen");
             LocationType locType3 = new LocationType(3, "Restaurant");
             LocationType locType4 = new LocationType(4, "Tanken");
-            
+            /*
             Location location1 = new Location(1, "Cineplexx Villach", 1, 1);
             Location location2 = new Location(2, "China Restaurant (Zum gerösteten Hund)", 3, 2);
             Location location3 = new Location(3, "Eni Tankstelle", 4, 3);
@@ -69,7 +88,7 @@ public class LocationDatabase {
             vecLocations.add(location2);
             vecLocations.add(location3);
             vecLocations.add(location4);
-            vecLocations.add(location5);
+            vecLocations.add(location5);*/
             
             vecLocationTypes.add(locType1);
             vecLocationTypes.add(locType2);
@@ -79,19 +98,19 @@ public class LocationDatabase {
         
         public Vector<Location> getLocations()
         {
-            return vecLocations;
+            return LocationService.getInstance().getLocations();
         }
         
         public Vector<LocationType> getLocationTypes()
         {
-            return vecLocationTypes;
+            return LocationService.getInstance().getLocationTypes();
         }
         
         public int getNewLocationID()
         {
             int highestID = -1;
             
-            for (Location l : vecLocations)
+            for (Location l : this.getLocations())
             {
                 if (l.getIdLocation()>highestID)
                     highestID = l.getIdLocation();
@@ -112,8 +131,10 @@ public class LocationDatabase {
             return highestID+1;
         }
         
-        public void deleteLocation(int idLocation)
+        public void deleteLocation(Location deleteLocation)
         {
+            LocationService.getInstance().deleteLocation(deleteLocation);
+            /*
             int index = 0;
             int indexToDelete = -1;
             //bug
@@ -128,11 +149,14 @@ public class LocationDatabase {
             }
             
             if (indexToDelete != -1)
-                this.getLocations().remove(indexToDelete);
+                this.getLocations().remove(indexToDelete);*/
         }
         
          public Location getLocation(int idLocation)
         {
+            return LocationService.getInstance().getLocation(idLocation);
+            
+            /*
             Location returnLocation = null;
             
             for (Location l : this.getLocations())
@@ -141,11 +165,14 @@ public class LocationDatabase {
                     returnLocation = l;
             }
             
-            return returnLocation;
+            return returnLocation;*/
         }
          
         public LocationType getLocationType(int idLocationType)
         {
+            return LocationService.getInstance().getLocationType(idLocationType);
+            
+            /*
             LocationType returnType = null;
             
             for (LocationType type : this.getLocationTypes())
@@ -155,18 +182,24 @@ public class LocationDatabase {
             }
             
             return returnType;
+*/
         }
 
          public void addLocationType(LocationType newType) {
-             this.getLocationTypes().add(newType);
+             LocationService.getInstance().postLocationType(newType);
+             //this.getLocationTypes().add(newType);
         }
 
     public void addLocation(Location newLocation) {
-        this.getLocations().add(newLocation);
+        LocationService.getInstance().postLocation(newLocation);
+        //this.getLocations().add(newLocation);
     }
     
     public void updateLocation(Location updateLocation)
     {
+        LocationService.getInstance().putLocation(updateLocation);
+        
+        /*
         int index = -1;
         int i=0;
         for (Location l : this.getLocations())
@@ -178,6 +211,7 @@ public class LocationDatabase {
         }
         
         this.getLocations().setElementAt(updateLocation, index);
+*/
     }
    
 }

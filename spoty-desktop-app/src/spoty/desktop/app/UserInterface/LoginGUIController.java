@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import spoty.desktop.app.Database.UserAccountDatabase;
 
 
@@ -48,17 +50,19 @@ public class LoginGUIController {
         if (UserAccountDatabase.getInstance().existsUsername(txtUsername.getText())==true)
         {
             int idUserAccount = UserAccountDatabase.getInstance().getIDOfAccount(txtUsername.getText());
-            System.out.println("ID: "+ idUserAccount);
             
             if (txtPassword.getText().compareTo(UserAccountDatabase.getInstance().getPasswordOfAccount(idUserAccount))==0)
             {
-                Parent rootframeTable = FXMLLoader.load(getClass().getResource("resources/MainGUI.fxml"));
-                Scene sceneTable = new Scene(rootframeTable);
+                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/MainGUI.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+            
+                Scene sceneTable = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(sceneTable);
                 stage.setTitle("Hauptmenü");
                 Stage stageLogin = (Stage) btnLogin.getScene().getWindow();
                 stageLogin.close();
+             
                 stage.showAndWait();  
             }
             

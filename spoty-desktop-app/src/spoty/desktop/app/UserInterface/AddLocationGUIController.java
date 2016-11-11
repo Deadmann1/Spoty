@@ -151,7 +151,7 @@ public class AddLocationGUIController {
             //int id_selectedCounty = cmbCounty.getSelectionModel().getSelectedItem().getIdCounty();
             int id_selectedCity = cmbCity.getSelectionModel().getSelectedItem().getIdCity();
 
-            Address newAddress = new Address(AddressDatabase.getInstance().getNewAddressID(), id_selectedCity, txtStreetname.getText(), Integer.parseInt(txtHousenumber.getText()));
+            Address newAddress = new Address(AddressDatabase.getInstance().getNewAddressID(), id_selectedCity,  txtStreetname.getText(), Integer.parseInt(txtHousenumber.getText()));
             Location newLocation = new Location(LocationDatabase.getInstance().getNewLocationID(), txtLocationname.getText(), id_selectedType, newAddress.getIdAddress());
 
             AddressDatabase.getInstance().addAddress(newAddress);

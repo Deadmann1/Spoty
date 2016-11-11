@@ -50,7 +50,6 @@ public class AddCityGUIController {
     void onAction_btnAddCity(ActionEvent event) {
         if (txtCityname.getText().compareTo("")!=0 && txtPostalcode.getText().compareTo("")!=0)
         {
-            System.out.println("IDCount: " + idCounty);
             int idCity = AddressDatabase.getInstance().getNewCityID();
             City newCity = new City(idCity, Integer.parseInt(txtPostalcode.getText()), txtCityname.getText(), idCounty);
             AddressDatabase.getInstance().addCity(newCity);
