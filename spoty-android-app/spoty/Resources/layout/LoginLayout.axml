@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imageViewLogin"
-        android:layout_weight="60" />
+        android:layout_weight="60"
+        android:layout_marginBottom="0.0dp" />
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -39,11 +40,23 @@
             android:text="Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonLogin" />
+            android:id="@+id/buttonLogin"
+            android:enabled="false" />
         <Button
-            android:text="Cancle"
+            android:text="Login as Guest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonLoginCancle" />
+            android:id="@+id/buttonLoginGuest" />
+        <Button
+            android:text="Logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonLogout"
+            android:enabled="false" />
+        <Button
+            android:text="Exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonExit" />
     </LinearLayout>
 </LinearLayout>

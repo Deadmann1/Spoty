@@ -1,25 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using Android.Text;
+using spoty.Services;
+using Spoty.Data;
+using Spoty.Data.Models;
 
 namespace spoty
 {
     [Activity(MainLauncher = true, Icon = "@drawable/logo")]
     public class LoginActivity : Activity
     {
-        Button btnLogin;
-        Button btnLoginCancle;
-        EditText txtUsername;
-        EditText txtPassword;
+        private Button btnLogin;
+        private Button btnLogout;
+        private Button btnLoginGuest;
+        private Button btnExit;
+        private EditText txtUsername;
+        private EditText txtPassword;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,30 +25,69 @@ namespace spoty
             SetContentView(Resource.Layout.LoginLayout);
             this.ActionBar.SetTitle(Resource.String.LoginLayoutTitle);
             FindAllViewsById();
-            SetEventHandler();
+            SetEventHandlers();
         }
 
         private void FindAllViewsById()
         {
             btnLogin = FindViewById<Button>(Resource.Id.buttonLogin);
-            btnLoginCancle = FindViewById<Button>(Resource.Id.buttonLoginCancle);
+            btnLogout = FindViewById<Button>(Resource.Id.buttonLogout);
+            btnLoginGuest = FindViewById<Button>(Resource.Id.buttonLoginGuest);
+            btnExit = FindViewById<Button>(Resource.Id.buttonExit);
             txtUsername = FindViewById<EditText>(Resource.Id.editTextUsername);
             txtPassword = FindViewById<EditText>(Resource.Id.editTextPassword);
         }
 
-        private void SetEventHandler() {
+        private void SetEventHandlers()
+        {
             btnLogin.Click += BtnLogin_Click;
-            btnLoginCancle.Click += BtnLoginCancle_Click;
+            btnLogout.Click += BtnLogoutOnClick;
+            btnLoginGuest.Click += BtnLoginGuestOnClick;
+            btnExit.Click += BtnExitOnClick;
         }
 
-        private void BtnLoginCancle_Click(object sender, EventArgs e)
+        private void BtnLogoutOnClick(object sender, EventArgs eventArgs)
         {
-            txtPassword.Text = "";
-            txtUsername.Text = "";
+            btnLogout.Enabled = false;
+            Database.Instance.CurrentUser = null;
+            btnLoginGuest.Enabled = true;
         }
 
-        private async void BtnLogin_Click(object sender, EventArgs e)
+        private void BtnExitOnClick(object sender, EventArgs eventArgs)
         {
+            Process.KillProcess(Process.MyPid());
+        }
+
+        private void BtnLoginGuestOnClick(object sender, EventArgs eventArgs)
+        {
+            try
+            {
+                if (SpotyService.Login(new User(1, "guest", "guest"))) // with await asynchronous methods calling in sprint 2 when we call the auth/login service
+                {
+                    btnLoginGuest.Enabled = false;
+                    btnLogout.Enabled = true;
+                    var activity = new Intent(this, typeof(LocationOverviewActivity));
+                    StartActivity(activity);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+                
+            }
+            catch (Exception)
+            {
+                ShowAlertDialog("Error!", "Login was unsuccessful!", "OK");
+            }
+        }
+
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            ShowAlertDialog("Alert!", "Currently there's only support for guests! \n Use the button below to log in as a guest.", "OK");
+            /*
+             * 
+             * Login with as registered User will be included in Sprint 2, as well as a secure connection to the Service and the the possiblity to register as a new user !
+             * 
             btnLogin.Enabled = false;
             btnLoginCancle.Enabled = false;
             if (String.IsNullOrEmpty(txtPassword.Text) || String.IsNullOrEmpty(txtUsername.Text))
@@ -72,8 +109,8 @@ namespace spoty
                     btnLogin.Enabled = true;
                     btnLoginCancle.Enabled = true;
                 }
-                */
             }
+            */
         }
 
         private void ShowAlertDialog(string title, string message, string posBtnMsg)

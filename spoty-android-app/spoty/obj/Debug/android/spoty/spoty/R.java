@@ -15,20 +15,24 @@ public final class R {
         public static final int logo=0x7f020001;
     }
     public static final class id {
-        public static final int buttonLogin=0x7f050004;
-        public static final int buttonLoginCancle=0x7f050005;
-        public static final int editTextPassword=0x7f050003;
-        public static final int editTextUsername=0x7f050002;
-        public static final int imageViewLogin=0x7f050000;
-        public static final int linearLayoutLogin=0x7f050001;
+        public static final int buttonExit=0x7f050008;
+        public static final int buttonLogin=0x7f050005;
+        public static final int buttonLoginGuest=0x7f050006;
+        public static final int buttonLogout=0x7f050007;
+        public static final int editTextPassword=0x7f050004;
+        public static final int editTextUsername=0x7f050003;
+        public static final int imageViewLogin=0x7f050001;
+        public static final int linearLayoutLogin=0x7f050002;
+        public static final int listViewLocations=0x7f050000;
     }
     public static final class layout {
-        public static final int loginlayout=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int locationoverviewlayout=0x7f030000;
+        public static final int loginlayout=0x7f030001;
+        public static final int main=0x7f030002;
     }
     public static final class string {
         public static final int ApplicationName=0x7f040002;
+        public static final int LocationOverviewLayoutTitle=0x7f040001;
         public static final int LoginLayoutTitle=0x7f040000;
-        public static final int ShowStationLayoutTitle=0x7f040001;
     }
 }

@@ -1,0 +1,8 @@
+spoty.LocationOverviewActivity, spoty;md5a548d3f8213edc2522f6f3dca9217284.LocationOverviewActivity
+spoty.LocationOverviewActivity, spoty, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5a548d3f8213edc2522f6f3dca9217284.LocationOverviewActivity
+spoty.LocationOverviewActivity;md5a548d3f8213edc2522f6f3dca9217284.LocationOverviewActivity
+spoty.LocationOverviewActivity;md5a548d3f8213edc2522f6f3dca9217284.LocationOverviewActivity
+spoty.LoginActivity, spoty;md5a548d3f8213edc2522f6f3dca9217284.LoginActivity
+spoty.LoginActivity, spoty, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5a548d3f8213edc2522f6f3dca9217284.LoginActivity
+spoty.LoginActivity;md5a548d3f8213edc2522f6f3dca9217284.LoginActivity
+spoty.LoginActivity;md5a548d3f8213edc2522f6f3dca9217284.LoginActivity
