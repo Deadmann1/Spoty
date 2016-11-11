@@ -17,6 +17,8 @@ C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\res\drawable\logo.png
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\R.cs.flag
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\uploadflags.txt
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\Spoty.csprojResolveAssemblyReference.cache
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\res\layout\locationdetaillayout.xml
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\bin\Debug\spoty.dll.mdb
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\bin\Debug\Java.Interop.dll.mdb
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\bin\Debug\Microsoft.CSharp.dll.mdb
@@ -46,4 +48,4 @@ C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\android\assets\System.Xml.dll.mdb
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\spoty.dll.mdb
-C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Debug\Spoty.csprojResolveAssemblyReference.cache
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\bin\Debug\spoty.dll.mdb

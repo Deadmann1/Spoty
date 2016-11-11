@@ -68,8 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
-    <Compile Include="Data\Location.cs" />
+    <Compile Include="Data\Models\Address.cs" />
+    <Compile Include="Data\Models\City.cs" />
+    <Compile Include="Data\Models\Country.cs" />
+    <Compile Include="Data\Models\County.cs" />
+    <Compile Include="Data\Models\Location.cs" />
+    <Compile Include="Data\Models\Rating.cs" />
     <Compile Include="Data\Models\User.cs" />
+    <Compile Include="LocationDetailActivity.cs" />
     <Compile Include="LocationOverviewActivity.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -84,6 +90,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\LocationOverviewLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LocationDetailLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
