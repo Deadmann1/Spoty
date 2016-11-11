@@ -82,16 +82,16 @@ router.post('/ratings', function (req, res, next) {
             console.error(err);
             return;
         }
-        var city = req.body;
-        request = new Request("INSERT Spoty.Rating ( Grade, CityName, IdCounty) VALUES (@IdRating, @PostalCode, @CityName, @IdCounty);", function (err) {
+        var rating = req.body;
+        request = new Request("INSERT Spoty.Rating (Grade, Feedback, IdUserAccount, IdLocation) VALUES (@Grade, @Feedback, @IdUserAccount, @IdLocation);", function (err) {
             if (err) {
                 next(err)
             }
         });
-        request.addParameter('Grade', types.Int,  city.IdRating);
-        request.addParameter('PostalCode', types.Int,  city.PostalCode);
-        request.addParameter('CityName', types.NVarChar,  city.CityName);
-        request.addParameter('IdCounty', types.Int,  city.IdCounty);
+        request.addParameter('Grade', types.Int,  rating.Grade);
+        request.addParameter('Feedback', types.NVarChar,  rating.Feedback);
+        request.addParameter('IdUserAccount', types.Int,  rating.IdUserAccount);
+        request.addParameter('IdLocation', types.Int,  rating.IdLocation);
         request.on('doneInProc', function (columns) {
             connection.release();
             res.send({message: 'Rating successfully added'});
