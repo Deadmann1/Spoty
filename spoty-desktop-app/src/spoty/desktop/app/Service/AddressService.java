@@ -16,7 +16,6 @@ import spoty.desktop.app.data.Address;
 import spoty.desktop.app.data.City;
 import spoty.desktop.app.data.Country;
 import spoty.desktop.app.data.County;
-import spoty.desktop.app.data.Location;
 
 /**
  *

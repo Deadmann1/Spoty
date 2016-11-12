@@ -6,8 +6,6 @@
 package spoty.desktop.app.data;
 
 import com.google.gson.annotations.SerializedName;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *

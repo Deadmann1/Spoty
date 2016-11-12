@@ -1,15 +1,8 @@
 package spoty.desktop.app.UserInterface;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Vector;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,8 +18,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
-import spoty.desktop.app.Service.AddressService;
-import spoty.desktop.app.Service.LocationService;
 import spoty.desktop.app.data.Address;
 import spoty.desktop.app.data.City;
 import spoty.desktop.app.data.Country;

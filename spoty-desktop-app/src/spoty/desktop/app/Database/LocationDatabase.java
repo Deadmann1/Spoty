@@ -9,32 +9,13 @@ package spoty.desktop.app.Database;
  *
  * @author lampr
  */
-import com.sun.deploy.util.SessionState;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+
 import java.util.Vector;
 import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.LocationType;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
-import com.sun.jersey.api.client.WebResource;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.codehaus.jettison.json.JSONObject;
-import jdk.nashorn.internal.parser.JSONParser;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import spoty.desktop.app.Service.LocationService;
 
 

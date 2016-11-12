@@ -12,7 +12,6 @@ import com.sun.jersey.api.client.WebResource;
 import java.util.Vector;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
-import spoty.desktop.app.Database.LocationDatabase;
 import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.LocationType;
 

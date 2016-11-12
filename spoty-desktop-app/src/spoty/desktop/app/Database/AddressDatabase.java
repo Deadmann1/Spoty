@@ -6,20 +6,16 @@
 package spoty.desktop.app.Database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.Vector;
-import static spoty.desktop.app.Database.LocationDatabase.vecLocations;
+
 import spoty.desktop.app.Service.AddressService;
-import spoty.desktop.app.Service.LocationService;
+
 import spoty.desktop.app.data.Address;
 import spoty.desktop.app.data.City;
 import spoty.desktop.app.data.Country;
 import spoty.desktop.app.data.County;
-import spoty.desktop.app.data.Location;
+
 
 
 public class AddressDatabase {

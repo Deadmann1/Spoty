@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
-import spoty.desktop.app.data.County;
 import spoty.desktop.app.data.LocationType;
 
 

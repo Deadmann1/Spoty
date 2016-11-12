@@ -7,15 +7,12 @@
 package spoty.desktop.app.data;
 
 import com.google.gson.annotations.SerializedName;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author lampr
  */
 
-@XmlRootElement (name = "Location")
 public class Location {
     @SerializedName("IdLocation")
     private int IdLocation;

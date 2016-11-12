@@ -6,14 +6,9 @@
 package spoty.desktop.app.Database;
 
 import java.sql.Connection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Vector;
 import spoty.desktop.app.Service.UserAccountService;
 import spoty.desktop.app.data.AccountType;
-import spoty.desktop.app.data.Location;
-import spoty.desktop.app.data.LocationType;
 import spoty.desktop.app.data.UserAccount;
 
 /**

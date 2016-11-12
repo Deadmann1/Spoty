@@ -1,6 +1,5 @@
 package spoty.desktop.app.UserInterface;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
