@@ -1,6 +1,12 @@
 # Spoty
 
-Credits:
+## Releases
+
+### Sprint 1.  Release
+
+[Link zu unserem Sprint 1. Release ](https://github.com/Deadmann1/Spoty/releases).
+
+## Credits:
 
 Sammer Manuel : Project Lead, Programmer
 
