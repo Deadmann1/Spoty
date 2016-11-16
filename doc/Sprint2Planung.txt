@@ -1,0 +1,43 @@
+Ziele:
+  Operative Applikationen:
+  Web-Applikation:
+    ⦁	Filtern nach typischen Kriterien dieser Typen (Bewertungen, Name, Entfernung)
+    ⦁ Auflistung der Ergebnisse in der Nähe oder für einen eingegebenen Ort
+    ⦁	Bewertung des Geschäfts
+    ⦁	Möglichkeit Ergebnisse in einer Google Maps Karte anzuzeigen
+    
+    
+  Mobile-Applikation:
+  	⦁ Auswählen von Geschäftstypen
+    ⦁	Filtern nach typischen Kriterien dieser Typen (Bewertungen, Name, Entfernung)
+    ⦁	Auflistung der Ergebnisse in der Nähe oder für einen eingegebenen Ort
+    ⦁	Bewertung des Geschäfts
+    ⦁	Möglichkeit Ergebnisse in einer Google Maps Karte anzuzeigen
+ 
+  Administrive Applikation:
+      ⦁	Berichte über Bewertungen/Aufrufe in der App
+      ⦁ Überarbeitung Interface-Design
+      ⦁ Hinzufügen neuer Geschäfte mit GeoDaten (evtl.) oder Adresse
+      
+      
+
+Implementation: 
+
+Operative Applikationen:
+
+ Mobile Applikation:  Manuel Sammer  C#
+    ⦁ Xamarin.Droid
+    
+ Web Applikation: Alexander Ruhdorfer
+    ⦁ Angular JS / Bootstrap
+    
+Adminstravive Applikation: 
+
+  Desktop Applikation: Daniel Lamprecht Java
+    ⦁ JavaFX
+
+Backend:  
+Webservice Restful: Manuel Sammer
+Hosting for Service and Site: Manuel Sammer
+MS SQL Server: Manuel Sammer
+  - Schimpfwörter-Filter für das Bewertungs-Feedback hinzufügen
