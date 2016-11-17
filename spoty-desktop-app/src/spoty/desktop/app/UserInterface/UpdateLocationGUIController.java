@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
 import spoty.desktop.app.data.Address;
@@ -30,6 +31,8 @@ public class UpdateLocationGUIController {
     private int idLocation;
     private int idAddress;
     
+    @FXML
+    private AnchorPane paneUpdateLocationGUI;
     
     @FXML
     private TextField txtLocationname;
@@ -170,6 +173,9 @@ public class UpdateLocationGUIController {
     @FXML
     void initialize() {
         assert btnUpdateLocation != null : "fx:id=\"btnUpdateLocation\" was not injected: check your FXML file 'UpdateLocationGUI.fxml'.";
+        
+        lblInfoMessageUpdateLocation.getStyleClass().add("labelInfo");
+        paneUpdateLocationGUI.getStyleClass().add("pane");
     }
     
     

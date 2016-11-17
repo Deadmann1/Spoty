@@ -11,10 +11,14 @@ import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.Database.LocationDatabase;
 import spoty.desktop.app.data.LocationType;
+import javafx.scene.layout.AnchorPane;
 
 
 public class AddLocationTypeGUIController {
 
+    @FXML
+    private AnchorPane paneAddLocationTypeGUI;
+    
     @FXML
     private ResourceBundle resources;
 
@@ -53,7 +57,8 @@ public class AddLocationTypeGUIController {
         assert lblInfoMessageAddLocationType != null : "fx:id=\"lblInfoMessageAddLocationType\" was not injected: check your FXML file 'AddLocationTypeGUI.fxml'.";
         assert txtTypename != null : "fx:id=\"txtTypename\" was not injected: check your FXML file 'AddLocationTypeGUI.fxml'.";
 
-
+        lblInfoMessageAddLocationType.getStyleClass().add("labelInfo");
+        paneAddLocationTypeGUI.getStyleClass().add("pane");
     }
 
 }

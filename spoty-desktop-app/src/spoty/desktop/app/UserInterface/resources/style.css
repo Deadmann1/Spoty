@@ -1,0 +1,21 @@
+.pane{
+    -fx-background-color: darkslategrey;
+}
+
+.button {
+  -fx-background-color: lightgreen;
+  -fx-text-fill: black;
+  -fx-background-radius: 16px;
+}
+
+.list-cell{
+    -fx-text-fill: darkgreen;
+}
+
+.labelInfo{
+    -fx-background-color: lightgreen;
+}
+
+.label{
+    -fx-text-fill: whitesmoke;
+}

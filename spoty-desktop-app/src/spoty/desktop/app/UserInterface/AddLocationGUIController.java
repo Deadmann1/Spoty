@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -27,6 +28,9 @@ import spoty.desktop.app.data.LocationType;
 
 public class AddLocationGUIController {
 
+    @FXML
+    private AnchorPane paneAddLocationGUI;
+    
     @FXML
     private ResourceBundle resources;
 
@@ -201,6 +205,9 @@ public class AddLocationGUIController {
                 }
             } 
         });
+        
+        lblInfoMessageAddLocation.getStyleClass().add("labelInfo");
+        paneAddLocationGUI.getStyleClass().add("pane");
     }
     
     private void fillCmbCity(int idCounty)

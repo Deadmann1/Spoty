@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="184.0" prefWidth="293.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.AddCityGUIController">
+<AnchorPane id="AnchorPane" fx:id="paneAddCityGUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="184.0" prefWidth="293.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.AddCityGUIController">
   <children>
     <Label layoutX="25.0" layoutY="14.0" prefWidth="142.0" text="Stadt hinzufügen:" />
     <TextField id="txtCountryname" fx:id="txtCityname" layoutX="76.0" layoutY="43.0" prefWidth="184.0" />
@@ -16,4 +17,7 @@
     <Label layoutX="26.0" layoutY="82.0" text="PLZ:" />
     <TextField id="txtCountryname" fx:id="txtPostalcode" layoutX="76.0" layoutY="79.0" prefWidth="184.0" />
   </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
 </AnchorPane>

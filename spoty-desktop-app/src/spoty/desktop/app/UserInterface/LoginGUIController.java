@@ -13,10 +13,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.UserAccountDatabase;
+import javafx.scene.layout.AnchorPane;
 
 
 public class LoginGUIController {
 
+    @FXML
+    private AnchorPane paneLoginGUI;
+    
     @FXML
     private ResourceBundle resources;
 
@@ -80,7 +84,8 @@ public class LoginGUIController {
         assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'LoginGUI.fxml'.";
 
         UserAccountDatabase.getInstance().generateTestUserAccounts();
-
+        lblInfoMessageLogin.getStyleClass().add("labelInfo");
+        paneLoginGUI.getStyleClass().add("pane");
     }
 
 }

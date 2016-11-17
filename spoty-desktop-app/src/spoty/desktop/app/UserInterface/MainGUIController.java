@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import spoty.desktop.app.Database.AddressDatabase;
@@ -27,6 +28,8 @@ import spoty.desktop.app.data.LocationType;
 
 
 public class MainGUIController {
+    @FXML
+    private AnchorPane paneMainGUI;
 
     @FXML
     private GridPane gridPaneInformation;
@@ -141,6 +144,9 @@ public class MainGUIController {
         //AddressDatabase.generateTestAddresses();
         //LocationDatabase.generateTestLocations();
         fillListViewLocations();
+        gridPaneInformation.getStyleClass().add("gridPane");
+        lblInfoMessageMainMenu.getStyleClass().add("labelInfo");
+        paneMainGUI.getStyleClass().add("pane");
     }
     
     

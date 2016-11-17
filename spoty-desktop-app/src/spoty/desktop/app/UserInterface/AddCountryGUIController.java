@@ -10,10 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.data.Country;
+import javafx.scene.layout.AnchorPane;
 
 
 public class AddCountryGUIController {
 
+    @FXML
+    private AnchorPane paneAddCountryGUI;
+    
     @FXML
     private ResourceBundle resources;
 
@@ -52,7 +56,8 @@ public class AddCountryGUIController {
         assert lblInfoMessageAddCountry != null : "fx:id=\"lblInfoMessageAddCountry\" was not injected: check your FXML file 'AddCountryGUI.fxml'.";
         assert txtCountryname != null : "fx:id=\"txtCountryname\" was not injected: check your FXML file 'AddCountryGUI.fxml'.";
 
-
+        lblInfoMessageAddCountry.getStyleClass().add("labelInfo");
+        paneAddCountryGUI.getStyleClass().add("pane");
     }
 
 }

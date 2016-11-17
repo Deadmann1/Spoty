@@ -10,11 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.AddressDatabase;
 import spoty.desktop.app.data.City;
+import javafx.scene.layout.AnchorPane;
 
 
 public class AddCityGUIController {
 
     private int idCounty;
+    
+    @FXML
+    private AnchorPane paneAddCityGUI;
     
     @FXML
     private ResourceBundle resources;
@@ -67,7 +71,8 @@ public class AddCityGUIController {
         assert lblInfoMessageAddCity != null : "fx:id=\"lblInfoMessageAddCity\" was not injected: check your FXML file 'AddCityGUI.fxml'.";
         assert txtCityname != null : "fx:id=\"txtCountyname\" was not injected: check your FXML file 'AddCityGUI.fxml'.";
 
-
+        lblInfoMessageAddCity.getStyleClass().add("labelInfo");
+        paneAddCityGUI.getStyleClass().add("pane");
     }
 
 }
