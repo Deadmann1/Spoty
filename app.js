@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 var debug = require('debug')('testapp:server');
+var cors = require('cors');
 
 /* ROUTES DEFINITION*/
 var index = require('./routes/index');
@@ -23,6 +24,9 @@ var county = require('./routes/county');
 
 
 var app = express();
+
+//enable cross side scripting for angular js use of this app
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

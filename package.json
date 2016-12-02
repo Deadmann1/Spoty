@@ -14,7 +14,8 @@
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "tedious" : "*",
-    "tedious-connection-pool" : "*"
+    "tedious-connection-pool" : "*",
+    "cors" : "*"
   },
   "engines":{
     "node": "6.9.1 || 0.6.x"
