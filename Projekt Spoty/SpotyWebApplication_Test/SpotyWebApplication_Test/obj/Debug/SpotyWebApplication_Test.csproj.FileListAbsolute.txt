@@ -38,3 +38,11 @@ D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test
 D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\obj\Debug\SpotyWebApplication_Test.dll
 D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\obj\Debug\SpotyWebApplication_Test.pdb
 D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\obj\Debug\SpotyWebApplication_Test.csprojResolveAssemblyReference.cache
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\App\main.js
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\CSS\Home.css
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\CSS\login.css
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\CSS\Sternebewertung.css
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\login.html
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\index.html
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\home.html
+D:\Schule\5BHIFS\BSD - Ortner & Reichmann\Projekt Spoty\SpotyWebApplication_Test\SpotyWebApplication_Test\bin\packages.config
