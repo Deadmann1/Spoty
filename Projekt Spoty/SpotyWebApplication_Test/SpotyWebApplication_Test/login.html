@@ -3,7 +3,12 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+
     <link rel="stylesheet" href="CSS/login.css">
+    <script src="JavaScripts/JavaScript.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="App/main.js"></script>
 </head>
 <body ng-controller="LoginController">
     <div class="container">
@@ -19,7 +24,6 @@
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                 </div>
-                <label>{{LoginOutput}}</label>
                 <button type="button" class="btn btn-lg btn-primary btn-block btn-signin" ng-click="goToHome('/home')">Login</button>
             </form>
         </div>

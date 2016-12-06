@@ -3,92 +3,53 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
-    <link rel="stylesheet" href="CSS/Home.css">
 
+    <link rel="stylesheet" href="CSS/Home.css">
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="App/geoLocation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="App/main.js"></script>
 </head>
-<body ng-controller="HomeController" ng-app="SpotyWebApplication">
+<body ng-controller="HomeController">
     <div id="HomeContainer">
-        <table id="divbigTable">
-            <tr>
+        <label style="font-size:20px">Suchen: <input class="txtInput" type="text" ng-model="search.$" style="font-size:20px"></label><br /><br />
+        <label for="Filter für Land">Filter für Land: <select name="repeatSelect" ng-model="search.Land">
+            <option name="selectedLocation" ng-repeat="ort in orte | unique:'Land' ">{{ort.Land}}</option>
+            </select>
+        </label><br /><br />
+        <label for="Filter für Bundesland">
+            Filter für Bundesland: <select name="repeatSelect" ng-model="search.Bundesland">
+                <option name="selectedLocation" ng-repeat="ort in orte | unique:'Bundesland' ">{{ort.Bundesland}}</option>
+            </select>
+        </label><br />
+        <label for="Filter für Stadt">
+            Filter für Stadt: <select name="repeatSelect" ng-model="search.Stadt">
+                <option name="selectedLocation" ng-repeat="ort in orte | unique:'Stadt' ">{{ort.Stadt}}</option>
+            </select>
+        </label><br />
+        <label for="Filter für Locationtype">
+            Filter für Locationtyp: <select name="repeatSelect" ng-model="search.Locationtyp">
+                <option name="selectedLocation" ng-repeat="ort in orte | unique:'Locationtyp' ">{{ort.Locationtyp}}</option>
+            </select>
+        </label>
+        <br />
+        <table border="1">
+            <tr><th>Land</th><th>Bundesland</th><th>Stadt</th><th>Location</th><th>Locationtyp</th><th>Bewertung</th></tr>
+            <tr ng-repeat="ort in orte | filter:search.$ | filter:search.Bundesland | filter:search.Land | filter:search.Stadt | filter:search.Locationtyp">
+                <td>{{ort.Land}}</td>
+                <td>{{ort.Bundesland}}</td>
+                <td>{{ort.Stadt}}</td>
+                <td ng-model="orte[$index]">{{ort.Locationname}}</td>
+                <td>{{ort.Locationtyp}}</td>
                 <td>
-                    <div id="divSearchFields">
-                        <label id="lblSuchen">Suchen: <input class="txtInput" type="text" ng-model="search.$"></label><br /><br />
-                        <label for="Filter für Land">
-                            Filter für Country: <select name="repeatSelect" ng-model="search.LocationCountry">
-                                <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationCountry' ">{{Location.LocationCountry}}</option>
-                            </select>
-                        </label><br />
-                        <label for="Filter für County">
-                            Filter für Bundesland: <select name="repeatSelect" ng-model="search.LocationCounty">
-                                <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationCounty' ">{{Location.LocationCounty}}</option>
-                            </select>
-                        </label><br />
-                        <label for="Filter für City">
-                            Filter für City: <select name="repeatSelect" ng-model="search.LocationCity">
-                                <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationCity' ">{{Location.LocationCity}}</option>
-                            </select>
-                        </label><br />
-                        <label for="Filter für Address">
-                            Filter für Address: <select name="repeatSelect" ng-model="search.LocationAddress">
-                                <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationAddress' ">{{Location.LocationAddress}}</option>
-                            </select>
-                        </label><br />
-                        <label for="Filter für LocationName">
-                            Filter für LocationName: <select name="repeatSelect" ng-model="search.LocationName">
-                                <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationName' ">{{Location.LocationName}}</option>
-                            </select>
-                        </label><br />
-                        <label for="Filter für LocationType">
-                            Filter für LocationType: <select name="repeatSelect" ng-model="search.LocationType">
-                                <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationType' ">{{Location.LocationType}}</option>
-                            </select>
-                        </label><br />
-                        <label for="Filter für Rating">
-                            Filter für Rating:
-                            <select name="repeatSelect" ng-model="search.starRating1">
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </label>
-                        <br />
-                        <button class="btn btn-default btn-lg btn3d" value="No Filter" ng-click="removeSelection()">Reset Filter</button>
-                    </div>
-                </td>
-                <td>
-                    <div id="divTable">
-                        <table>
-                            <tr>
-                                <td align="center">
-                                    <table>
-                                        <tr><th>Country</th><th>County</th><th>City</th><th>Address</th><th>LocationName</th><th>LocationType</th><th>Rating</th></tr>
-                                        <tr ng-repeat="Location in Locations | filter:search.$ | filter:search.LocationCountry | filter:search.LocationCounty | filter:search.LocationCity | filter:search.LocationAddress  | filter:search.LocationName  | filter:search.LocationType | filter:search.StarRating">
-                                            <td>{{Location.LocationCountry}}</td>
-                                            <td>{{Location.LocationCounty}}</td>
-                                            <td>{{Location.LocationCity}}</td>
-                                            <td>{{Location.LocationAddress}}</td>
-                                            <td ng-model="Locations[$index]">{{Location.LocationName}}</td>
-                                            <td>{{Location.LocationType}}</td>
-                                            <td id="tdStars">
-                                                <div star-rating rating="starRating1" click="click(param)" mouse-hover="mouseStarHover(param)" mouse-leave="mouseStarLeave(param)"></div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                    <span ng-repeat="rating in ratings">
+                        <span star-rating ng-model="ratings" max="rating.max" on-rating-selected="getSelectedRating(rating)" ng-click="getSelectedRow($index)" ng-class="'selected': $index==selectedRow" ></span>
+                    </span>
                 </td>
             </tr>
         </table>
-        
-        
+        <button class="btn btn-default btn-lg btn3d" value="No Filter" ng-click="removeSelection()">Reset Filter</button>
     </div>
 </body>
 </html>
-
-<!--<div star-rating rating="starRating3" ng-click="getSelectedRow($index)" mouse-hover="mouseHover3(param)" mouse-leave="mouseLeave3(param)"></div>
-<div star-rating rating-value="rating" max="rating.max" on-rating-selected="getSelectedRating(rating)" ng-click="getSelectedRow($index)" ng-class="'selected': $index==selectedRow"></div>-->
