@@ -29,7 +29,7 @@ router.get('/ratings', function (req, res, next) {
                 }
             });
             console.log(result);
-            ratings.push(new Rating(result[0], result[1], result[2], result[3], new Date(result[4]));
+            ratings.push(new Rating(result[0], result[1], result[2], result[3], new Date(result[4])));
             result = [];
         });
         request.on('doneInProc', function (rowCount, more, rows) {
