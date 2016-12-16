@@ -41,8 +41,12 @@ router.get('/ratings', function (req, res, next) {
                 var d = new Date(ratings[i].Date);
                 ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() , "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
             }
-
-            res.send(ret);
+            if(ret.length == 0 ){
+                res.sendStatus(204);
+            }
+            else {
+                res.send(ret);
+            }
         });
         connection.execSql(request);
     });
@@ -55,8 +59,9 @@ router.get('/ratings/:_id', function (req, res, next) {
             return;
         }
         var result = [];
-        var rating;
-        request = new Request("SELECT * FROM Spoty.Rating WHERE IdRating =" + req.params._id + ";", function (err) {
+        var ratings = [];
+        var ret = [];
+        request = new Request("SELECT * FROM Spoty.Rating WHERE IdLocation =" + req.params._id + ";", function (err) {
             if (err) {
                 next(err)
             }
@@ -73,10 +78,18 @@ router.get('/ratings/:_id', function (req, res, next) {
             if (!result) {
                 next(err)
             }
-            ratings.push(new Rating(result[0], result[1], new Date(result[2]), result[3], result[4]));
             connection.release();
             res.type('application/json');
-            res.send(rating);
+            for(var i=0;i<ratings.length;i++) {
+                var d = new Date(ratings[i].Date);
+                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() , "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
+            }
+            if(ret.length == 0 ){
+                res.sendStatus(204);
+            }
+            else {
+                res.send(ret);
+            }
         });
         connection.execSql(request);
     });
