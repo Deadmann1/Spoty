@@ -38,7 +38,8 @@ router.get('/ratings', function (req, res, next) {
             res.type('application/json');
             var ret = [];
             for(var i=0;i<ratings.length;i++) {
-                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  new Date(ratings[i].Date).toLocaleDateString(), "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
+                var d = new Date(ratings[i].Date);
+                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() , "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
             }
 
             res.send(ret);
