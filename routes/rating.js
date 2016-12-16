@@ -29,7 +29,7 @@ router.get('/ratings', function (req, res, next) {
                 }
             });
             console.log(result);
-            ratings.push(new Rating(result[0], result[1], result[2], result[3], new Date(result[4])));
+            ratings.push(new Rating(result[0], result[1], new Date(result[2]), result[3], result[4]));
             result = [];
         });
         request.on('doneInProc', function (rowCount, more, rows) {
@@ -67,7 +67,7 @@ router.get('/ratings/:_id', function (req, res, next) {
             if (!result) {
                 next(err)
             }
-            rating = new Rating(result[0], result[1], result[2], result[3], new Date(result[4]));
+           ratings.push(new Rating(result[0], result[1], new Date(result[2]), result[3], result[4]));
             connection.release();
             res.type('application/json');
             res.send(rating);
@@ -86,7 +86,7 @@ router.post('/ratings', function (req, res, next) {
         var date = new Date();
         var current_date = date.getDate();
         var rating = req.body;
-        request = new Request("INSERT Spoty.Rating (Grade, Feedback, IdUserAccount, IdLocation, Date) VALUES (@Grade, @Feedback, @IdUserAccount, @IdLocation,"+ current_date.toString() + ");", function (err) {
+        request = new Request("INSERT Spoty.Rating (Grade, Feedback, Date, IdUserAccount, IdLocation) VALUES (@Grade, @Feedback,"+ current_date.toString() + "@IdUserAccount, @IdLocation);", function (err) {
             if (err) {
                 next(err)
             }

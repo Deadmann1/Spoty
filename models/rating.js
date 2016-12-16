@@ -1,6 +1,6 @@
 var method = Rating.prototype;
 
-function Rating(Grade, Feedback, IdUserAccount, IdLocation, Date) {
+function Rating(Grade, Feedback,Date, IdUserAccount, IdLocation) {
     this.Grade = Grade;
     this.Feedback = Feedback;
     this.IdUserAccount = IdUserAccount;
