@@ -36,7 +36,12 @@ router.get('/ratings', function (req, res, next) {
             console.log(rowCount + ' rows returned');
             connection.release();
             res.type('application/json');
-            res.send(ratings);
+            var ret = [];
+            for(var i=0;i<ratings.length;i++) {
+                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  new Date(ratings[i].Date).toLocaleDateString(), "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
+            }
+
+            res.send(ret);
         });
         connection.execSql(request);
     });
@@ -67,7 +72,7 @@ router.get('/ratings/:_id', function (req, res, next) {
             if (!result) {
                 next(err)
             }
-           ratings.push(new Rating(result[0], result[1], new Date(result[2]), result[3], result[4]));
+            ratings.push(new Rating(result[0], result[1], new Date(result[2]), result[3], result[4]));
             connection.release();
             res.type('application/json');
             res.send(rating);
