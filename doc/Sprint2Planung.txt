@@ -16,12 +16,14 @@ Ziele:
  
   Administrive Applikation:
       ⦁	Berichte über Bewertungen/Aufrufe in der App
-        - Alle Bewertungen einer Location mit Diagramm
-        - Alle Bewertungen einer Location von bestimmten Zeitraum in CSV-/PDF - File speichern
-        - Alle Bewertungen einer Location von bestimmten Zeitraum in der Anwendung anzeigen
-        - Im Diagramm können einzelne Noten (Kreissegmente) ausgewählt werden und die dazugehörigen Bewertungen angezeigt werden
+        - Alle Bewertungen einer Location anzeigen (inkl. Anzeige in Diagramm)
+        - Alle Bewertungen einer Location in CSV-File speichern
+        - Alle Bewertungen einer Location von einem bestimmten Zeitraum in CSV-File speichern
+        - Alle Bewertungen einer Location von bestimmten Zeitraum anzeigen (inkl. Anzeige in Diagramm)
+        - Combobox mit Auswahl von einzelnen Noten, die ihnen zugehörigen Bewertungen werden dann in der Liste angezeigt (Diagramm soll
+          nicht aktualisiert werden).
       ⦁ Überarbeitung Interface-Design
-      ⦁ Hinzufügen neuer Geschäfte mit GeoDaten (evtl.) oder Adresse -> GeoDaten evtl. später (wenn benötigt wird)
+      ⦁ Hinzufügen neuer Geschäfte mit Adresse
       
       
       
