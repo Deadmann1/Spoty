@@ -98,4 +98,9 @@ public class UserAccountDatabase {
         
         return id;
     }
+    
+    public UserAccount getUserAccount(int idUserAccount)
+    {
+        return UserAccountService.getInstance().getUserAccount(idUserAccount);
+    }
 }

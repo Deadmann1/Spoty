@@ -1,5 +1,6 @@
 package spoty.desktop.app.UserInterface;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -72,6 +73,9 @@ public class MainGUIController {
     
     @FXML
     private Button btnDeleteLocation;
+    
+    @FXML
+    private Button btnRatings;
 
     @FXML
     private ListView<Location> listViewLocations;
@@ -161,6 +165,8 @@ public class MainGUIController {
         fillInformationData();
     }
     
+    
+    
     private void fillInformationData()
     {
         Location currentlySelectedLocation = listViewLocations.getSelectionModel().getSelectedItem();
@@ -182,5 +188,36 @@ public class MainGUIController {
         LocationType type = LocationDatabase.getInstance().getLocationType(currentlySelectedLocation.getIdType());
         lblLocationType.setText(type.getLocationtypename());
     }
+    
+    
+    
+    @FXML
+    void onAction_btnRatings(ActionEvent event) throws Exception
+    {
+        if (listViewLocations.getSelectionModel().getSelectedItem()!=null)
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/RatingGUI.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            RatingGUIController controller = fxmlLoader.<RatingGUIController>getController();
+            controller.setIdLocation(listViewLocations.getSelectionModel().getSelectedItem().getIdLocation());
 
+            Scene sceneTable = new Scene(root);
+            Stage stage = new Stage();     
+            stage.setScene(sceneTable);
+            stage.setTitle("Bewertungs-Statistik");
+            stage.setOnShown(new EventHandler<WindowEvent>() {
+              public void handle(WindowEvent we) {
+                 controller.fillRatings();
+                 
+              }
+            });  
+
+            stage.showAndWait();
+            fillListViewLocations();
+        }
+        
+        else
+            lblInfoMessageMainMenu.setText("Es muss ein Ort ausgewählt werden!");
+        
+    }
 }

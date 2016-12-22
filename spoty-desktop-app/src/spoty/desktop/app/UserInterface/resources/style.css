@@ -14,8 +14,13 @@
 
 .labelInfo{
     -fx-background-color: lightgreen;
+    -fx-text-fill: darkgreen !important;
 }
 
 .label{
     -fx-text-fill: whitesmoke;
+}
+
+.chart-legend-item{
+    -fx-text-fill: darkgreen;
 }
