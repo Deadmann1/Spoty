@@ -110,7 +110,7 @@ router.post('/ratings', function (req, res, next) {
         var date = new Date();
         var current_date = date.getDate();
         var rating = req.body;
-        request = new Request("INSERT Spoty.Rating (Grade, Feedback, Date, IdUserAccount, IdLocation) VALUES (@Grade, @Feedback,"+ current_date.toString() + "@IdUserAccount, @IdLocation);", function (err) {
+        request = new Request("INSERT Spoty.Rating (Grade, Feedback, Date, IdUserAccount, IdLocation) VALUES (@Grade, @Feedback,@Date, @IdUserAccount, @IdLocation);", function (err) {
             if (err) {
                 next(err)
             }
@@ -120,6 +120,7 @@ router.post('/ratings', function (req, res, next) {
         request.addParameter('Feedback', types.NVarChar,  rating.Feedback);
         request.addParameter('IdUserAccount', types.Int,  rating.IdUserAccount);
         request.addParameter('IdLocation', types.Int,  rating.IdLocation);
+        request.addParameter('Date', types.Date,  date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate());
         request.on('doneInProc', function (columns) {
             connection.release();
             res.send({message: 'Rating successfully added'});
