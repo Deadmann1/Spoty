@@ -228,12 +228,12 @@ namespace spoty.Services
                 request.RequestFormat = DataFormat.Json;
                 var jsonString =
                     JsonConvert.SerializeObject(new Rating(rbGradeNumStars, txtFeedbackText,
-                        Database.Instance.CurrentLocation.Id, Database.Instance.CurrentLocation.Id)).ToString();
+                        Database.Instance.CurrentUser.Id, Database.Instance.CurrentLocation.Id)).ToString();
                 request.AddBody(jsonString);
                 var restResponse = await myRestClient.ExecuteTaskAsync(request);
                 if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    throw new Exception();
+                    throw new Exception("Error message: " + restResponse.ErrorMessage + "  Response Content: " + restResponse.Content);
                 }
                 else
                 {
