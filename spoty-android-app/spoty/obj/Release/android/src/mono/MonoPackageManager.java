@@ -101,6 +101,10 @@ class MonoPackageManager_Resources {
 		"spoty.dll",
 		"Newtonsoft.Json.dll",
 		"RestSharp.dll",
+		"Xamarin.Android.Support.v4.dll",
+		"Xamarin.GooglePlayServices.Base.dll",
+		"Xamarin.GooglePlayServices.Basement.dll",
+		"Xamarin.GooglePlayServices.Maps.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

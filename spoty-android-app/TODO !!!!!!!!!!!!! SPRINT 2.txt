@@ -1,0 +1,8 @@
+Fix Rating : (Invert Stars e.g. 1 Start == Note 5 and 5 Starts = 1)
+Better Design ( Material Design in Colors of Daniels App, Align Location name Center, Align Stars Center, and so on)
+Fix Map
+Add Date to Ratings and sort by date
+Add Filter for Locations
+Add Map as tab next to list
+make list view standard
+locate all locs, if loca not vaild street then show error mark red or so, maybe show distance to loc in  list and sort ?

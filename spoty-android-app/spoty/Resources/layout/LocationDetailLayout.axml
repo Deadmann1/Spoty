@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -17,12 +17,19 @@
             android:weightSum="100">
             <TableRow
                 android:id="@+id/tableRowName"
-                android:layout_weight="15">
+                android:layout_weight="15"
+                android:layoutMode="clipBounds"
+                android:textAlignment="center"
+                android:layout_width="match_parent">
                 <TextView
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/textViewName"
-                    android:textSize="75px" />
+                    android:textSize="75px"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
             </TableRow>
             <TableRow
                 android:id="@+id/tableRowType"
@@ -72,6 +79,13 @@
                     android:id="@+id/textViewCountry" />
             </TableRow>
         </TableLayout>
+        <TextView
+            android:text="Ratings:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1"
+            android:textSize="72px" />
         <ListView
             android:minWidth="25px"
             android:minHeight="25px"
@@ -95,7 +109,9 @@
                 android:numStars="5"
                 android:rating="0"
                 android:stepSize="1"
-                android:isIndicator="false" />
+                android:isIndicator="false"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginLeft="125px" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
