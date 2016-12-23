@@ -48,7 +48,7 @@ namespace spoty
             else
             {
                 ShowAlertDialog("Info:",
-                    "GPS not enabled only approximate coordinates, reenter map with gps enabled to get bette results!", "OK");
+                    "GPS not enabled only approximate coordinates and no user location, reenter map with gps enabled to get better results and more features!", "OK");
             }
         }
 
