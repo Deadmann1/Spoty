@@ -20,6 +20,7 @@ Ziele:
         - Alle Bewertungen einer Location in CSV-File speichern
         - Alle Bewertungen einer Location von einem bestimmten Zeitraum in CSV-File speichern
         - Alle Bewertungen einer Location von bestimmten Zeitraum anzeigen (inkl. Anzeige in Diagramm)
+        - Alle Bewertungen einer bestimmten Note in CSV-File speichern
         - Combobox mit Auswahl von einzelnen Noten, die ihnen zugehörigen Bewertungen werden dann in der Liste angezeigt (Diagramm soll
           nicht aktualisiert werden).
       ⦁ Überarbeitung Interface-Design
