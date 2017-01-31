@@ -74,6 +74,47 @@ router.get('/counties/:_id', function (req, res, next) {
         connection.execSql(request);
     });
 });
+
+router.get('/counties/new/id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var result = [];
+        request = new Request("Select MAX(IdCounty) from Spoty.County;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.on('row', function (columns) {
+            columns.forEach(function (column) {
+                if (column.value === null) {
+                    result.push('NULL');
+                } else {
+                    result.push(column.value);
+                }
+
+            });
+            console.log(result);
+        });
+        request.on('doneInProc', function (rowCount, more, rows) {
+            console.log(rowCount + ' rows returned');
+            connection.release();
+            res.type('application/json');
+            var ret = [];
+            ret.push({"Id": result[0]+1});
+            if(ret.length == 0 ){
+                res.sendStatus(204);
+            }
+            else {
+                res.send(ret);
+            }
+        });
+        connection.execSql(request);
+    });
+});
+
 router.post('/counties', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
