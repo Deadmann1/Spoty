@@ -102,8 +102,8 @@ router.get('/locations/new/id', function (req, res, next) {
             console.log(rowCount + ' rows returned');
             connection.release();
             res.type('application/json');
-            var ret = [];
-            ret.push({"Id": result[0]+1});
+            var ret = "";
+            ret = {"Id": result[0]+1};
             if(ret.length == 0 ){
                 res.sendStatus(204);
             }
