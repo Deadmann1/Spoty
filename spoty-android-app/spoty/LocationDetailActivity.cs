@@ -33,7 +33,6 @@ namespace spoty
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LocationDetailLayout);
-            ActionBar.SetTitle(Resource.String.LocationDetailLayoutTitle);
             FindAllViewsById();
             SetEventHandlers();
             FillList();
@@ -72,7 +71,7 @@ namespace spoty
         {
             if (!String.IsNullOrEmpty(txtFeedback.Text))
             {
-                SpotyService.SendFeedback(rbGrade.NumStars, txtFeedback.Text);
+                SpotyService.SendFeedback(int.Parse(rbGrade.Rating.ToString()), txtFeedback.Text);
                 ShowAlertDialog("Success!", "You rated the location with: " + rbGrade.NumStars, "OK");
                 Finish();
             }

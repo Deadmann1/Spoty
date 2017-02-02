@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using RestSharp;
+using spoty.Data.Models;
 using Spoty.Data;
 using Spoty.Data.Models;
 
@@ -21,19 +22,15 @@ namespace spoty.Services
         private static string ServiceBaseUrl = "http://spotyweb-backend.azurewebsites.net/";
         private static string SpotyServiceUrl = ServiceBaseUrl + "/api";
 
-        public static bool Login(User user)
+        public static async Task<bool> Login(User user)
         {
             bool retVal = false;
-            if (user.Id != 1)
+            if (user.IdUserAccount != 1)
             {
-                /*
-                 * Proper User Login will be added in Sprint 2, meanwhile only the guest account is used, so we know the fixed id and everything means no need to even call the service
-                 * 
-                RestRequest request = new RestRequest("/auth", Method.POST);
+                RestRequest request = new RestRequest("/users", Method.GET);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddParameter("username", user.username, ParameterType.GetOrPost);
-                request.AddParameter("password", AuthHelper.GenerateHash(user.password, challenge), ParameterType.GetOrPost);
                 //Execute async for perfomance
+                RestClient myRestClient = new RestClient(SpotyServiceUrl);
                 var restResponse = await myRestClient.ExecuteTaskAsync(request);
                 if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
                 {
@@ -41,11 +38,12 @@ namespace spoty.Services
                 }
                 else
                 {
-                    var d = JsonConvert.DeserializeObject<TokenResponse>(restResponse.Content);
-                    return d.token;
+                    List<User> users = JsonConvert.DeserializeObject<List<User>>(restResponse.Content);
+                    if (users.Contains(user))
+                    {
+                        retVal = true;
+                    }
                 }
-                retVal = ...
-                */
             }
             else
             {
@@ -60,6 +58,7 @@ namespace spoty.Services
             try
             {
                 await GetAddresses();
+                await GetLocationTypes();
                 RestClient myRestClient = new RestClient(SpotyServiceUrl);
                 RestRequest request = new RestRequest("/locations", Method.GET);
                 //Execute async for perfomance
@@ -74,6 +73,7 @@ namespace spoty.Services
                     foreach (Location l in list)
                     {
                         l.Address = Database.Instance.Addresses.Find(x => x.Id == l.IdAddress);
+                        l.Type = Database.Instance.LocationTypes.Find(x => x.IdLocationType == l.IdType).LocationTypeName;
                     }
                     Database.Instance.Locations = list;
                 }
@@ -217,19 +217,62 @@ namespace spoty.Services
             }
         }
 
+        private static async Task GetLocationTypes()
+        {
+
+            try
+            {
+                await GetCounties();
+                RestClient myRestClient = new RestClient(SpotyServiceUrl);
+                RestRequest request = new RestRequest("/locationTypes", Method.GET);
+                //Execute async for perfomance
+                var restResponse = await myRestClient.ExecuteTaskAsync(request);
+                if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    List<LocationType> list = JsonConvert.DeserializeObject<List<LocationType>>(restResponse.Content);
+                    Database.Instance.LocationTypes = list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public static async void SendFeedback(int rbGradeNumStars, string txtFeedbackText)
         {
             try
             {
+                int rating = 0;
+                switch (rbGradeNumStars)
+                {
+                    case 1:
+                        rating = 5;
+                        break;
+                    case 2:
+                        rating = 4;
+                        break;
+                    case 3:
+                        rating = 3;
+                        break;
+                    case 4:
+                        rating = 2;
+                        break;
+                    case 5:
+                        rating = 1;
+                        break;
+                }
+
                 RestClient myRestClient = new RestClient(SpotyServiceUrl);
                 RestRequest request = new RestRequest("/ratings", Method.POST);
                 //Execute async for perfomance
                 request.AddHeader("Content-Type", "application/json");
                 request.RequestFormat = DataFormat.Json;
-                var jsonString =
-                    JsonConvert.SerializeObject(new Rating(rbGradeNumStars, txtFeedbackText,
-                        Database.Instance.CurrentUser.Id, Database.Instance.CurrentLocation.Id)).ToString();
-                request.AddBody(jsonString);
+                request.AddBody(new Rating(rating, txtFeedbackText, Database.Instance.CurrentUser.IdUserAccount, Database.Instance.CurrentLocation.Id));
                 var restResponse = await myRestClient.ExecuteTaskAsync(request);
                 if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
                 {

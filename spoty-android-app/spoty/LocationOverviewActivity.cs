@@ -23,10 +23,41 @@ namespace spoty
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LocationOverviewLayout);
-            ActionBar.SetTitle(Resource.String.LocationOverviewLayoutTitle);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar1);
+            SetActionBar(toolbar);
+            ActionBar.Title = "Location Overview";
             FindAllViewsById();
             SetEventHandlers();
             FillList();
+            Database.Instance.lvLocationOverview = listLocations;
+        }
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.top_menus, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+
+            if (Database.Instance.Locations != null)
+            {
+                if (item.TitleFormatted.ToString() == "Set Filter")
+                {
+                    var activity = new Intent(this, typeof(LocationFilterActivity));
+                    StartActivity(activity);
+                }
+                else
+                {
+                    var activity = new Intent(this, typeof(LocationMapActivity));
+                    StartActivity(activity);
+                }
+            }
+            else
+            {
+                ShowAlertDialog("Error!", "Please wait for locations to load before selecting an action!", "OK");
+            }
+
+            return base.OnOptionsItemSelected(item);
         }
 
         private async Task GetRatings()
@@ -37,7 +68,7 @@ namespace spoty
         private async Task FillList()
         {
             await SpotyService.GetLocations();
-            ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(this,Android.Resource.Layout.SimpleListItem1, Database.Instance.Locations);
+            ArrayAdapter<Location> adapter = new ArrayAdapter<Location>(this, Android.Resource.Layout.SimpleListItem1, Database.Instance.Locations);
             listLocations.Adapter = adapter;
         }
 
@@ -62,6 +93,15 @@ namespace spoty
         public override void OnBackPressed()
         {
             Finish();
+        }
+        private void ShowAlertDialog(string title, string message, string posBtnMsg)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.SetTitle(title);
+            builder.SetMessage(message);
+            builder.SetCancelable(false);
+            builder.SetPositiveButton(posBtnMsg, delegate { });
+            builder.Show();
         }
     }
 }

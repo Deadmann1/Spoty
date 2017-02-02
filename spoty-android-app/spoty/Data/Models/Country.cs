@@ -15,5 +15,10 @@ namespace Spoty.Data.Models
             this.Id = id;
             this.Name = name;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

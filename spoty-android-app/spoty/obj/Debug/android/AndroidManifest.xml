@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="spoty.spoty" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
   <!--suppress UsesMinSdkAttributes-->
-  <uses-sdk android:minSdkVersion="16" />
+  <uses-sdk android:minSdkVersion="21" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <application android:label="spoty" android:icon="@drawable/icon" android:name="android.app.Application" android:allowBackup="true" android:debuggable="true">
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+  <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+  <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+  <uses-permission android:name="spoty.spoty.permission.MAPS_RECEIVE" />
+  <permission android:name="spoty.spoty.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
+  <application android:label="spoty" android:icon="@drawable/icon" android:theme="@style/Theme.Custom1" android:name="android.app.Application" android:allowBackup="true" android:debuggable="true">
+    <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyC3KWWPnP_U9p6GEjFBB_wW9GElUPf9lvE" />
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <activity android:label="LocationFilterActivity" android:name="md5a548d3f8213edc2522f6f3dca9217284.LocationFilterActivity" />
     <activity android:label="LocationDetailActivity" android:name="md5a548d3f8213edc2522f6f3dca9217284.LocationDetailActivity" />
+    <activity android:label="LocationMapActivity" android:name="md5a548d3f8213edc2522f6f3dca9217284.LocationMapActivity" />
     <activity android:name="md5a548d3f8213edc2522f6f3dca9217284.LocationOverviewActivity" />
     <activity android:icon="@drawable/logo" android:name="md5a548d3f8213edc2522f6f3dca9217284.LoginActivity">
       <intent-filter>

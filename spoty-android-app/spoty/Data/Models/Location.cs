@@ -16,6 +16,8 @@ namespace Spoty.Data.Models
         [JsonProperty("IdAddress")]
         public int IdAddress { get; set; }
         public Address Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         public Location(int id, string name, int idAddress, int idType)
         {

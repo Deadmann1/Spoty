@@ -20,5 +20,10 @@ namespace Spoty.Data.Models
             this.Name = cityName;
             this.IdCounty = idCounty;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

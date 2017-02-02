@@ -8,6 +8,10 @@ C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Releas
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.Xml.Linq.dll
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Newtonsoft.Json.dll
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\RestSharp.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Xamarin.Android.Support.v4.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Xamarin.GooglePlayServices.Base.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Xamarin.GooglePlayServices.Basement.dll
+C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Xamarin.GooglePlayServices.Maps.dll
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.Runtime.Serialization.dll
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\System.ServiceModel.Internals.dll
 C:\Users\Manuel Sammer\Documents\GitHub\Spoty\spoty-android-app\spoty\obj\Release\android\assets\Microsoft.CSharp.dll

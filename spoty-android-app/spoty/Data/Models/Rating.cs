@@ -9,15 +9,15 @@ namespace Spoty.Data.Models
         [JsonProperty("Feedback")]
         public string Feedback { get; }
         [JsonProperty("IdUserAccount")]
-        public int IdUser { get; }
+        public int IdUserAccount { get; }
         [JsonProperty("IdLocation")]
         public int IdLocation { get; }
 
-        public Rating(int grade, string feedback, int idUser, int idLocation)
+        public Rating(int grade, string feedback, int idUserAccount, int idLocation)
         {
             this.Grade = grade;
             this.Feedback = feedback;
-            this.IdUser = idUser;
+            this.IdUserAccount = idUserAccount;
             this.IdLocation = idLocation;
         }
 

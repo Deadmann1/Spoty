@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -41,22 +41,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonLogin"
-            android:enabled="false" />
+            android:theme="@style/AccentButton" />
         <Button
             android:text="Login as Guest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonLoginGuest" />
+            android:id="@+id/buttonLoginGuest"
+            android:theme="@style/AccentButton" />
         <Button
             android:text="Logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonLogout"
-            android:enabled="false" />
+            android:enabled="false"
+            android:theme="@style/AccentButton" />
         <Button
             android:text="Exit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonExit" />
+            android:id="@+id/buttonExit"
+            android:theme="@style/AccentButton" />
     </LinearLayout>
 </LinearLayout>

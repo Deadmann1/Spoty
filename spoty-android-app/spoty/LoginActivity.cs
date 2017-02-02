@@ -23,7 +23,6 @@ namespace spoty
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LoginLayout);
-            this.ActionBar.SetTitle(Resource.String.LoginLayoutTitle);
             FindAllViewsById();
             SetEventHandlers();
         }
@@ -50,6 +49,7 @@ namespace spoty
         {
             btnLogout.Enabled = false;
             Database.Instance.CurrentUser = null;
+            btnLogin.Enabled = true;
             btnLoginGuest.Enabled = true;
         }
 
@@ -58,12 +58,38 @@ namespace spoty
             Process.KillProcess(Process.MyPid());
         }
 
-        private void BtnLoginGuestOnClick(object sender, EventArgs eventArgs)
+        private async void BtnLoginGuestOnClick(object sender, EventArgs eventArgs)
         {
             try
             {
-                if (SpotyService.Login(new User(1, "guest", "guest"))) // with await asynchronous methods calling in sprint 2 when we call the auth/login service
+                if (await SpotyService.Login(new User(1, "guest", "guest"))) // with await asynchronous methods calling in sprint 2 when we call the auth/login service
                 {
+                    btnLoginGuest.Enabled = false;
+                    btnLogin.Enabled = false;
+                    btnLogout.Enabled = true;
+                    var activity = new Intent(this, typeof(LocationOverviewActivity));
+                    StartActivity(activity);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch (Exception)
+            {
+                ShowAlertDialog("Error!", "Login was unsuccessful!", "OK");
+            }
+        }
+
+        private async void BtnLogin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (await SpotyService.Login(new User(-1, txtUsername.Text, txtPassword.Text)))
+                    // with await asynchronous methods calling in sprint 2 when we call the auth/login service
+                {
+                    btnLogin.Enabled = false;
                     btnLoginGuest.Enabled = false;
                     btnLogout.Enabled = true;
                     var activity = new Intent(this, typeof(LocationOverviewActivity));
@@ -73,44 +99,17 @@ namespace spoty
                 {
                     throw new Exception();
                 }
-                
+
             }
             catch (Exception)
             {
                 ShowAlertDialog("Error!", "Login was unsuccessful!", "OK");
             }
-        }
-
-        private void BtnLogin_Click(object sender, EventArgs e)
-        {
-            ShowAlertDialog("Alert!", "Currently there's only support for guests! \n Use the button below to log in as a guest.", "OK");
-            /*
-             * 
-             * Login with as registered User will be included in Sprint 2, as well as a secure connection to the Service and the the possiblity to register as a new user !
-             * 
-            btnLogin.Enabled = false;
-            btnLoginCancle.Enabled = false;
-            if (String.IsNullOrEmpty(txtPassword.Text) || String.IsNullOrEmpty(txtUsername.Text))
+            finally
             {
-                ShowAlertDialog("Error", "Please enter username and password!", "OK");
-                btnLogin.Enabled = true;
-                btnLoginCancle.Enabled = true;
+                txtPassword.Text = "";
+                txtUsername.Text = "";
             }
-            else
-            {
-                /*User user = new User(txtUsername.Text, txtPassword.Text);
-                if (await uGuideService.Instance.Login(user))
-                {
-                    ScanCode();
-                }
-                else
-                {
-                    ShowAlertDialog("Error", "Login was unsuccessful!", "OK");
-                    btnLogin.Enabled = true;
-                    btnLoginCancle.Enabled = true;
-                }
-            }
-            */
         }
 
         private void ShowAlertDialog(string title, string message, string posBtnMsg)

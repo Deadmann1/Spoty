@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Android.Widget;
+using spoty.Data.Models;
 using Spoty.Data.Models;
 
 namespace Spoty.Data
@@ -17,10 +20,17 @@ namespace Spoty.Data
         public List<County> Counties { get; set; }
         public List<Country> Countries { get; set; }
         public List<Rating> Ratings { get; set; }
+        public List<LocationType> LocationTypes { get; set; }
+        public ListView lvLocationOverview { get; set; }
 
 
         private Database() { }
 
         public static Database Instance => instance ?? (instance = new Database());
+
+        internal void GetLocationFromName(string title)
+        {
+            CurrentLocation =  Locations.Find(x => x.Name == title);
+        }
     }
 }
