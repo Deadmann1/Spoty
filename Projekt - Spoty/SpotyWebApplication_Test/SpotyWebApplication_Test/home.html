@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="CSS/ScrollTable.css" />
+</head>
+<body ng-controller="HomeController">
+    <div id="HomeContainer">
+        <div id="divFilter">
+            <h1>Location Filter</h1>
+            <label id="lblSuchen">Suchen: <input class="txtInput" type="text" ng-model="search.$"></label><br /><br />
+            <label for="Filter für Land">
+                Filter für Country: <br /><select name="repeatSelect" ng-model="search.LocationCountry">
+                    <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationCountry' ">{{Location.LocationCountry}}</option>
+                </select>
+            </label><br />
+            <label for="Filter für County">
+                Filter für Bundesland: <br /><select name="repeatSelect" ng-model="search.LocationCounty">
+                    <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationCounty' ">{{Location.LocationCounty}}</option>
+                </select>
+            </label><br />
+            <label for="Filter für City">
+                Filter für City: <br /><select name="repeatSelect" ng-model="search.LocationCity">
+                    <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationCity' ">{{Location.LocationCity}}</option>
+                </select>
+            </label><br />
+            <label for="Filter für Address">
+                Filter für Address: <br /><select name="repeatSelect" ng-model="search.LocationAddress">
+                    <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationAddress' ">{{Location.LocationAddress}}</option>
+                </select>
+            </label><br />
+            <label for="Filter für LocationName">
+                Filter für LocationName: <br /><select name="repeatSelect" ng-model="search.LocationName">
+                    <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationName' ">{{Location.LocationName}}</option>
+                </select>
+            </label><br />
+            <label for="Filter für LocationType">
+                Filter für LocationType: <br /><select name="repeatSelect" ng-model="search.LocationType">
+                    <option name="selectedLocation" ng-repeat="Location in Locations | unique:'LocationType' ">{{Location.LocationType}}</option>
+                </select>
+            </label><br />
+            <br />
+            <button id="btnResetFilter" class="btn btn-primary active" value="No Filter" ng-click="removeSelection()">Reset Filter</button>
+        </div>
+        <div id="divLocations">
+            <table class="tblLocationTable">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>County</th>
+                        <th>City</th>
+                        <th>Address</th>
+                        <th>LocationName</th>
+                        <th>LocationType</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-click="locationSelected($index)" ng-repeat="Location in Locations | filter:search.$ | filter:search.LocationCountry | filter:search.LocationCounty | filter:search.LocationCity | filter:search.LocationAddress  | filter:search.LocationName  | filter:search.LocationType">
+                        <td>{{Location.LocationCountry}}</td>
+                        <td>{{Location.LocationCounty}}</td>
+                        <td>{{Location.LocationCity}}</td>
+                        <td>{{Location.LocationAddress}}</td>
+                        <td ng-model="Locations[$index]">{{Location.LocationName}}</td>
+                        <td>{{Location.LocationType}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p id="LocationNotFound" ng-model="locationNotFound"> {{locationNotFound}}</p>
+        </div>
+        <div id="divRatings">
+            <table id="RatingTable" class="tblRatingTable">
+                <thead>
+                    <tr>
+                        <th>Feedback</th>
+                        <th>Date</th>
+                        <th>Ratings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="rating in Ratings">
+                        <td>{{rating.Feedback}}</td>
+                        <td>{{rating.Date}}</td>
+                        <td id="tdStars">
+                            <div star-rating rating="rating.Grade" read-only="true" mouse-hover="mouseStarHover(param)" mouse-leave="mouseStarLeave(param)" ng-init='onWindowLoad()'></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="addNewRating">
+            <h1>New Rating</h1>
+            <p id="feedback">Feedback</p>
+            <input id="txtFeedback" type="text" value="" />
+            <p id="rating">Rating</p>
+            <div ng-model="addStarRating" star-rating rating="rating.Grade" mouse-hover="mouseStarHover(param)" mouse-leave="mouseStarLeave(param)"></div>
+            <input id="btnAddRating"type="button" value="Add new Rating" ng-click="btnAddRating()" class="btn btn-primary disabled"/><br />
+            <label id="ratingAddInformation" ng-model="addStarRatingLabel">{{addStarRatingLabel}}</label>
+        </div>
+        <div my-map="">
+        </div>
+    </div>
+</body>
+</html>

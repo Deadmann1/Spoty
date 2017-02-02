@@ -1,0 +1,59 @@
+﻿
+.header-fixed th {
+		border:3px double #909090;
+		background-color:darkgray;
+	}
+   .header-fixed tr 
+    {
+        color:black;
+        background:white;
+    }
+	.header-fixed td {
+		border:3px double #909090;
+	}
+
+    .header-fixed tr:hover
+    {
+        color:white;
+        background-color:darkgrey;
+    }
+
+.header-fixed 
+{
+    width:100%;
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td 
+{
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after 
+{
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 150px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th 
+{
+    float: left;
+}
+
+#RatingTable 
+{
+    width:100%;
+}
