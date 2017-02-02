@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.UserAccountDatabase;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +46,9 @@ public class LoginGUIController {
 
     @FXML
     private TextField txtUsername;
+    
+    @FXML
+    private ImageView imageViewLogo;
 
 
     @FXML

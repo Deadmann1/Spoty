@@ -5,7 +5,12 @@
 .button {
   -fx-background-color: lightgreen;
   -fx-text-fill: black;
-  -fx-background-radius: 16px;
+  -fx-background-radius: 8px
+}
+
+.button:pressed {
+    -fx-background-color: #187a2c;
+    -fx-text-fill: whitesmoke;
 }
 
 .list-cell{
@@ -15,6 +20,7 @@
 .labelInfo{
     -fx-background-color: lightgreen;
     -fx-text-fill: darkgreen !important;
+    -fx-background-radius: 4px
 }
 
 .label{
