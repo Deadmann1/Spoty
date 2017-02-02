@@ -39,7 +39,11 @@ router.get('/ratings', function (req, res, next) {
             var ret = [];
             for(var i=0;i<ratings.length;i++) {
                 var d = new Date(ratings[i].Date);
-                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() , "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
+                var month = d.getMonth();
+                if(month == 0) {
+                    month = 1;
+                }
+                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  d.getFullYear() + "-" + month + "-" + d.getDate() , "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
             }
             if(ret.length == 0 ){
                 res.sendStatus(204);
@@ -86,7 +90,11 @@ router.get('/ratings/:_id', function (req, res, next) {
             var ret = [];
             for(var i=0;i<ratings.length;i++) {
                 var d = new Date(ratings[i].Date);
-                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() , "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
+                var month = d.getMonth();
+                if(month == 0) {
+                    month = 1;
+                }
+                ret.push({"Grade": ratings[i].Grade, "Feedback":ratings[i].Feedback, "Date":  d.getFullYear() + "-" + month + "-" + d.getDate() , "IdUserAccount":ratings[i].IdUserAccount, "IdLocation":ratings[i].IdLocation});
             }
             if(ret.length == 0 ){
                 res.sendStatus(204);
@@ -98,7 +106,6 @@ router.get('/ratings/:_id', function (req, res, next) {
          connection.execSql(request);
     });
 });
-
 
 router.post('/ratings', function (req, res, next) {
     pool.acquire(function (err, connection) {
