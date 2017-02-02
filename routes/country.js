@@ -82,7 +82,7 @@ router.get('/countries/new/id', function (req, res, next) {
             return;
         }
         var result = [];
-        request = new Request("Select MAX(IdCountry) from Spoty.Country;", function (err) {
+        request = new Request("Select ISNULL(MAX(IdCountry),0) from Spoty.Country;", function (err) {
             if (err) {
                 next(err)
             }

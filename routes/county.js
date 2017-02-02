@@ -82,7 +82,7 @@ router.get('/counties/new/id', function (req, res, next) {
             return;
         }
         var result = [];
-        request = new Request("Select MAX(IdCounty) from Spoty.County;", function (err) {
+        request = new Request("Select ISNULL(MAX(IdCounty),0) from Spoty.County;", function (err) {
             if (err) {
                 next(err)
             }

@@ -82,7 +82,7 @@ router.get('/locationTypes/new/id', function (req, res, next) {
             return;
         }
         var result = [];
-        request = new Request("Select MAX(IdLocationType) from Spoty.LocationType;", function (err) {
+        request = new Request("Select ISNULL(MAX(IdLocationType),0) from Spoty.LocationType;", function (err) {
             if (err) {
                 next(err)
             }
