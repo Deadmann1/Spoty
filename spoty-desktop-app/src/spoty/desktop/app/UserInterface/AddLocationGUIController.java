@@ -149,19 +149,32 @@ public class AddLocationGUIController {
     {
         if(cmbCity.getSelectionModel().getSelectedItem()!=null && cmbLocationtype.getSelectionModel().getSelectedItem()!=null && txtLocationname.getText().compareTo("")!=0 && txtHousenumber.getText().compareTo("")!=0 && txtStreetname.getText().compareTo("")!=0)
         {
-            int id_selectedType = cmbLocationtype.getSelectionModel().getSelectedItem().getIdType();
-            //int id_selectedCountry = cmbCountry.getSelectionModel().getSelectedItem().getIdCountry();
-            //int id_selectedCounty = cmbCounty.getSelectionModel().getSelectedItem().getIdCounty();
-            int id_selectedCity = cmbCity.getSelectionModel().getSelectedItem().getIdCity();
-
-            Address newAddress = new Address(AddressDatabase.getInstance().getNewAddressID(), id_selectedCity,  txtStreetname.getText(), Integer.parseInt(txtHousenumber.getText()));
-            Location newLocation = new Location(LocationDatabase.getInstance().getNewLocationID(), txtLocationname.getText(), id_selectedType, newAddress.getIdAddress());
-
-            AddressDatabase.getInstance().addAddress(newAddress);
-            LocationDatabase.getInstance().addLocation(newLocation);
+            int housenumber = -1;
             
-            Stage stage = (Stage) btnAddLocation.getScene().getWindow();
-            stage.close();
+            try{
+                housenumber = Integer.parseInt(txtHousenumber.getText());
+            }
+            catch(Exception e)
+            {
+                lblInfoMessageAddLocation.setText("Hausnummer muss eine Zahl sein!");
+            }
+            
+            if (housenumber != -1)
+            {
+                int id_selectedType = cmbLocationtype.getSelectionModel().getSelectedItem().getIdType();
+                //int id_selectedCountry = cmbCountry.getSelectionModel().getSelectedItem().getIdCountry();
+                //int id_selectedCounty = cmbCounty.getSelectionModel().getSelectedItem().getIdCounty();
+                int id_selectedCity = cmbCity.getSelectionModel().getSelectedItem().getIdCity();
+
+                Address newAddress = new Address(AddressDatabase.getInstance().getNewAddressID(), id_selectedCity,  txtStreetname.getText(), Integer.parseInt(txtHousenumber.getText()));
+                Location newLocation = new Location(LocationDatabase.getInstance().getNewLocationID(), txtLocationname.getText(), id_selectedType, newAddress.getIdAddress());
+
+                AddressDatabase.getInstance().addAddress(newAddress);
+                LocationDatabase.getInstance().addLocation(newLocation);
+
+                Stage stage = (Stage) btnAddLocation.getScene().getWindow();
+                stage.close();
+            }
         }
         
         else 

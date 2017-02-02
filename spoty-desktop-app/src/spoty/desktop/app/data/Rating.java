@@ -35,7 +35,7 @@ public class Rating {
     public Rating(int grade, String feedback, String rDate, int IdUserAccount, int IdLocation) throws ParseException {
         this.grade = grade;
         this.feedback = feedback;
-        setRatingDate(rDate);
+        this.setRatingDate(rDate);
         this.IdUserAccount = IdUserAccount; 
     }
 

@@ -20,10 +20,6 @@ import spoty.desktop.app.data.Rating;
  */
 public class RatingDatabase {
     private static RatingDatabase db = null;
-	
-        
-        
-    public static Vector<Rating>vecRatings = new Vector<Rating>();
 
     private RatingDatabase() {
     }

@@ -16,6 +16,8 @@ import spoty.desktop.app.data.Address;
 import spoty.desktop.app.data.City;
 import spoty.desktop.app.data.Country;
 import spoty.desktop.app.data.County;
+import spoty.desktop.app.data.Constants;
+import spoty.desktop.app.data.IdWrapper;
 
 /**
  *
@@ -23,10 +25,11 @@ import spoty.desktop.app.data.County;
  */
 public class AddressService {
     private static AddressService s = null;
-    private static String url= "http://spotyweb-backend.azurewebsites.net";//"http://localhost:3000"; // // //"http://spotyweb-backend.azurewebsites.net";
+    private static String url;
     
     private AddressService() {
-	}
+        this.url = Constants.getInstance().getUrl();
+    }
 
     public static AddressService getInstance() {
             if (s == null) {
@@ -177,7 +180,6 @@ public class AddressService {
         
         Vector<City> vec = gson.fromJson(s, new TypeToken<Vector<City>>(){}.getType());
         return vec;
-        //return gson.fromJson(s, new TypeToken<Vector<City>>(){}.getType()); 
     }
     
     public City getCity(int idCity)
@@ -202,5 +204,57 @@ public class AddressService {
 
         Gson gson = new Gson();
         service.header("Content-Type", "application/json").post(String.class, gson.toJson(newCity, City.class));
+    }
+
+    public int getNewAddressID() {
+        Client client = Client.create();
+           
+        WebResource service;
+        service = client.resource(UriBuilder.fromUri(url + "/api/addresses/new/id").build());
+
+        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        Gson gson = new Gson();
+        IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
+        
+        return idWrapperObject.getId();
+    }
+
+    public int getNewCountryID() {
+        Client client = Client.create();
+           
+        WebResource service;
+        service = client.resource(UriBuilder.fromUri(url + "/api/countries/new/id").build());
+
+        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        Gson gson = new Gson();
+        IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
+        
+        return idWrapperObject.getId();
+    }
+
+    public int getNewCountyID() {
+        Client client = Client.create();
+           
+        WebResource service;
+        service = client.resource(UriBuilder.fromUri(url + "/api/counties/new/id").build());
+
+        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        Gson gson = new Gson();
+        IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
+        
+        return idWrapperObject.getId();
+    }
+
+    public int getNewCityID() {
+         Client client = Client.create();
+           
+        WebResource service;
+        service = client.resource(UriBuilder.fromUri(url + "/api/cities/new/id").build());
+
+        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        Gson gson = new Gson();
+        IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
+        
+        return idWrapperObject.getId();
     }
 }

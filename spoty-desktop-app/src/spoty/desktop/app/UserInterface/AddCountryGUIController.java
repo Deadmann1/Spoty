@@ -39,6 +39,7 @@ public class AddCountryGUIController {
         if (txtCountryname.getText().compareTo("")!=0)
         {
             int idCountry = AddressDatabase.getInstance().getNewCountryID();
+            System.out.println("IDCountry: " + idCountry);
             Country newCountry = new Country(idCountry, txtCountryname.getText());
             AddressDatabase.getInstance().addCountry(newCountry);
             

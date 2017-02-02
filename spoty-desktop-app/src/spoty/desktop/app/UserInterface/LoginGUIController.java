@@ -83,7 +83,6 @@ public class LoginGUIController {
         assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginGUI.fxml'.";
         assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'LoginGUI.fxml'.";
 
-        UserAccountDatabase.getInstance().generateTestUserAccounts();
         lblInfoMessageLogin.getStyleClass().add("labelInfo");
         paneLoginGUI.getStyleClass().add("pane");
     }

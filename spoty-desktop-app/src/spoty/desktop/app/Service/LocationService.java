@@ -9,11 +9,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import java.lang.reflect.Array;
 import java.util.Vector;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.LocationType;
+import spoty.desktop.app.data.Constants;
+import spoty.desktop.app.data.IdWrapper;
 
 /**
  *
@@ -22,10 +25,11 @@ import spoty.desktop.app.data.LocationType;
 public class LocationService {
     
     private static LocationService s = null;
-    private static String url = "http://spotyweb-backend.azurewebsites.net"; //"http://localhost:3000";///"http://localhost:3000";   //
+    private static String url;
     
     private LocationService() {
-	}
+        this.url = Constants.getInstance().getUrl();
+    }
 
     public static LocationService getInstance() {
             if (s == null) {
@@ -60,6 +64,20 @@ public class LocationService {
         
         Gson gson = new Gson();
         return gson.fromJson(s, Location.class); 
+    }
+    
+    public int getNewLocationID()
+    {
+        Client client = Client.create();
+           
+        WebResource service;
+        service = client.resource(UriBuilder.fromUri(url + "/api/locations/new/id").build());
+
+        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        Gson gson = new Gson();
+        IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
+        
+        return idWrapperObject.getId();
     }
     
     public void postLocation(Location newLocation)
@@ -126,6 +144,19 @@ public class LocationService {
         return gson.fromJson(s, LocationType.class); 
     }
     
+    public int getNewLocationTypeID() {
+       Client client = Client.create();
+           
+        WebResource service;
+        service = client.resource(UriBuilder.fromUri(url + "/api/locationTypes/new/id").build());
+
+        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        Gson gson = new Gson();
+        IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
+        
+        return idWrapperObject.getId();
+    }
+    
     public void postLocationType(LocationType newLocationType)
     {
         Client client = Client.create();
@@ -136,4 +167,6 @@ public class LocationService {
         Gson gson = new Gson();
         service.header("Content-Type", "application/json").post(String.class, gson.toJson(newLocationType, LocationType.class));
     }
+
+    
 }

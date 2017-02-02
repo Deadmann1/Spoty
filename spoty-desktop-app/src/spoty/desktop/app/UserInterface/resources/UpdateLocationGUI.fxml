@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="paneUpdateLocationGUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.UpdateLocationGUIController">
+<AnchorPane id="AnchorPane" fx:id="paneUpdateLocationGUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.UpdateLocationGUIController">
   <children>
     <Label layoutX="66.0" layoutY="14.0" text="Adresse:" />
-    <GridPane layoutX="67.0" layoutY="63.0" prefWidth="441.0">
+    <GridPane layoutX="67.0" layoutY="71.0" prefHeight="219.0" prefWidth="441.0">
       <children>
         <Label text="Stadt:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <ComboBox fx:id="cmbCity" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -38,6 +38,13 @@
         <Button id="btnAddCounty" mnemonicParsing="false" onAction="#onAction_btnAddCounty" text="Land hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <TextField fx:id="txtStreet" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <TextField id="txtHouseNumber" fx:id="txtHousenumber" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <ComboBox fx:id="cmbLocationtype" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+          <items>
+            <FXCollections fx:factory="observableArrayList" />
+          </items>
+        </ComboBox>
+        <Label text="Typ:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Button id="btnAddLocationtype" mnemonicParsing="false" onAction="#onAction_btnAddLocationtype" prefWidth="137.99990000000253" text="Typ hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="119.0" />
@@ -53,17 +60,10 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Label layoutX="66.0" layoutY="246.0" text="Typ:" />
-    <ComboBox fx:id="cmbLocationtype" layoutX="192.0" layoutY="243.0" prefWidth="166.0">
-      <items>
-        <FXCollections fx:factory="observableArrayList" />
-      </items>
-    </ComboBox>
-    <Button id="btnAddLocationtype" layoutX="370.0" layoutY="243.0" mnemonicParsing="false" onAction="#onAction_btnAddLocationtype" prefWidth="137.99990000000253" text="Typ hinzufügen" />
-    <Button fx:id="btnUpdateLocation" layoutX="370.0" layoutY="289.0" mnemonicParsing="false" onAction="#onAction_btnUpdateLocation" text="Location ändern" />
+    <Button fx:id="btnUpdateLocation" layoutX="371.0" layoutY="335.0" mnemonicParsing="false" onAction="#onAction_btnUpdateLocation" text="Location ändern" />
     <Label layoutX="67.0" layoutY="43.0" text="Name:" />
     <TextField fx:id="txtLocationname" layoutX="200.0" layoutY="37.0" prefWidth="200.0" />
-    <Label fx:id="lblInfoMessageUpdateLocation" layoutX="67.0" layoutY="327.0" prefWidth="441.0" text="..." />
+    <Label fx:id="lblInfoMessageUpdateLocation" layoutX="64.0" layoutY="378.0" prefWidth="440.9999000000025" text="..." />
   </children>
   <stylesheets>
     <URL value="@style.css" />

@@ -6,6 +6,8 @@
 package spoty.desktop.app.data;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Objects;
+import spoty.desktop.app.Database.UserAccountDatabase;
 
 /**
  *
@@ -36,6 +38,10 @@ public class UserAccount {
         this.lastname = lastname;
         this.birthdate = birthdate;
         this.idAccountType = idAccountType;
+    }
+
+    public UserAccount(String username) {
+        this.username = username;
     }
 
     
@@ -96,6 +102,37 @@ public class UserAccount {
     public void setIdAccountType(int idAccountType) {
         this.idAccountType = idAccountType;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserAccount other = (UserAccount) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccount{" + "idUserAccount=" + idUserAccount + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", birthdate=" + birthdate + ", idAccountType=" + idAccountType + '}';
+    }
+    
+    
     
     
 }

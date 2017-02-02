@@ -132,20 +132,33 @@ public class UpdateLocationGUIController {
     void onAction_btnUpdateLocation(ActionEvent event) throws Exception {
         if(cmbCity.getSelectionModel().getSelectedItem()!=null && cmbLocationtype.getSelectionModel().getSelectedItem()!=null && txtLocationname.getText().compareTo("")!=0 && txtHousenumber.getText().compareTo("")!=0 && txtStreet.getText().compareTo("")!=0)
         {
-            int id_selectedType = cmbLocationtype.getSelectionModel().getSelectedItem().getIdType();
-            //int id_selectedCountry = cmbCountry.getSelectionModel().getSelectedItem().getIdCountry();
-            //int id_selectedCounty = cmbCounty.getSelectionModel().getSelectedItem().getIdCounty();
-            int id_selectedCity = cmbCity.getSelectionModel().getSelectedItem().getIdCity();
+            int housenumber = -1;
+            
+            try{
+                housenumber = Integer.parseInt(txtHousenumber.getText());
+            }
+            catch(Exception e)
+            {
+                lblInfoMessageUpdateLocation.setText("Hausnummer muss eine Zahl sein!");
+            }
+            
+            if (housenumber != -1)
+            {
+                int id_selectedType = cmbLocationtype.getSelectionModel().getSelectedItem().getIdType();
+                //int id_selectedCountry = cmbCountry.getSelectionModel().getSelectedItem().getIdCountry();
+                //int id_selectedCounty = cmbCounty.getSelectionModel().getSelectedItem().getIdCounty();
+                int id_selectedCity = cmbCity.getSelectionModel().getSelectedItem().getIdCity();
 
-            
-            Location updateLocation = new Location(idLocation, txtLocationname.getText(), id_selectedType, idAddress);
-            LocationDatabase.getInstance().updateLocation(updateLocation);
-            
-            Address updateAddress = new Address(idAddress,  id_selectedCity, txtStreet.getText(), Integer.parseInt(txtHousenumber.getText()));
-            AddressDatabase.getInstance().updateAddress(updateAddress);
-            
-            Stage stage = (Stage) btnUpdateLocation.getScene().getWindow();
-            stage.close();
+
+                Location updateLocation = new Location(idLocation, txtLocationname.getText(), id_selectedType, idAddress);
+                LocationDatabase.getInstance().updateLocation(updateLocation);
+
+                Address updateAddress = new Address(idAddress,  id_selectedCity, txtStreet.getText(), Integer.parseInt(txtHousenumber.getText()));
+                AddressDatabase.getInstance().updateAddress(updateAddress);
+
+                Stage stage = (Stage) btnUpdateLocation.getScene().getWindow();
+                stage.close();
+            }
         }
         
         else

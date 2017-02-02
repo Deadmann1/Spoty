@@ -63,10 +63,6 @@ public class RatingGUIController {
     @FXML
     private ComboBox cmbGradeFilter;
     
-    
-    
-    private int idLocation;
-
     @FXML
     private TextField txtFromDate;
 
@@ -77,6 +73,8 @@ public class RatingGUIController {
     private Label lblLocationname;
     
     private FilterCriteria criteria;
+    
+    private int idLocation;
     
     
 
@@ -92,10 +90,7 @@ public class RatingGUIController {
         lblInfoMessageRatings.getStyleClass().add("labelInfo");
         paneRatingGUI.getStyleClass().add("pane");
         
-        cmbGradeFilter.getItems().addAll("Alle", "Sehr Gut", "Gut", "Befriedigend", "Genügend", "Nicht Genügend");
-        
-        
-        
+        cmbGradeFilter.getItems().addAll("Alle", "Sehr Gut", "Gut", "Befriedigend", "Genügend", "Nicht Genügend");    
     }
 
     public int getIdLocation() {
@@ -106,7 +101,7 @@ public class RatingGUIController {
         this.idLocation = idLocation;
     }
 
-    void fillRatings() {
+    void fillRatings() throws ParseException {
         lblLocationname.setText(LocationDatabase.getInstance().getLocation(idLocation).getLocationname());
         
         listViewRatings.getItems().clear();
@@ -244,7 +239,7 @@ public class RatingGUIController {
     }
 
     @FXML
-    void onAction_cmbGradeFilter(ActionEvent event) {
+    void onAction_cmbGradeFilter(ActionEvent event) throws ParseException {
         System.out.println(cmbGradeFilter.getSelectionModel().getSelectedItem().toString());
         String selectedItem = cmbGradeFilter.getSelectionModel().getSelectedItem().toString();
         

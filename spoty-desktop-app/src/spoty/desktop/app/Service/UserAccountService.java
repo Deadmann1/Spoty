@@ -13,6 +13,7 @@ import java.util.Vector;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 import spoty.desktop.app.data.UserAccount;
+import spoty.desktop.app.data.Constants;
 
 /**
  *
@@ -20,10 +21,11 @@ import spoty.desktop.app.data.UserAccount;
  */
 public class UserAccountService {
      private static UserAccountService s = null;
-    private static String url = "http://spotyweb-backend.azurewebsites.net"; //"http://localhost:3000";///"http://localhost:3000";   //
+    private static String url;
     
     private UserAccountService() {
-	}
+        this.url = Constants.getInstance().getUrl();
+    }
 
     public static UserAccountService getInstance() {
             if (s == null) {

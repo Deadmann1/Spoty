@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="paneAddLocationGUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="479.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.AddLocationGUIController">
+<AnchorPane id="AnchorPane" fx:id="paneAddLocationGUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="479.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="spoty.desktop.app.UserInterface.AddLocationGUIController">
   <children>
     <Label layoutX="27.0" layoutY="14.0" text="Adresse:" />
-    <GridPane layoutX="27.0" layoutY="78.0" prefWidth="441.0">
+    <GridPane layoutX="27.0" layoutY="88.0" prefHeight="220.0" prefWidth="440.9999000000025">
       <children>
         <Label text="Stadt:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <ComboBox fx:id="cmbCity" onAction="#cmbCity" prefWidth="167.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -44,6 +44,7 @@
             <FXCollections fx:factory="observableArrayList" />
           </items>
         </ComboBox>
+        <Button id="btnAddLocationtype" mnemonicParsing="false" onAction="#onAction_btnAddLocationtype" prefWidth="137.99990000000253" text="Typ hinzufügen" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="119.0" />
@@ -60,10 +61,10 @@
       </rowConstraints>
     </GridPane>
     <Button fx:id="btnAddLocationtype" layoutX="327.0" layoutY="231.0" mnemonicParsing="false" onAction="#onAction_btnAddLocationtype" prefWidth="137.99990000000253" text="Typ hinzufügen" />
-    <Button fx:id="btnAddLocation" layoutX="301.0" layoutY="297.0" mnemonicParsing="false" onAction="#onAction_btnAddLocation" prefWidth="166.0" text="Location hinzufügen" />
+    <Button fx:id="btnAddLocation" layoutX="302.0" layoutY="332.0" mnemonicParsing="false" onAction="#onAction_btnAddLocation" prefWidth="166.0" text="Location hinzufügen" />
     <Label layoutX="27.0" layoutY="43.0" text="Name:" />
     <TextField id="lblLocationname" fx:id="txtLocationname" layoutX="160.0" layoutY="40.0" prefWidth="200.0" />
-    <Label fx:id="lblInfoMessageAddLocation" layoutX="27.0" layoutY="336.0" prefWidth="441.0" text="..." />
+    <Label fx:id="lblInfoMessageAddLocation" layoutX="27.0" layoutY="377.0" prefWidth="441.0" text="..." />
   </children>
   <stylesheets>
     <URL value="@style.css" />

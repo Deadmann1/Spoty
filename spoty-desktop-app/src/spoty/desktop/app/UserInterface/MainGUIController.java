@@ -1,8 +1,12 @@
 package spoty.desktop.app.UserInterface;
 
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -150,7 +154,7 @@ public class MainGUIController {
         fillListViewLocations();
         gridPaneInformation.getStyleClass().add("gridPane");
         lblInfoMessageMainMenu.getStyleClass().add("labelInfo");
-        paneMainGUI.getStyleClass().add("pane");
+        paneMainGUI.getStyleClass().add("pane"); 
     }
     
     
@@ -207,7 +211,11 @@ public class MainGUIController {
             stage.setTitle("Bewertungs-Statistik");
             stage.setOnShown(new EventHandler<WindowEvent>() {
               public void handle(WindowEvent we) {
-                 controller.fillRatings();
+                  try {
+                      controller.fillRatings();
+                  } catch (ParseException ex) {
+                      Logger.getLogger(MainGUIController.class.getName()).log(Level.SEVERE, null, ex);
+                  }
                  
               }
             });  
