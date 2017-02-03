@@ -37,7 +37,7 @@ function LoginController ($scope, $http, $location)
     checkLogin($scope, $location, Users);
 }
 
-function HomeController($scope, $http, $location)
+function HomeController($scope, $http, $location, $filter)
 {
         $scope.checkLoginFromUser = function()
         {
@@ -68,14 +68,16 @@ function HomeController($scope, $http, $location)
 
         $scope.addStarRating = 0;
 
-        $scope.removeSelection = function () {
-            $scope.search.$ = "";
-            $scope.search.LocationCountry = "";
-            $scope.search.LocationCounty = "";
-            $scope.search.LocationCity = "";
-            $scope.search.LocationAddress = "";
-            $scope.search.LocationName = "";
-            $scope.search.LocationType = "";
+        $scope.removeSelection = function () 
+        {
+            $scope.search = undefined;
+            $scope.search.$ = undefined;
+            $scope.search.LocationCountry = undefined;
+            $scope.search.LocationCounty = undefined;
+            $scope.search.LocationCity = undefined;
+            $scope.search.LocationAddress = undefined;
+            $scope.search.LocationName = undefined;
+            $scope.search.LocationType = undefined;
             $scope.search.StarRating = "";
             $scope.data.model = "";
             $scope.locationNotFound = "";
@@ -92,60 +94,40 @@ function HomeController($scope, $http, $location)
         $scope.locationSelected = function (selectedIndex)
         {
             isolatedLocation = $scope.Locations[selectedIndex];
+            if ($scope.search != undefined)
+            {
+                console.log($scope.search.LocationCountry);
+                if ($scope.search.LocationCountry != undefined)
+                {
+                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCountry === $scope.search.LocationCountry)[selectedIndex];
+                }
+                if ($scope.search.LocationCounty != undefined)
+                {
+                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCounty === $scope.search.LocationCounty)[selectedIndex];
+                }
+                if ($scope.search.LocationCity != undefined)
+                {
+                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCity === $scope.search.LocationCity)[selectedIndex];
+                }
+                if ($scope.search.LocationAddress != undefined)
+                {
+                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationAddress === $scope.search.LocationAddress)[selectedIndex];
+                }
+                if ($scope.search.LocationName != undefined)
+                {
+                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationName === $scope.search.LocationName)[selectedIndex];
+                }
+                if ($scope.search.LocationType != undefined)
+                {
+                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationType === $scope.search.LocationType)[selectedIndex];
+                }
+            }
+
+            console.log(isolatedLocation);
             getRatingsFromWebServer(Ratings, $scope, $http, isolatedLocation);
+            $scope.addStarRatingLabel = "";
 
             angular.element(document.getElementById("btnAddRating").className = "btn btn-primary active");
-        }
-
-        $scope.btnAddRating = function ()
-        {
-            var feedback = angular.element(document.getElementById('txtFeedback'))[0].value;
-            var date = new Date();
-            var currentDate;
-            if (date.getMonth() < 10)
-            {
-                if (date.getDate() < 10)
-                {
-                    currentDate = date.getFullYear() + "-0" + date.getMonth() + "-0" + date.getDay();
-                }
-                else
-                {
-                    currentDate = date.getFullYear() + "-0" + date.getMonth() + "-" + date.getDay();
-                }
-            }
-            else
-            {
-                if (date.getDate() < 10)
-                {
-                    currentDate = date.getFullYear() + "-0" + date.getMonth() + "-0" + date.getDay();
-                }
-                else
-                {
-                    currentDate = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
-                }
-            }
-
-            if (feedback != "" && clickedStarRating != 0)
-            {
-                console.log(currentDate);
-                var jsonString = '{ "Grade": ' + "\"" + clickedStarRating + "\"" + ', "Feedback":' + "\"" + feedback + "\"" + ', "IdUserAccount":' + "\"" + currentUser.IdUserAccount + "\"" + ', "IdLocation":' + "\"" + isolatedLocation.IdLocation + "\"" + '}';
-                console.log(jsonString);
-                var data = JSON.parse(jsonString);
-                $http.post('http://spotyweb-backend.azurewebsites.net/api/ratings', data)
-                    .success(function (data, status)
-                    {
-                        $scope.addStarRatingLabel = "Rating wurde zur Location: " + isolatedLocation.LocationName + " hinzugefügt";
-                        console.log("Post war erfolgreich");
-                        angular.element(document.getElementById('ratingAddInformation')).value = status;
-                    })
-                    .error(function (data, status, header)
-                    {
-                        console.log("Error");
-                        console.log("Data: " + data)
-                        console.log("status: " + status)
-                        console.log("header: " + header)
-                    });
-            }
         }
     }
 
