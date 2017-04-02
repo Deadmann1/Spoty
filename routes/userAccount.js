@@ -76,4 +76,77 @@ router.get('/users/:_id', function (req, res, next) {
     });
 });
 
+router.post('/users', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var user = req.body;
+        request = new Request("INSERT INTO Spoty.UserAccount (IdUserAccount, Username, Password, Firstname, Lastname, Birthdate, IdAccountType) VALUES (?, ?, ?, ?, ?, ?, ?);", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdUserAccount', types.Int,  user.IdUserAccount);
+        request.addParameter('Username', types.NVarChar,  location.Username);
+        request.addParameter('Password', types.Int,  location.Password);
+        request.addParameter('Firstname', types.Int,  location.Firstname);
+        request.addParameter('Lastname', types.Int,  location.Lastname);
+        request.addParameter('Birthdate', types.Int,  location.Birthdate);
+        request.addParameter('IdAccountType', types.Int,  location.IdAccountType);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'User successfully added'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.delete('/users/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        request = new Request("DELETE FROM Spoty.UserAccount  WHERE IdUserAccount =" + req.params._id + ";", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'User successfully deleted'});
+        });
+        connection.execSql(request);
+    });
+});
+
+router.put('/locations/:_id', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var user = req.body;
+        request = new Request("UPDATE Spoty.UserAccount SET Username = @Username, Password = @Password, Firstname = @Firstname, Lastname = @Lastname, Birthdate = @Birthdate, IdAccountType = @IdAccountType WHERE IdUserAccount = @IdUserAccount;", function (err) {
+            if (err) {
+                next(err)
+            }
+        });
+        request.addParameter('IdUserAccount', types.Int,  user.IdUserAccount);
+        request.addParameter('Username', types.NVarChar,  location.Username);
+        request.addParameter('Password', types.Int,  location.Password);
+        request.addParameter('Firstname', types.Int,  location.Firstname);
+        request.addParameter('Lastname', types.Int,  location.Lastname);
+        request.addParameter('Birthdate', types.Int,  location.Birthdate);
+        request.addParameter('IdAccountType', types.Int,  location.IdAccountType);
+        request.on('doneInProc', function (columns) {
+            connection.release();
+            res.send({message: 'User successfully updated'});
+        });
+        connection.execSql(request);
+    });
+});
+
 module.exports = router;
