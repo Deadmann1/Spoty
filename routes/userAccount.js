@@ -76,6 +76,39 @@ router.get('/users/:_id', function (req, res, next) {
     });
 });
 
+outer.get('/users/newId', function (req, res, next) {
+    pool.acquire(function (err, connection) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+    var result = [];
+    var newId;
+    request = new Request("SELECT max(IdUserAccount) FROM Spoty.UserAccount;", function (err) {
+        if (err) {
+            next(err)
+        }
+    });
+    request.on('row', function (columns) {
+        columns.forEach(function (column) {
+            if (column.value === null) {
+                result.push('NULL');
+            } else {
+                result.push(column.value + 1);
+            }
+        });
+        console.log(result);
+        if(!result) {
+            next(err)
+        }
+        newId = result[0];
+        connection.release();
+        res.type('text/plain');  
+        res.send(newId);
+    });
+    connection.execSql(request);
+    });
+});
 router.post('/users', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
