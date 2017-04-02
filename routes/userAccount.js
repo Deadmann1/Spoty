@@ -76,15 +76,14 @@ router.get('/users/:_id', function (req, res, next) {
     });
 });
 
-outer.get('/users/newId', function (req, res, next) {
+router.get('/newUserId', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
             console.error(err);
             return;
         }
     var result = [];
-    var newId;
-    request = new Request("SELECT max(IdUserAccount) FROM Spoty.UserAccount;", function (err) {
+    request = new Request("SELECT MAX(IdUserAccount) + 1  FROM Spoty.UserAccount;", function (err) {
         if (err) {
             next(err)
         }
@@ -94,17 +93,16 @@ outer.get('/users/newId', function (req, res, next) {
             if (column.value === null) {
                 result.push('NULL');
             } else {
-                result.push(column.value + 1);
+                result.push(column.value);
             }
         });
         console.log(result);
         if(!result) {
             next(err)
         }
-        newId = result[0];
         connection.release();
-        res.type('text/plain');  
-        res.send(newId);
+        res.type('application/json');  
+        res.send(new UserAccount(result[0],null,null,null,null,null,null));
     });
     connection.execSql(request);
     });
