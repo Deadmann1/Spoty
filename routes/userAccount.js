@@ -153,7 +153,7 @@ router.delete('/users/:_id', function (req, res, next) {
     });
 });
 
-router.put('/locations/:_id', function (req, res, next) {
+router.put('/users/:_id', function (req, res, next) {
     pool.acquire(function (err, connection) {
         if (err) {
             console.error(err);
