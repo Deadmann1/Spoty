@@ -171,7 +171,7 @@ router.put('/users/:_id', function (req, res, next) {
             if (err) {
                 next(err)
             }
-        });
+        });   
         var date = new  Date(user.Birthdate);
          var  month = date.getMonth();
         if(month == 0) {

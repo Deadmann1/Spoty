@@ -11,6 +11,9 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var debug = require('debug')('testapp:server');
 var cors = require('cors');
+var morgan = require('morgan');
+var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
+var config = require('./config');
 
 /* ROUTES DEFINITION*/
 var index = require('./routes/index');
@@ -23,6 +26,7 @@ var locationType = require('./routes/locationType');
 var rating = require('./routes/rating');
 var accountType = require('./routes/accountType');
 var county = require('./routes/county');
+var authenticate = require('./routes/authenticate');
 
 
 var app = express();
@@ -41,6 +45,41 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// CONFIGS
+app.set('secret', config.secret);
+
+
+/* ROUTE AUTH */
+app.use('/api', authenticate);
+
+
+app.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token, app.get('secret'), function(err, decoded) {      
+      if (err) {
+         return res.status(403).send('Failed to authentificate the token.');    
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;    
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send('No token provided.');
+  }
+});
+
 
 /* ROUTES */
 app.use('/', index);
