@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spoty.desktop.app.data;
+package spoty.desktop.app.helper;
 
+import spoty.desktop.app.data.*;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 import spoty.desktop.app.Database.UserAccountDatabase;
@@ -13,7 +14,7 @@ import spoty.desktop.app.Database.UserAccountDatabase;
  *
  * @author lampr
  */
-public class UserAccount {
+public class UserAccountHelper {
     @SerializedName("IdUserAccount")
     private int idUserAccount;
     @SerializedName("Username")
@@ -25,11 +26,12 @@ public class UserAccount {
     @SerializedName("Lastname")
     private String lastname;
     @SerializedName("Birthdate")
-    private String birthdate;
+    private long birthdate;
     @SerializedName("IdAccountType")
     private int idAccountType;
 
-    public UserAccount(int idUserAccount, String username, String password, String firstname, String lastname, String birthdate, int idAccountType) {
+    public UserAccountHelper(int idUserAccount, String username, String password, String firstname, String lastname, long birthdate, int idAccountType) {
+        System.out.println("asdf");
         this.idUserAccount = idUserAccount;
         this.username = username;
         this.password = password;
@@ -39,7 +41,7 @@ public class UserAccount {
         this.idAccountType = idAccountType;
     }
 
-    public UserAccount(String username) {
+    public UserAccountHelper(String username) {
         this.username = username;
     }
 
@@ -86,14 +88,15 @@ public class UserAccount {
         this.lastname = lastname;
     }
 
-    public String getBirthdate() {
+    public long getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(long birthdate) {
         this.birthdate = birthdate;
     }
-   
+
+
     public int getIdAccountType() {
         return idAccountType;
     }
@@ -119,7 +122,7 @@ public class UserAccount {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final UserAccount other = (UserAccount) obj;
+        final UserAccountHelper other = (UserAccountHelper) obj;
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }

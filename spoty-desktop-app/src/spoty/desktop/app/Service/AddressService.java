@@ -12,6 +12,7 @@ import com.sun.jersey.api.client.WebResource;
 import java.util.Vector;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import spoty.desktop.app.Database.UserAccountDatabase;
 import spoty.desktop.app.data.Address;
 import spoty.desktop.app.data.City;
 import spoty.desktop.app.data.Country;
@@ -47,7 +48,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/addresses").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         
@@ -61,7 +62,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/addresses/"+idAddress).build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
        
         return gson.fromJson(s, Address.class); 
@@ -76,7 +77,7 @@ public class AddressService {
 
         Gson gson = new Gson();
         //service.accept(MediaType.APPLICATION_JSON).post(String.class, gson.toJson(newAddress, Address.class));
-        service.header("Content-Type", "application/json").post(String.class, gson.toJson(newAddress, Address.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).post(String.class, gson.toJson(newAddress, Address.class));
     }
     
     public void putAddress(Address updateAddress)
@@ -87,7 +88,7 @@ public class AddressService {
         service = client.resource(UriBuilder.fromUri(url + "/api/addresses/"+updateAddress.getIdAddress()).build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").put(String.class, gson.toJson(updateAddress, Address.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).put(String.class, gson.toJson(updateAddress, Address.class));
     }
     
     
@@ -100,7 +101,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/countries").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, new TypeToken<Vector<Country>>(){}.getType()); 
@@ -113,7 +114,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/countries/"+idCountry).build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, Country.class); 
@@ -127,7 +128,7 @@ public class AddressService {
         service = client.resource(UriBuilder.fromUri(url + "/api/countries").build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").post(String.class, gson.toJson(newCountry, Country.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).post(String.class, gson.toJson(newCountry, Country.class));
     }
     
     //-----------------County---------------------
@@ -137,7 +138,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/counties").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, new TypeToken<Vector<County>>(){}.getType()); 
@@ -150,7 +151,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/counties/"+idCounty).build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, County.class); 
@@ -164,7 +165,7 @@ public class AddressService {
         service = client.resource(UriBuilder.fromUri(url + "/api/counties").build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").post(String.class, gson.toJson(newCounty, County.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).post(String.class, gson.toJson(newCounty, County.class));
     }
       
     //-----------------City---------------------
@@ -174,7 +175,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/cities").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         
@@ -189,7 +190,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/cities/"+idCity).build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, City.class); 
@@ -203,7 +204,7 @@ public class AddressService {
         service = client.resource(UriBuilder.fromUri(url + "/api/cities").build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").post(String.class, gson.toJson(newCity, City.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).post(String.class, gson.toJson(newCity, City.class));
     }
 
     public int getNewAddressID() {
@@ -212,7 +213,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/addresses/new/id").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
         IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
         
@@ -225,7 +226,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/countries/new/id").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
         IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
         
@@ -238,7 +239,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/counties/new/id").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
         IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
         
@@ -251,7 +252,7 @@ public class AddressService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/cities/new/id").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
         IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
         

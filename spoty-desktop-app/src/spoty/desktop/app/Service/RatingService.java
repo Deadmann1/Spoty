@@ -13,6 +13,7 @@ import com.sun.jersey.api.client.WebResource;
 import java.util.Vector;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import spoty.desktop.app.Database.UserAccountDatabase;
 import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.Rating;
 import spoty.desktop.app.data.Constants;
@@ -43,7 +44,7 @@ public class RatingService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/ratings").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         //Gson gson = new Gson();
         Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
         

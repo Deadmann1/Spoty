@@ -81,6 +81,9 @@ public class MainGUIController {
     
     @FXML
     private Button btnRatings;
+    
+    @FXML
+    private Button btnManageUsers;
 
     @FXML
     private ListView<Location> listViewLocations;
@@ -145,6 +148,26 @@ public class MainGUIController {
         }
         
         lblInfoMessageMainMenu.setText("Es muss ein Ort ausgewählt werden!");
+    }
+    
+    @FXML
+    void onAction_btnManageUsers(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/UserManagementGUI.fxml"));
+             Parent root = (Parent) fxmlLoader.load();
+             
+            UserManagementGUIController controller = fxmlLoader.<UserManagementGUIController>getController();
+            
+             Scene sceneTable = new Scene(root);
+             Stage stage = new Stage();     
+             stage.setScene(sceneTable);
+             stage.setTitle("User verwalten");
+             stage.setOnShown(new EventHandler<WindowEvent>() {
+               public void handle(WindowEvent we) {
+                 controller.fillListViewUserAccounts();
+               }
+            });  
+            
+            stage.showAndWait();
     }
 
     @FXML

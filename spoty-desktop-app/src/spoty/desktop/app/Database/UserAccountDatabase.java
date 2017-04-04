@@ -8,9 +8,14 @@ package spoty.desktop.app.Database;
 import java.sql.Connection;
 import java.util.Objects;
 import java.util.Vector;
+import spoty.desktop.app.Service.LocationService;
 import spoty.desktop.app.Service.UserAccountService;
 import spoty.desktop.app.data.AccountType;
+import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.UserAccount;
+import spoty.desktop.app.helper.LoginHelper;
+import spoty.desktop.app.helper.TokenHelper;
+import spoty.desktop.app.helper.UserAccountHelper;
 
 /**
  *
@@ -25,6 +30,7 @@ public class UserAccountDatabase {
 
     private Connection conn = null;
 
+    public TokenHelper token = null;
 
     private UserAccountDatabase() {
     }
@@ -34,6 +40,23 @@ public class UserAccountDatabase {
                     db = new UserAccountDatabase();
             }
             return db;
+    }
+    
+    public int getAuthenticationToken(LoginHelper userAccount)
+    {
+        TokenHelper token = null;
+        token = UserAccountService.getInstance().getAuthenticationToken(userAccount);
+        //System.out.println(UserAccountService.getInstance().getAuthenticationToken(userAccount).getToken());
+        if (token!=null)
+        {
+            this.token = token;
+            return 1;
+        }
+        
+        
+        else
+            return -1;
+
     }
     
     public Vector<UserAccount> getUserAccounts()
@@ -78,4 +101,25 @@ public class UserAccountDatabase {
     {
         return UserAccountService.getInstance().getUserAccount(idUserAccount);
     } 
+    
+    public void deleteUserAccount(UserAccount deleteUserAccount)
+    {
+        UserAccountService.getInstance().deleteUserAccount(deleteUserAccount);
+    }
+    
+    public int getNewUserAccountID()
+    {
+        return UserAccountService.getInstance().getNewUserAccountID().getIdUserAccount();
+    }
+    
+    public void addUserAccount(UserAccountHelper newUserAccount) {
+        UserAccountService.getInstance().postUserAccount(newUserAccount);
+    }
+    
+    public void updateUserAccount(UserAccountHelper updateUserAccount) {
+        UserAccountService.getInstance().putUserAccount(updateUserAccount);
+    }
+
+    
+    
 }

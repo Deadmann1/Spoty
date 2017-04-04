@@ -14,7 +14,7 @@ import spoty.desktop.app.Service.AddressService;
  */
 public class Constants {
     private static Constants c = null;
-    private String url = "http://spotyweb-backend.azurewebsites.net";//"http://localhost:3000"; // // //"http://spotyweb-backend.azurewebsites.net";
+    private String url = "https://spotyweb-backend.azurewebsites.net";//"http://spotyweb-backend.azurewebsites.net"
     
     private Constants() {
     }

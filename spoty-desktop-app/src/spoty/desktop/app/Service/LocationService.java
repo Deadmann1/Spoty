@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 import java.util.Vector;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import spoty.desktop.app.Database.UserAccountDatabase;
 import spoty.desktop.app.data.Location;
 import spoty.desktop.app.data.LocationType;
 import spoty.desktop.app.data.Constants;
@@ -47,7 +48,7 @@ public class LocationService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/locations").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
         
         return gson.fromJson(s, new TypeToken<Vector<Location>>(){}.getType()); 
@@ -60,7 +61,7 @@ public class LocationService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/locations/"+idLocation).build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, Location.class); 
@@ -73,7 +74,7 @@ public class LocationService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/locations/new/id").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
         IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
         
@@ -88,7 +89,7 @@ public class LocationService {
         service = client.resource(UriBuilder.fromUri(url + "/api/locations").build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").post(String.class, gson.toJson(newLocation, Location.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).post(String.class, gson.toJson(newLocation, Location.class));
       
     
     }
@@ -101,7 +102,7 @@ public class LocationService {
         service = client.resource(UriBuilder.fromUri(url + "/api/locations/"+updateLocation.getIdLocation()).build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").put(String.class, gson.toJson(updateLocation, Location.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).put(String.class, gson.toJson(updateLocation, Location.class));
     }
     
     public void deleteLocation(Location deleteLocation)
@@ -112,7 +113,7 @@ public class LocationService {
         service = client.resource(UriBuilder.fromUri(url + "/api/locations/"+deleteLocation.getIdLocation()).build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").delete(String.class, gson.toJson(deleteLocation, Location.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).delete(String.class, gson.toJson(deleteLocation, Location.class));
     }
     
     
@@ -125,7 +126,7 @@ public class LocationService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/locationTypes").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, new TypeToken<Vector<LocationType>>(){}.getType()); 
@@ -138,7 +139,7 @@ public class LocationService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/locationTypes/"+idLocationType).build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         
         Gson gson = new Gson();
         return gson.fromJson(s, LocationType.class); 
@@ -150,7 +151,7 @@ public class LocationService {
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/locationTypes/new/id").build());
 
-        String s = service.accept(MediaType.APPLICATION_JSON).get(String.class);
+        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
         Gson gson = new Gson();
         IdWrapper idWrapperObject = gson.fromJson(s, IdWrapper.class); 
         
@@ -165,7 +166,7 @@ public class LocationService {
         service = client.resource(UriBuilder.fromUri(url + "/api/locationtypes").build());
 
         Gson gson = new Gson();
-        service.header("Content-Type", "application/json").post(String.class, gson.toJson(newLocationType, LocationType.class));
+        service.header("Content-Type", "application/json").header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).post(String.class, gson.toJson(newLocationType, LocationType.class));
     }
 
     

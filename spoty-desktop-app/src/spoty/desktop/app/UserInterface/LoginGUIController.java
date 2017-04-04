@@ -16,6 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import spoty.desktop.app.Database.UserAccountDatabase;
 import javafx.scene.layout.AnchorPane;
+import spoty.desktop.app.helper.LoginHelper;
+import spoty.desktop.app.helper.TokenHelper;
+import spoty.desktop.app.helper.UserAccountHelper;
 
 
 public class LoginGUIController {
@@ -53,23 +56,47 @@ public class LoginGUIController {
 
     @FXML
     void onAction_btnLogin(ActionEvent event) throws Exception {
+        LoginHelper userAccount = new LoginHelper(txtUsername.getText(), txtPassword.getText());
+        
+        if (UserAccountDatabase.getInstance().getAuthenticationToken(userAccount) == 1)
+        {
+            int idUserAccount = UserAccountDatabase.getInstance().getIDOfAccount(txtUsername.getText());
+            
+            if (UserAccountDatabase.getInstance().getUserAccount(idUserAccount).getIdAccountType() == 1)
+                {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/MainGUI.fxml"));
+                    Parent root = (Parent) fxmlLoader.load();
+
+                    Scene sceneTable = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(sceneTable);
+                    stage.setTitle("Hauptmenü");
+                    Stage stageLogin = (Stage) btnLogin.getScene().getWindow();
+                    stageLogin.close();
+
+                    stage.showAndWait();  
+                }
+                
+                else
+                    lblInfoMessageLogin.setText("Sie sind kein Admin");
+        }
+        
+        else
+        {
+            lblInfoMessageLogin.setText("Login fehlgeschlagen");
+        }
+        
+        
+        /*
         if (UserAccountDatabase.getInstance().existsUsername(txtUsername.getText())==true)
         {
             int idUserAccount = UserAccountDatabase.getInstance().getIDOfAccount(txtUsername.getText());
             
+            
             if (txtPassword.getText().compareTo(UserAccountDatabase.getInstance().getPasswordOfAccount(idUserAccount))==0)
             {
-                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/MainGUI.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-            
-                Scene sceneTable = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(sceneTable);
-                stage.setTitle("Hauptmenü");
-                Stage stageLogin = (Stage) btnLogin.getScene().getWindow();
-                stageLogin.close();
-             
-                stage.showAndWait();  
+                
+                
             }
             
             else
@@ -78,6 +105,7 @@ public class LoginGUIController {
         
         else
             lblInfoMessageLogin.setText("Username nicht vorhanden");
+*/
     }
 
     @FXML
