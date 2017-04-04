@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // CONFIGS
 app.set('secret', config.secret);
-var debug = false;
+var isDebug = false;
 
 /* ROUTE AUTH */
 app.use('/api', authenticate);
@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
 
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
-  if (debug) {
+  if (isDebug) {
     console.log('-----------------REQUEST---------------');
     console.log(req);
     console.log('-----------------HEADERS---------------');
