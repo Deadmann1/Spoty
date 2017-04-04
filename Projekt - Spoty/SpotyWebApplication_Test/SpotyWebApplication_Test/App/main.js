@@ -1,11 +1,12 @@
 ﻿(function ()
 {
+    'use strict';
+
     var clickedStarRating = 0;
     var currentUser = null;
     var googleMapsRatings = [];
     var mapLocations = [];
-
-    'use strict';
+    var map;
 
     var app = angular.module("SpotyWebApplication", ['ngRoute']);
 
@@ -23,7 +24,6 @@
 
     app.controller("HomeController", HomeController);
 
-
     app.directive('starRating', starRating);
    
     app.directive('myMap', googleMaps);
@@ -37,304 +37,345 @@ function LoginController ($scope, $http, $location)
     checkLogin($scope, $location, Users);
 }
 
-function HomeController($scope, $http, $location, $filter)
+function HomeController($scope, $http, $location, $filter, $timeout)
 {
-        $scope.checkLoginFromUser = function()
-        {
-            console.log("vor CurrentUser === null");
-            if (currentUser === null)
-            {
-                console.log(currentUser);
-                console.log("currentUser == null")
-                $location.path("/");
-                $scope.$apply();
-            }
-        }
-        $scope.checkLoginFromUser();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    var directionsService = new google.maps.DirectionsService();
 
+    $scope.map =
+    {
+        control: {},
+        center: {
+            latitude: 46,
+            longitude: 14
+        },
+        zoom: 8
+    }
 
-        var Locations = [];
-        var maxRatings = [1, 2, 3, 4, 5];
-        var Ratings = [];
-        var isolatedLocation;
-        var currentRating;
+    $scope.directions = {
+        origin: "",
+        destination: "",
+        showList: false
+    }
 
-        $scope.hoverRating = 0;
-
-        getLocationsFromWebService($http, Locations, mapLocations);
-        getRatingsFromWebServerForGoogleMap($http);
-
-        $scope.Locations = Locations;
-
-        $scope.addStarRating = 0;
-
-        $scope.removeSelection = function () 
-        {
-            $scope.search = undefined;
-            $scope.search.$ = undefined;
-            $scope.search.LocationCountry = undefined;
-            $scope.search.LocationCounty = undefined;
-            $scope.search.LocationCity = undefined;
-            $scope.search.LocationAddress = undefined;
-            $scope.search.LocationName = undefined;
-            $scope.search.LocationType = undefined;
-            $scope.search.StarRating = "";
-            $scope.data.model = "";
-            $scope.locationNotFound = "";
-        }
-
-        $scope.mouseStarHover = function (param) {
-            $scope.hoverRating = param;
+    $scope.getDirections = function () {
+        var request = {
+            origin: $scope.directions.origin,
+            destination: $scope.directions.destination,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
         };
-
-        $scope.mouseStarLeave = function (param) {
-            $scope.hoverRating = param + '*';
-        };
-
-        $scope.locationSelected = function (selectedIndex)
-        {
-            isolatedLocation = $scope.Locations[selectedIndex];
-            if ($scope.search != undefined)
-            {
-                console.log($scope.search.LocationCountry);
-                if ($scope.search.LocationCountry != undefined)
-                {
-                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCountry === $scope.search.LocationCountry)[selectedIndex];
-                }
-                if ($scope.search.LocationCounty != undefined)
-                {
-                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCounty === $scope.search.LocationCounty)[selectedIndex];
-                }
-                if ($scope.search.LocationCity != undefined)
-                {
-                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCity === $scope.search.LocationCity)[selectedIndex];
-                }
-                if ($scope.search.LocationAddress != undefined)
-                {
-                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationAddress === $scope.search.LocationAddress)[selectedIndex];
-                }
-                if ($scope.search.LocationName != undefined)
-                {
-                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationName === $scope.search.LocationName)[selectedIndex];
-                }
-                if ($scope.search.LocationType != undefined)
-                {
-                    isolatedLocation = $scope.Locations.filter((Location) => Location.LocationType === $scope.search.LocationType)[selectedIndex];
-                }
+        directionsService.route(request, function (response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                directionsDisplay.setMap(map);
+                directionsDisplay.setPanel(document.getElementById('directionsList'));
+                $scope.directions.showList = true;
+            } else {
+                alert('Google route unsuccesfull!');
             }
+        });
+    }
 
-            console.log(isolatedLocation);
-            getRatingsFromWebServer(Ratings, $scope, $http, isolatedLocation);
-            $scope.addStarRatingLabel = "";
-
-            angular.element(document.getElementById("btnAddRating").className = "btn btn-primary active");
+    $scope.checkLoginFromUser = function()
+    {
+        console.log("vor CurrentUser === null");
+        if (currentUser === null)
+        {
+            console.log(currentUser);
+            console.log("currentUser == null")
+            $location.path("/");
+            $scope.$apply();
         }
     }
+    $scope.checkLoginFromUser();
+
+
+    var Locations = [];
+    var maxRatings = [1, 2, 3, 4, 5];
+    var Ratings = [];
+    var isolatedLocation;
+    var currentRating;
+
+    $scope.hoverRating = 0;
+
+    getLocationsFromWebService($http, Locations, mapLocations);
+    getRatingsFromWebServerForGoogleMap($http);
+
+    $scope.Locations = Locations;
+
+    $scope.addStarRating = 0;
+
+    $scope.removeSelection = function () 
+    {
+        $scope.search = undefined;
+        $scope.search.$ = undefined;
+        $scope.search.LocationCountry = undefined;
+        $scope.search.LocationCounty = undefined;
+        $scope.search.LocationCity = undefined;
+        $scope.search.LocationAddress = undefined;
+        $scope.search.LocationName = undefined;
+        $scope.search.LocationType = undefined;
+        $scope.search.StarRating = "";
+        $scope.data.model = "";
+        $scope.locationNotFound = "";
+    }
+
+
+    $scope.mouseStarHover = function (param) {
+        $scope.hoverRating = param;
+    };
+
+    $scope.mouseStarLeave = function (param) {
+        $scope.hoverRating = param + '*';
+    };
+
+    $scope.locationSelected = function (selectedIndex)
+    {
+        isolatedLocation = $scope.Locations[selectedIndex];
+        if ($scope.search != undefined)
+        {
+            console.log($scope.search.LocationCountry);
+            if ($scope.search.LocationCountry != undefined)
+            {
+                isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCountry === $scope.search.LocationCountry)[selectedIndex];
+            }
+            if ($scope.search.LocationCounty != undefined)
+            {
+                isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCounty === $scope.search.LocationCounty)[selectedIndex];
+            }
+            if ($scope.search.LocationCity != undefined)
+            {
+                isolatedLocation = $scope.Locations.filter((Location) => Location.LocationCity === $scope.search.LocationCity)[selectedIndex];
+            }
+            if ($scope.search.LocationAddress != undefined)
+            {
+                isolatedLocation = $scope.Locations.filter((Location) => Location.LocationAddress === $scope.search.LocationAddress)[selectedIndex];
+            }
+            if ($scope.search.LocationName != undefined)
+            {
+                isolatedLocation = $scope.Locations.filter((Location) => Location.LocationName === $scope.search.LocationName)[selectedIndex];
+            }
+            if ($scope.search.LocationType != undefined)
+            {
+                isolatedLocation = $scope.Locations.filter((Location) => Location.LocationType === $scope.search.LocationType)[selectedIndex];
+            }
+        }
+
+        console.log(isolatedLocation);
+        getRatingsFromWebServer(Ratings, $scope, $http, isolatedLocation);
+        $scope.addStarRatingLabel = "";
+
+        angular.element(document.getElementById("btnAddRating").className = "btn btn-primary active");
+
+    }
+
+    $timeout(function () {
+        $scope.$apply();
+    }, 3000);
+}
 
 function googleMaps()
 {
-        var link = function (scope, element, attrs)
-        {
-            var map, infoWindow;
-            var markers = [];
-            var marker = {};
-            // map config
-            var mapOptions = {
-                center: new google.maps.LatLng(46, 14),
-                zoom: 8,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                scrollwheel: true
-            };
-
-            // init the map
-            function initMap() {
-                if (map === void 0) {
-                    map = new google.maps.Map(element[0], mapOptions);
-                }
-            }
-
-            // place a marker
-            function setMarker(map, position, title, content) {
-                var marker;
-                var markerOptions = {
-                    position: position,
-                    map: map,
-                    title: title,
-                    icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
-                };
-
-                marker = new google.maps.Marker(markerOptions);
-                markers.push(marker); // add marker to array
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    // close window if not undefined
-                    if (infoWindow !== void 0) {
-                        infoWindow.close();
-                    }
-                    // create new window
-                    var infoWindowOptions = {
-                        content: content
-                    };
-                    infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-                    infoWindow.open(map, marker);
-                });
-            }
-
-
-            initMap();
-
-
-            // show the map and place some markers
-
-            if (navigator.geolocation)
-            {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            }
-            function showPosition(position)
-            {
-                mapOptions.center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                mapOptions.zoom = 8;
-                map = map = new google.maps.Map(element[0], mapOptions);
-
-                var image = 'Marker_icon.png';
-                var marker = new google.maps.Marker({
-                    position: { lat: position.coords.latitude, lng: position.coords.longitude },
-                    map: map,
-                    title: "Your Position",
-                    icon:image
-                });
-
-                setMarker(marker, 'Your current Position');
-                try
-                {
-                    for (var i = 0; i < mapLocations.length; i++)
-                    {
-                        (function (i)
-                        {
-                            var geocoder = new google.maps.Geocoder();
-                            if (geocoder)
-                            {
-                                var country = "Country: " + mapLocations[i].LocationCountry;
-                                var county = "County: " + mapLocations[i].LocationCounty
-                                var city = "City: " + mapLocations[i].LocationCity
-                                var address = "Address: " + mapLocations[i].LocationAddress;
-                                var locationname = "Location: " + mapLocations[i].LocationName;
-                                var locationtype = "Locationtype: " + mapLocations[i].LocationType;
-                                var ratingsDurchschnitt = 0.00;
-                                try
-                                {
-                                    var anzahlVonRatings = 0;
-                                    for (var j = 0; j < googleMapsRatings.length; j++)
-                                    {
-                                        console.log("In Schleife");
-                                        if (mapLocations[i].IdLocation == googleMapsRatings[j].IdLocation)
-                                        {
-                                            console.log("Im If drinen");
-                                            if (angular.isNumber(googleMapsRatings[j].Grade))
-                                            {
-                                                console.log(typeof (googleMapsRatings[j].Grade));
-                                                console.log("Die Grade ist eine Number googleMapsRatingNumber: " + googleMapsRatings[j].Grade);
-                                                ratingsDurchschnitt = ratingsDurchschnitt + googleMapsRatings[j].Grade;
-                                                anzahlVonRatings = anzahlVonRatings + 1;
-                                                console.log("Durchschnitt: " + ratingsDurchschnitt + "\nRatingAnzahl: " + anzahlVonRatings);
-                                            }
-                                        }
-
-                                    }
-                                    if (ratingsDurchschnitt != 0 && anzahlVonRatings != 0)
-                                        ratingsDurchschnitt = ratingsDurchschnitt / anzahlVonRatings;
-
-                                    console.log("gesamter Durchschnitt" + ratingsDurchschnitt + "\n\nAnzahl der Ratings: " + anzahlVonRatings);
-                                    
-                                    geocoder.geocode({ 'address': "\"" + mapLocations[i].LocationCounty + " " + mapLocations[i].LocationCity + " " + mapLocations[i].LocationAddress + "\"" }, function (results, status) {
-                                        if (status === google.maps.GeocoderStatus.OK) {
-                                            var latitude = results[0].geometry.location.lat();
-                                            var longitude = results[0].geometry.location.lng();
-
-                                            var R = 6371; // Radius of the earth in km
-                                            var dLat = (position.coords.latitude - latitude) * 3.141592653589793 / 180;  // deg2rad below
-                                            var dLon = (position.coords.longitude - longitude) * 3.141592653589793 / 180;
-                                            var a = 0.5 - Math.cos(dLat) / 2 + Math.cos(latitude * Math.PI / 180) * Math.cos(position.coords.latitude * Math.PI / 180) * (1 - Math.cos(dLon)) / 2;
-
-                                            var d = Math.round((R * 2 * Math.asin(Math.sqrt(a))) * 100) / 100;
-
-                                            var newMarker = new google.maps.Marker({
-                                                position: { lat: latitude, lng: longitude },
-                                                map: map,
-                                                title: "Name of " + locationname + "\nDistance between you and the Location: " + d + " (km)"
-                                            });
-
-                                            if (ratingsDurchschnitt != 0)
-                                            {
-                                                var contentString = '<p>' +
-                                                country +
-                                                '</p><p>' +
-                                                county +
-                                                '</p><p>' +
-                                                city +
-                                                '</p><p>' +
-                                                address +
-                                                '</p><p>' +
-                                                locationname +
-                                                '</p><p>' +
-                                                locationtype +
-                                                '</p>' +
-                                                '<p>Durchschnitt - Rating: ' +
-                                                ratingsDurchschnitt +
-                                                '</p>';
-                                            }
-                                            else
-                                            {
-                                                var contentString = '<p>' +
-                                                country +
-                                                '</p><p>' +
-                                                county +
-                                                '</p><p>' +
-                                                city +
-                                                '</p><p>' +
-                                                address +
-                                                '</p><p>' +
-                                                locationname +
-                                                '</p><p>' +
-                                                locationtype +
-                                                '</p>' +
-                                                '<p>Keine Ratings vorhanden</p>';
-                                            }
-
-                                            var infowindow = new google.maps.InfoWindow({
-                                                content: contentString
-                                            });
-
-                                            google.maps.event.addListener(newMarker, 'click', function () {
-                                                infowindow.open(map, newMarker);
-                                            });
-                                            setMarker(newMarker, 'Position of the clicked Location');
-                                        }
-                                    });
-                                }
-                                catch (e)
-                                {
-                                    console.log(e);
-                                }
-                            }
-                        })(i);
-                    }
-                }
-                catch (e)
-                {
-                    console.log(e);
-                }
-            }
+    function link(scope, element, attrs)
+    {
+        var infoWindow;
+        var markers = [];
+        var marker = {};
+        // map config
+        var mapOptions = {
+            center: new google.maps.LatLng(46, 14),
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: true
         };
 
+        // init the map
+        function initMap() {
+            if (map === void 0) {
+                map = new google.maps.Map(element[0], mapOptions);
+            }
+        }
+
+        // place a marker
+        function setMarker(map, position, title, content) {
+            var marker;
+            var markerOptions = {
+                position: position,
+                map: map,
+                title: title,
+                icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            };
+
+            marker = new google.maps.Marker(markerOptions);
+            markers.push(marker); // add marker to array
+
+            google.maps.event.addListener(marker, 'click', function () {
+                // close window if not undefined
+                if (infoWindow !== void 0) {
+                    infoWindow.close();
+                }
+                // create new window
+                var infoWindowOptions = {
+                    content: content
+                };
+                infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+                infoWindow.open(map, marker);
+            });
+        }
+
+        initMap();
+
+        //show the map and place some markers
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        function showPosition(position)
+        {
+            var image = 'Marker_icon.png';
+            var marker = new google.maps.Marker({
+                position: { lat: position.coords.latitude, lng: position.coords.longitude },
+                map: map,
+                title: "Your Position",
+                icon: image
+            });
+
+            setMarker(map, marker.position, marker.title, "Your position");
+            map.setCenter(marker.position);
+            try
+            {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'latLng': marker.position}, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[1])
+                        {
+                            scope.directions.origin = results[1].formatted_address;
+                        }
+                        else {
+                            console.log("Fehler!");
+                        }
+                    } else {
+                        console.log('Geocoder failed due to: ' + status);
+                    }
+                });
+            }
+            catch (e)
+            {
+                console.log(e);
+            }
+            try {
+                for (var i = 0; i < mapLocations.length; i++) {
+                    (function (i) {
+                        var geocoder = new google.maps.Geocoder();
+                        if (geocoder) {
+                            var country = "Country: " + mapLocations[i].LocationCountry;
+                            var county = "County: " + mapLocations[i].LocationCounty
+                            var city = "City: " + mapLocations[i].LocationCity
+                            var address = "Address: " + mapLocations[i].LocationAddress;
+                            var locationname = "Location: " + mapLocations[i].LocationName;
+                            var locationtype = "Locationtype: " + mapLocations[i].LocationType;
+                            var ratingsDurchschnitt = 0.00;
+                            try {
+                                var anzahlVonRatings = 0;
+                                for (var j = 0; j < googleMapsRatings.length; j++) {
+                                    if (mapLocations[i].IdLocation == googleMapsRatings[j].IdLocation) {
+                                        if (angular.isNumber(googleMapsRatings[j].Grade)) {
+                                            ratingsDurchschnitt = ratingsDurchschnitt + googleMapsRatings[j].Grade;
+                                            anzahlVonRatings = anzahlVonRatings + 1;
+                                        }
+                                    }
+
+                                }
+                                if (ratingsDurchschnitt != 0 && anzahlVonRatings != 0)
+                                    ratingsDurchschnitt = ratingsDurchschnitt / anzahlVonRatings;
+
+                                geocoder.geocode({ 'address': "\"" + mapLocations[i].LocationCounty + " " + mapLocations[i].LocationCity + " " + mapLocations[i].LocationAddress + "\"" }, function (results, status) {
+                                    if (status === google.maps.GeocoderStatus.OK) {
+                                        var latitude = results[0].geometry.location.lat();
+                                        var longitude = results[0].geometry.location.lng();
+
+                                        var R = 6371; // Radius of the earth in km
+                                        var dLat = (position.coords.latitude - latitude) * 3.141592653589793 / 180;  // deg2rad below
+                                        var dLon = (position.coords.longitude - longitude) * 3.141592653589793 / 180;
+                                        var a = 0.5 - Math.cos(dLat) / 2 + Math.cos(latitude * Math.PI / 180) * Math.cos(position.coords.latitude * Math.PI / 180) * (1 - Math.cos(dLon)) / 2;
+
+                                        var d = Math.round((R * 2 * Math.asin(Math.sqrt(a))) * 100) / 100;
+
+                                        var newMarker = new google.maps.Marker({
+                                            position: { lat: latitude, lng: longitude },
+                                            map: map,
+                                            title: "Name of " + locationname + "\nDistance between you and the Location: " + d + " (km)"
+                                        });
+
+                                        if (ratingsDurchschnitt != 0) {
+                                            var contentString = '<p>' +
+                                            country +
+                                            '</p><p>' +
+                                            county +
+                                            '</p><p>' +
+                                            city +
+                                            '</p><p>' +
+                                            address +
+                                            '</p><p>' +
+                                            locationname +
+                                            '</p><p>' +
+                                            locationtype +
+                                            '</p>' +
+                                            '<p>Durchschnitt - Rating: ' +
+                                            ratingsDurchschnitt +
+                                            '</p>';
+                                        }
+                                        else {
+                                            var contentString = '<p>' +
+                                            country +
+                                            '</p><p>' +
+                                            county +
+                                            '</p><p>' +
+                                            city +
+                                            '</p><p>' +
+                                            address +
+                                            '</p><p>' +
+                                            locationname +
+                                            '</p><p>' +
+                                            locationtype +
+                                            '</p>' +
+                                            '<p>Keine Ratings vorhanden</p>';
+                                        }
+
+                                        var infowindow = new google.maps.InfoWindow({
+                                            content: contentString
+                                        });
+
+                                        google.maps.event.addListener(newMarker, 'click', function ()
+                                        {
+                                            infowindow.open(map, newMarker);
+                                            scope.directions.destination = mapLocations[i].LocationAddress + ", " + mapLocations[i].LocationCity + " " + mapLocations[i].LocationCountry;
+                                            scope.$apply();
+                                        });
+                                        setMarker(newMarker, "aösdfkj");
+                                    }
+                                });
+                            }
+                            catch (e) {
+                                console.log(e);
+                            }
+                        }
+                    })(i);
+                }
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
+        scope.$apply();
+    };
     return {
         restrict: 'A',
-        template: '<div id="gmaps"></div>',
+        template: '<div id="gmaps" control="map.control" center="map.center" zoom="map.zoom" draggable="true"></div>',
         replace: true,
-        link: link
+        link: link,
     };
     // directive link function
-    
 }
 
 function getUsersFromWebService($scope, $http, Users)
