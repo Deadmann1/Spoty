@@ -114,18 +114,25 @@ router.post('/users', function (req, res, next) {
             return;
         }
         var user = req.body;
-        request = new Request("INSERT INTO Spoty.UserAccount (IdUserAccount, Username, Password, Firstname, Lastname, Birthdate, IdAccountType) VALUES (?, ?, ?, ?, ?, ?, ?);", function (err) {
+        request = new Request("INSERT INTO Spoty.UserAccount (IdUserAccount, Username, Password, Firstname, Lastname, Birthdate, IdAccountType) VALUES (@IdUserAccount, @Username, @Password, @Firstname, @Lastname, @Birthdate, @IdAccountType);", function (err) {
             if (err) {
                 next(err)
             }
         });
+
+        var date = new  Date(user.Birthdate);
+         var  month = date.getMonth();
+        if(month == 0) {
+            month = 1;
+        }
+        var date2 = date.getFullYear() + "-" + month + "-" + date.getDate();
         request.addParameter('IdUserAccount', types.Int,  user.IdUserAccount);
-        request.addParameter('Username', types.NVarChar,  location.Username);
-        request.addParameter('Password', types.Int,  location.Password);
-        request.addParameter('Firstname', types.Int,  location.Firstname);
-        request.addParameter('Lastname', types.Int,  location.Lastname);
-        request.addParameter('Birthdate', types.Int,  location.Birthdate);
-        request.addParameter('IdAccountType', types.Int,  location.IdAccountType);
+        request.addParameter('Username', types.NVarChar,  user.Username);
+        request.addParameter('Password', types.NVarChar,  user.Password);
+        request.addParameter('Firstname', types.NVarChar,  user.Firstname);
+        request.addParameter('Lastname', types.NVarChar,  user.Lastname);
+        request.addParameter('Birthdate', types.Date, date2);
+        request.addParameter('IdAccountType', types.Int,  user.IdAccountType);
         request.on('doneInProc', function (columns) {
             connection.release();
             res.send({message: 'User successfully added'});
@@ -165,13 +172,19 @@ router.put('/users/:_id', function (req, res, next) {
                 next(err)
             }
         });
+        var date = new  Date(user.Birthdate);
+         var  month = date.getMonth();
+        if(month == 0) {
+            month = 1;
+        }
+        var date2 = date.getFullYear() + "-" + month + "-" + date.getDate();
         request.addParameter('IdUserAccount', types.Int,  user.IdUserAccount);
-        request.addParameter('Username', types.NVarChar,  location.Username);
-        request.addParameter('Password', types.Int,  location.Password);
-        request.addParameter('Firstname', types.Int,  location.Firstname);
-        request.addParameter('Lastname', types.Int,  location.Lastname);
-        request.addParameter('Birthdate', types.Int,  location.Birthdate);
-        request.addParameter('IdAccountType', types.Int,  location.IdAccountType);
+        request.addParameter('Username', types.NVarChar,  user.Username);
+        request.addParameter('Password', types.NVarChar,  user.Password);
+        request.addParameter('Firstname', types.NVarChar,  user.Firstname);
+        request.addParameter('Lastname', types.NVarChar,  user.Lastname);
+        request.addParameter('Birthdate', types.Date,  date2);
+        request.addParameter('IdAccountType', types.Int,  user.IdAccountType);
         request.on('doneInProc', function (columns) {
             connection.release();
             res.send({message: 'User successfully updated'});
