@@ -8,6 +8,8 @@
 
 [Link zu unserem Sprint 2. Release ](https://github.com/Deadmann1/Spoty/releases).
 
+[Link zu unserem Sprint 3. Release ](https://github.com/Deadmann1/Spoty/releases).
+
 ## Credits:
 
 Sammer Manuel : Project Lead, Programmer
