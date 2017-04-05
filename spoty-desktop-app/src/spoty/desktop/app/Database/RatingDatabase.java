@@ -69,6 +69,7 @@ public class RatingDatabase {
     
     public Vector<Rating> getRatingsByGradeAndLocation(int idLocation, int grade)
     {
+        System.out.println("in get Ratings by grade and location");
         Vector<Rating> vecRatings = RatingService.getInstance().getRatings();
         Vector<Rating> vecRatingsByGradeAndLocation = new Vector<Rating>();
         
@@ -82,6 +83,8 @@ public class RatingDatabase {
                 }
             }     
         }
+        
+        System.out.println("nach get Ratings by grade and location");
         
         return vecRatingsByGradeAndLocation;
     }

@@ -89,14 +89,23 @@ public class UserAccountService {
     
     public UserAccount getUserAccount(int idUserAccount)
     {   
+        System.out.println("in getUserAccount(id)");
+        
         Client client = Client.create();
            
         WebResource service;
         service = client.resource(UriBuilder.fromUri(url + "/api/users/"+idUserAccount).build());
 
         System.out.println("Token: " + UserAccountDatabase.getInstance().token.getToken());
-        String s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
-        
+        String s = "";
+        try{
+            s = service.accept(MediaType.APPLICATION_JSON).header("x-access-token", UserAccountDatabase.getInstance().token.getToken()).get(String.class);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("danach");
         Gson gson = new Gson();
         return gson.fromJson(s, UserAccount.class); 
     }

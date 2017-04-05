@@ -325,8 +325,6 @@ public class RatingGUIController {
         sb.append(';');
         sb.append("Datum");
         sb.append(';');
-        sb.append("Benutzername");
-        sb.append(';');
         sb.append("Location-Name");
         sb.append('\n');
         
@@ -337,7 +335,6 @@ public class RatingGUIController {
             sb.append(Integer.toString(r.getGrade()) + ";");
             sb.append(r.getFeedback() + ";");
             sb.append(r.getRatingDate().toString() + ";");
-            sb.append((UserAccountDatabase.getInstance().getUserAccount(r.getIdUserAccount()).getUsername()) + ";");
             sb.append(LocationDatabase.getInstance().getLocation(r.getIdLocation()).getLocationname() + ";");
             sb.append('\n');
         }
