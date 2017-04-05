@@ -7,6 +7,8 @@
     var googleMapsRatings = [];
     var mapLocations = [];
     var map;
+    var token = {};
+    var configAuthenticate = {};
 
     var app = angular.module("SpotyWebApplication", ['ngRoute']);
 
@@ -32,9 +34,7 @@ function LoginController ($scope, $http, $location)
 {
     var Users = [];
 
-    getUsersFromWebService($scope, $http, Users);
-
-    checkLogin($scope, $location, Users);
+    checkLogin($scope, $location, Users, $http);
 }
 
 function HomeController($scope, $http, $location, $filter, $timeout)
@@ -160,13 +160,14 @@ function HomeController($scope, $http, $location, $filter, $timeout)
                 isolatedLocation = $scope.Locations.filter((Location) => Location.LocationType === $scope.search.LocationType)[selectedIndex];
             }
         }
-
         console.log(isolatedLocation);
         getRatingsFromWebServer(Ratings, $scope, $http, isolatedLocation);
         $scope.addStarRatingLabel = "";
-
         angular.element(document.getElementById("btnAddRating").className = "btn btn-primary active");
-
+    }
+    $scope.btnAddRating = function()
+    {
+        addRating($scope, isolatedLocation, $http, Ratings);
     }
 
     $timeout(function () {
@@ -380,29 +381,81 @@ function googleMaps()
 
 function getUsersFromWebService($scope, $http, Users)
 {
-    var httpGetRequestUsers = $http.get('http://spotyweb-backend.azurewebsites.net/api/users');
 
-    httpGetRequestUsers.then(
-        function (response)
+    var config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    //var user = $.param({
+    //    json: JSON.stringify({
+    //        username: $scope.username,
+    //        password: $scope.password
+    //    })
+    //});
+    var user =
         {
-            for (var i = 0; i < response.data.length; i++) {
-                var user = {
-                    "IdUserAccount": response.data[i].IdUserAccount,
-                    "Username": response.data[i].Username,
-                    "Password": response.data[i].Password,
-                    "Firstname": response.data[i].Firstname,
-                    "Lastname": response.data[i].Lastname,
-                    "Birthdate": response.data[i].Birthdate,
-                    "IdAccountType": response.data[i].IdAccountType
+            'username': $scope.username,
+            'password': $scope.password
+        };
+
+
+    console.log(user.username);
+
+    $http.post('https://spotyweb-backend.azurewebsites.net/api/authenticate', user, config)
+        .success(
+            function (data, status, headers, config)
+            {
+                console.log(data.token);
+                token = {
+                    'token': data.token
                 };
-                Users.push(user);
-            }
-        },
-        function (error) {
-            $scope.LoginOutput = error.statusText;
-            alert(error.statusText);
-            alert(error.status);
-        });
+
+                configAuthenticate = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': token.token
+                    }
+                }
+
+                console.log(configAuthenticate.headers['x-access-token']);
+                var httpGetRequestUsers = $http.get('https://spotyweb-backend.azurewebsites.net/api/users', configAuthenticate);
+                httpGetRequestUsers
+                    .success(
+                    function (data, status, headers, config)
+                    {
+                        console.log("success");
+                        for (var i = 0; i < data.length; i++) {
+                            var user = {
+                                "IdUserAccount": data[i].IdUserAccount,
+                                "Username": data[i].Username,
+                                "Password": data[i].Password,
+                                "Firstname": data[i].Firstname,
+                                "Lastname": data[i].Lastname,
+                                "Birthdate": data[i].Birthdate,
+                                "IdAccountType": data[i].IdAccountType
+                            };
+                            Users.push(user);
+                        }
+                    })
+                    .error(
+                    function (data, status, headers, config)
+                    {
+                        alert("error");
+                        alert(status);
+                        $scope.LoginOutput = status;
+                        alert(status);
+                    });
+                    
+            })
+        .error(
+            function (data, status, headers, config)
+            {
+                alert("asdfasdfasdfasdf");
+                $scope.LoginOutput = status;
+                alert(status);
+            });
 }
 
 function getLocationsFromWebService($http, Locations, mapLocations)
@@ -415,7 +468,7 @@ function getLocationsFromWebService($http, Locations, mapLocations)
     var countries = [];
 
 
-    var httpGetRequestLocationtypes = $http.get('http://spotyweb-backend.azurewebsites.net/api/locationtypes');
+    var httpGetRequestLocationtypes = $http.get('https://spotyweb-backend.azurewebsites.net/api/locationtypes', configAuthenticate);
 
     //Get All LocationTypes
     httpGetRequestLocationtypes.then
@@ -433,7 +486,7 @@ function getLocationsFromWebService($http, Locations, mapLocations)
             }
 
 
-            var httpGetRequestAddresses = $http.get('http://spotyweb-backend.azurewebsites.net/api/addresses');
+            var httpGetRequestAddresses = $http.get('https://spotyweb-backend.azurewebsites.net/api/addresses', configAuthenticate);
 
             //Get all Adresses
             httpGetRequestAddresses.then(
@@ -453,7 +506,7 @@ function getLocationsFromWebService($http, Locations, mapLocations)
 
 
 
-                    var httpGetRequestCities = $http.get('http://spotyweb-backend.azurewebsites.net/api/cities');
+                    var httpGetRequestCities = $http.get('https://spotyweb-backend.azurewebsites.net/api/cities', configAuthenticate);
 
                     //Get All Cities
                     httpGetRequestCities.then(
@@ -471,7 +524,7 @@ function getLocationsFromWebService($http, Locations, mapLocations)
 
 
 
-                           var httpGetRequestCounties = $http.get('http://spotyweb-backend.azurewebsites.net/api/counties');
+                           var httpGetRequestCounties = $http.get('https://spotyweb-backend.azurewebsites.net/api/counties', configAuthenticate);
 
                            //Get All Counties
                            httpGetRequestCounties.then(
@@ -487,7 +540,7 @@ function getLocationsFromWebService($http, Locations, mapLocations)
                                   }
 
 
-                                  var httpGetRequestCountries = $http.get('http://spotyweb-backend.azurewebsites.net/api/countries');
+                                  var httpGetRequestCountries = $http.get('https://spotyweb-backend.azurewebsites.net/api/countries', configAuthenticate);
 
                                   //Get All Countries
                                   httpGetRequestCountries.then(
@@ -501,7 +554,7 @@ function getLocationsFromWebService($http, Locations, mapLocations)
                                             countries.push(country);
                                         }
 
-                                        var httpGetRequestLocations = $http.get('http://spotyweb-backend.azurewebsites.net/api/locations');
+                                        var httpGetRequestLocations = $http.get('https://spotyweb-backend.azurewebsites.net/api/locations', configAuthenticate);
 
 
 
@@ -568,7 +621,8 @@ function getLocationsFromWebService($http, Locations, mapLocations)
 
 function getRatingsFromWebServer(Ratings, $scope, $http, isolatedLocation)
 {
-    var httpGetRequestRatings = $http.get('http://spotyweb-backend.azurewebsites.net/api/ratings/' + isolatedLocation.IdLocation);
+    var url = "https://spotyweb-backend.azurewebsites.net/api/ratings/" + isolatedLocation.IdLocation
+    var httpGetRequestRatings = $http.get(url, configAuthenticate);
 
     $scope.Ratings = [];
     Ratings = [];
@@ -643,7 +697,7 @@ function getRatingsFromWebServer(Ratings, $scope, $http, isolatedLocation)
 
 function getRatingsFromWebServerForGoogleMap($http)
 {
-    var httpGetRequestRatings = $http.get('http://spotyweb-backend.azurewebsites.net/api/ratings/');
+    var httpGetRequestRatings = $http.get('https://spotyweb-backend.azurewebsites.net/api/ratings/', configAuthenticate);
 
     //Get all Ratings from User
     httpGetRequestRatings.then(
@@ -693,6 +747,35 @@ function getRatingsFromWebServerForGoogleMap($http)
         });
 }
 
+function addRating($scope, isolatedLocation, $http, Ratings)
+{
+    var dateStringSplitted = new Date();
+
+    alert(clickedStarRating);
+    var rating =
+        {
+            "Grade": clickedStarRating,
+            "Feedback": $scope.Feedback,
+            "IdUserAccount": currentUser.IdUserAccount,
+            "IdLocation": isolatedLocation.IdLocation,
+            "Date": dateStringSplitted
+        }
+
+    $http.post('https://spotyweb-backend.azurewebsites.net/api/ratings', rating, configAuthenticate)
+            .success(
+                function (data, status, headers, config)
+                {
+                    Ratings.push(rating);
+                    alert("Add was successful");
+                })
+            .error(
+                function (data, status, headers, config) {
+                    alert("asdfasdfasdfasdf");
+                    $scope.LoginOutput = status;
+                    alert(status);
+                });
+}
+
 function findWithAttr(array, attr, value)
 {
     var retValue = -1;
@@ -706,10 +789,11 @@ function findWithAttr(array, attr, value)
     return retValue;
 }
 
-function checkLogin($scope, $location, User)
+function checkLogin($scope, $location, User, $http)
 {
     $scope.goToHome = function (path)
     {
+        getUsersFromWebService($scope, $http, User);
         var username = $scope.username;
         var password = $scope.password;
 

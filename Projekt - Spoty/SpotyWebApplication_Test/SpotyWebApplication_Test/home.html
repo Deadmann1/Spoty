@@ -92,9 +92,9 @@
         <div id="addNewRating">
             <h1>New Rating</h1>
             <p id="feedback">Feedback</p>
-            <input id="txtFeedback" type="text" value="" />
+            <input ng-model="Feedback" id="txtFeedback" type="text" value="" />
             <p id="rating">Rating</p>
-            <div ng-model="addStarRating" star-rating rating="rating.Grade" mouse-hover="mouseStarHover(param)" mouse-leave="mouseStarLeave(param)"></div>
+            <div id="idAddStarRating" ng-model="addStarRating" star-rating rating="rating.Grade" mouse-hover="mouseStarHover(param)" mouse-leave="mouseStarLeave(param)"></div>
             <input id="btnAddRating"type="button" value="Add new Rating" ng-click="btnAddRating()" class="btn btn-primary disabled"/><br />
             <label id="ratingAddInformation" ng-model="addStarRatingLabel">{{addStarRatingLabel}}</label>
         </div>
