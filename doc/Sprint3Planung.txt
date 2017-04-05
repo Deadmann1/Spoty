@@ -1,0 +1,38 @@
+Ziele:
+  Operative Applikationen:
+  Web-Applikation:
+    ⦁ Routing (Map-Routen berechnen)
+    ⦁ Einbauen von Backend
+    
+    
+  Mobile-Applikation / Backend:
+  	⦁ Routing (mobile)
+    ⦁ Security Layer (Verschlüsselung)
+ 
+  Administrive Applikation:
+      ⦁	User-Verwaltung
+      ⦁ Einbauen von Backend
+      
+      
+      
+      
+
+Implementation: 
+
+Operative Applikationen:
+
+ Mobile Applikation:  Manuel Sammer  C#
+    ⦁ Xamarin.Droid
+    
+ Web Applikation: Alexander Ruhdorfer
+    ⦁ Angular JS / Bootstrap
+    
+Adminstravive Applikation: 
+
+  Desktop Applikation: Daniel Lamprecht Java
+    ⦁ JavaFX
+
+Backend:  
+Webservice Restful: Manuel Sammer
+Hosting for Service and Site: Manuel Sammer
+MS SQL Server: Manuel Sammer
