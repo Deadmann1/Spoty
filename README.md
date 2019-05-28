@@ -14,6 +14,6 @@
 
 Sammer Manuel : Project Lead, Programmer
 
-Alexander Ruhdorfer: Programmer, Sunshine
+Alexander Ruhdorfer: Programmer
 
-Daniel Lamprecht : Vice Project Lead, Technical Assistant, Programmer
+Daniel Lamprecht : Programmer
